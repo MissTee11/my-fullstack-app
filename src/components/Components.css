@@ -1,0 +1,70 @@
+.Sidebar{
+    width:300px;
+    height: 100vh;
+    background-color:#3674B5 ;
+    position: fixed;
+    top:0;
+    left:0;
+
+}
+.Profile{
+    color: white;
+    background-color: #578FCA;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    padding:10px;
+}
+.ProfileImg{
+    font-size: 100px ;
+}
+.sidebar-list{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-list ul, li, a{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+   
+}
+.sidebar-item{
+    padding: 20px;
+    font-size: 28px;
+    border: 1px solid;
+    margin: 10px;
+}
+
+.sidebar-item:hover{
+    background-color: #578FCA;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.LogoutBtn{
+    font-size: 28px;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    background-color: #578FCA;
+    border: none;
+    width: 80%;
+    position: relative;
+    top:10px;
+    left: 25px;
+
+}
+.LogoutBtn:hover{
+    background-color: #3674B5;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.icon{
+    padding-right:20px;
+}

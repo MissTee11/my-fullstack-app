@@ -1,0 +1,108 @@
+.MainContent{
+    margin-left: 300px;
+    
+}
+.AddBtn{
+    background-color: #3674B5;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px;
+    border: none;
+}
+.AddBtn:hover, .UpdateBtn:hover, .SaveBtn:hover{
+    background-color: #578FCA;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.DeleteBtn{
+    margin: 10px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.DeleteBtn:hover, .ResetBtn:hover{
+    background-color: rgb(242, 82, 82);
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.UpdateBtn{
+    border-radius: 5px;
+    color: white;
+    background-color: #3674B5;
+    border: none;
+    padding: 10px;
+}
+.iconBtn{
+    font-size: 15px;
+}
+.Form{
+    border: #3674B5 3px solid;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+    position: relative;
+    top:20px;
+}
+.Form h1{
+    text-align: center;
+    color: #3674B5;
+    font-size: 40px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    color: #3674B5;
+}
+input, .cell{
+    padding: 10px;
+    font-size: 18px;
+    width: 500px;
+    margin: 15px;
+    color: #9E9E9E;
+    border-radius: 8px;
+    border: #3674B5 1px solid;
+}
+select{
+    padding: 10px;
+    font-size: 18px;
+    width: 523px;
+    margin: 15px;
+    color: #9E9E9E;
+    border-radius: 8px;
+    border: #3674B5 1px solid;
+}
+label{
+    font-size: 24px;
+    margin-left: 15px;
+}
+.Buttons{
+   display: flex;
+   margin-top: 10px;
+}
+.SaveBtn, .ResetBtn{
+    padding: 10px;
+    width: 300px;
+    margin: 10px 0px 10px 0px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+}
+.ResetBtn{
+    margin-left: 10px;
+    background-color: red;
+    color: white;
+}
+.SaveBtn{
+    background-color: #3674B5;
+    color: white;
+}
