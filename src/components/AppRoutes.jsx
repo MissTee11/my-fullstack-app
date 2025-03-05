@@ -10,6 +10,11 @@ import AddPatient from "../pages/AddPatient";
 import AddStaff from "../pages/AddStaff";
 import AddAppointments from "../pages/AddAppointment";
 import AddAdmissions from "../pages/AddAdmission";
+import UpdateAdmissions from "../pages/UpdateAdmission";
+import UpdateAppointment from "../pages/UpdateAppointment";
+import UpdateDoctor from "../pages/UpdateDoctor";
+import UpdatePatient from "../pages/UpdatePatients";
+import UpdateStaff from "../pages/UpdateStaff";
 
 function AppRoutes(){
     return(
@@ -27,6 +32,11 @@ function AppRoutes(){
             <Route path='/AddStaff' element={<AddStaff/>}/>
             <Route path ='/AddAppointment' element={<AddAppointments/>}/>
             <Route path='/AddAdmissions' element={<AddAdmissions/>}/>
+            <Route path='/UpdateAdmission' element={<UpdateAdmissions/>}/>
+            <Route path='/UpdateAppointment' element={<UpdateAppointment/>}/>
+            <Route path='/UpdateDoctor' element={<UpdateDoctor/>}/>
+            <Route path='/UpdatePatient' element={<UpdatePatient/>}/>
+            <Route path='/UpdateStaff' element={<UpdateStaff/>}/>
         </Routes>
         
         

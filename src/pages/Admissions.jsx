@@ -57,7 +57,9 @@ function Admissions(){
           name: 'Actions',
           cell: row => (
             <div>
-               <button className="UpdateBtn"><FaPen/></button>
+              <Link to='/UpdateAdmission'>
+              <button className="UpdateBtn"><FaPen/></button>
+              </Link>
                <button className="DeleteBtn" ><MdDelete/></button>
             </div>
           ),

@@ -65,7 +65,9 @@ function Patients(){
           name: 'Actions',
           cell: row => (
             <div >
-               <button className="UpdateBtn"><FaPen/></button>
+                <Link to='/UpdatePatients'>
+              <button className="UpdateBtn"><FaPen/></button>
+              </Link>
                <button className="DeleteBtn" ><MdDelete/></button>
             </div>
           ),

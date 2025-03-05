@@ -61,7 +61,9 @@ function Appointments(){
           name: 'Actions',
           cell: row => (
         <div >
-            <button className="UpdateBtn"><FaPen/></button>
+            <Link to='/UpdateAppointment'>
+              <button className="UpdateBtn"><FaPen/></button>
+              </Link>
             <button className="DeleteBtn" ><MdDelete/></button>
         </div>
           ),
