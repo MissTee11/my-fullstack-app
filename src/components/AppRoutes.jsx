@@ -15,6 +15,10 @@ import UpdateAppointment from "../pages/UpdateAppointment";
 import UpdateDoctor from "../pages/UpdateDoctor";
 import UpdatePatient from "../pages/UpdatePatients";
 import UpdateStaff from "../pages/UpdateStaff";
+import Dashboard from "../pages/Dashboard";
+import LoginPage from "../pages/LoginPage";
+import Rooms from "../pages/Rooms";
+import Payments from "../pages/Payments";
 
 function AppRoutes(){
     return(
@@ -37,6 +41,11 @@ function AppRoutes(){
             <Route path='/UpdateDoctor' element={<UpdateDoctor/>}/>
             <Route path='/UpdatePatient' element={<UpdatePatient/>}/>
             <Route path='/UpdateStaff' element={<UpdateStaff/>}/>
+            <Route path='/Dashboard' element={<Dashboard/>}/>
+            <Route path='/LoginPage' element={<LoginPage/>}/>
+            <Route path ='/Rooms' element={<Rooms/>}/>
+            <Route path ='/Payments' element={<Payments/>}/>
+
         </Routes>
         
         
