@@ -35,7 +35,7 @@ function UpdateDoctor(){
             <Sidebar/>
             <div className="MainContent">
             <div className="Form">
-            <h1> Doctor Registration</h1>
+            <h1> Doctor Update Form</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="first_name" > First Name</label>
                 <input type="text" placeholder='Enter doctor name'name='first_name' 

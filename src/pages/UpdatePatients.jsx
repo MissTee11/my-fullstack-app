@@ -36,7 +36,7 @@ function UpdatePatient(){
         <Sidebar/>
         <div className="MainContent">
             <div className="Form">
-            <h1> Patient Registration</h1>
+            <h1> Patient Update Form</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="first_name" >First Name</label>
                 <input type="text" placeholder='Enter patient name'name='first_name' 

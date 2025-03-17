@@ -39,7 +39,7 @@ function Payments(){
               name: 'Actions',
               cell: row => (
                <div >
-                    <Link to='/MakePayment'>
+                    <Link to='/UpdatePayment'>
                     <button className="UpdateBtn"><MdOutlinePayment/>Make Payment</button>
                     </Link>
                     </div>         
@@ -93,8 +93,8 @@ function Payments(){
             <div>
                 <Sidebar/>
             <div className="MainContent">
-                    <Link to="/AddInvoice">
-                    <button className="AddBtn"><IoMdAdd />Create New Invoice </button>
+                    <Link to="/AddPayment">
+                    <button className="AddBtn"><IoMdAdd />Record New Payment </button>
                     </Link>
           
                     <DataTable

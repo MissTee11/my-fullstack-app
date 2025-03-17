@@ -32,7 +32,7 @@ function UpdateStaff(){
              <Sidebar/>
             <div className="MainContent">
             <div className="Form">
-            <h1> Staff Registration</h1>
+            <h1> Staff Update Form</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="first_name" >Name</label>
                 <input type="text" placeholder='Enter staff first name'name='first_name' 

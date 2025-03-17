@@ -37,7 +37,7 @@ function UpdateAdmissions(){
             <Sidebar/>
             <div className="MainContent">
             <div className="Form">
-            <h1>Admission Registration</h1>
+            <h1>Admission Update Form</h1>
             <form onSubmit={handleSubmit}>
            
                         <label htmlFor="patient_ID">Select Patient</label>
@@ -49,8 +49,8 @@ function UpdateAdmissions(){
                         value={values.patient_ID}
                         >
                         <option value="" disabled>Select Patient</option>
-                        <option>John</option>
-                        <option>Mary</option>
+                        <option value="john">John</option>
+                        <option value="mary">Mary</option>
                         </select>
 
                         <label htmlFor="room_ID">Select Room</label>
@@ -62,10 +62,10 @@ function UpdateAdmissions(){
                         value={values.room_ID}
                         >
                         <option value="" disabled>Select Room</option>
-                        <option>A1</option>
-                        <option>A2</option>
-                        <option>A3</option>
-                        <option>A4</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="A3">A3</option>
+                        <option value="A4">A4</option>
                         </select>
 
                 <label htmlFor="admission_date">Admission Date</label>

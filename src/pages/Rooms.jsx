@@ -60,10 +60,6 @@ function Rooms(){
           selector:row =>row.availability_status
         },
         {
-          name: 'Price Per Day',
-          selector:row =>row.price_per_day
-        },
-        {
           name: 'Department',
           selector:row =>row.department_name
         },

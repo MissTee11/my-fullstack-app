@@ -37,7 +37,7 @@ function UpdateAppointments(){
             <Sidebar/>
             <div className="MainContent">
             <div className="Form">
-            <h1> Appointment Registration</h1>
+            <h1> Appointment Update Form</h1>
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="appointment_date" >Appointment Date</label>
