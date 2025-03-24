@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import Sidebar from '../components/Sidebar';
 import { IoPersonAddSharp } from "react-icons/io5";
+import { TbReportMedical } from "react-icons/tb";
 import './Pages.css';
 
 function Patients(){
@@ -65,6 +66,9 @@ function Patients(){
           name: 'Actions',
           cell: row => (
             <div >
+              <Link to='/MedicalRecord'>
+              <button className="UpdateBtn"><TbReportMedical/></button>
+              </Link>
                 <Link to='/UpdatePatient'>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>

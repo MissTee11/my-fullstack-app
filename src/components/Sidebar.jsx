@@ -2,7 +2,7 @@ import React from 'react'
 import './Components.css'
 import { RiDashboardLine, RiCalendarScheduleFill } from "react-icons/ri";
 import { FaUserDoctor } from "react-icons/fa6";
-import { IoPersonSharp } from "react-icons/io5";
+import { IoPersonSharp, IoLogOut } from "react-icons/io5";
 import { MdBedroomChild, MdOutlinePayment } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaBed } from "react-icons/fa"
@@ -62,7 +62,7 @@ function Sidebar(){
             </li>
         </ul>
         <Link to='/LoginPage'>
-        <button className="LogoutBtn">Log Out</button>
+        <button className="LogoutBtn"><IoLogOut/>Log Out</button>
         </Link>
        
     </div>

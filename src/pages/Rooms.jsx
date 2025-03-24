@@ -67,7 +67,10 @@ function Rooms(){
           name: 'Actions',
           cell: row => (
             <div >
+              <Link to='/AddAppointment'>
               <button className="UpdateBtn" onClick={(e)=>handleMakeAppointment(row.availability_status,e)}><RiCalendarScheduleFill/>Make Appointment</button>
+              </Link>
+             
          </div>
           ),
         },
