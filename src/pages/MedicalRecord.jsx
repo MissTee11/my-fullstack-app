@@ -33,10 +33,6 @@ const [medicalRecords, setMedicalRecords] = useState([]);
       selector: (row) => row.diagnosis,
     },
     {
-      name: 'Prescription ID',
-      selector: (row) => row.prescription_ID,
-    },
-    {
       name: 'Actions',
       cell: (row) => (
          <div >

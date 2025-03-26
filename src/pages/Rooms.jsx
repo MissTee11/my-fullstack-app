@@ -52,16 +52,16 @@ function Rooms(){
 
     const columns =[
         {
-          name: 'Room ID',
-          selector:row =>row.room_id
+          name: 'Room Number',
+          selector:row =>row.room_number
         },
         {
           name: 'Availability Status',
           selector:row =>row.availability_status
         },
         {
-          name: 'Department',
-          selector:row =>row.department_name
+          name: 'Room Type',
+          selector:row =>row.room_type
         },
         {
           name: 'Actions',

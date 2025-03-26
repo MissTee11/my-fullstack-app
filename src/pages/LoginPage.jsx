@@ -9,26 +9,16 @@ function LoginPage(){
     
             <div className="LogIn">
             <h1>Login to Your Account</h1>
-            <p id="User">Select User Profile</p>
 
-            <div className="Profiles">
-                <div className="Card">
-                <RiAdminFill />
-                <p>Admin</p>
-                </div>
-
-                <div className="Card">
-                <FaUserDoctor />
-                <p>Doctor</p>
-                </div>
-
-                <div className="Card">
-                <IoPerson />
-                <p>Receptionist</p>
-                </div>
-
-            </div>
             <form className="LoginForm">
+                
+                <label htmlFor='profile'>Choose Profile</label>
+                <select id='profile' name='profile'>
+                    <option value='receptionist'>Receptionist</option>
+                    <option value='doctor'>Doctor</option>
+                    <option value='admin'>Administration</option>
+                    
+                </select>
                 <input type='text' placeholder="Enter username"/>
                 <input type='text' placeholder="Enter password"/>
 

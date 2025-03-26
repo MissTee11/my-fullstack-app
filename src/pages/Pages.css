@@ -126,6 +126,10 @@ label{
     border-radius: 30px;
     background-color: #e9e9e9;
 }
+select{
+    padding: 20px;
+    border-radius: 30px;
+}
 .LoginForm{
     align-items: center;
 }
@@ -145,29 +149,4 @@ label{
  color: #3674B5;
  text-align: center;
 }
-#User{
-    text-align: center;
-    color: #3674B5;
-    font-size: 20px;
-    font-weight: 700;
-}
-.Registration{
-    width: 25%;
-    background-color: #3674B5;
-    height: 100vh;
-}
-.Profiles{
-    display: flex;
-    justify-content: center;
-}
-.Card{
-    padding: 25px;
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    background-color: #3674B5;
-    margin: 10px;
-    width: 100px;
-    border-radius: 18px;
-   
-}
+

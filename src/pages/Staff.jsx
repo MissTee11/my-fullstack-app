@@ -46,7 +46,7 @@ function Staff(){
         },
         {
           name: 'Role',
-          selector:row =>row.role
+          selector:row =>row.roles
         },
         {
           name: 'Department',

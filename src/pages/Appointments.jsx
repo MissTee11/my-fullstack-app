@@ -43,7 +43,7 @@ function Appointments(){
         },
         {
           name: 'Doctor ID',
-          selector:row =>row.doctor_id
+          selector:row =>row.doctor_name
         },
         {
           name: 'Appointment Date',

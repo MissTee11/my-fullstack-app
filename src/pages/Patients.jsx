@@ -36,7 +36,7 @@ function Patients(){
     const columns =[
         {
           name: 'Patient ID',
-          selector:row =>row.person_id
+          selector:row =>row.patient_id
         },
         {
           name: 'First Name',

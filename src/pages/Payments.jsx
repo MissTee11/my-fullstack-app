@@ -20,10 +20,6 @@ function Payments(){
                selector: (row) => `${row.first_name} ${row.last_name}`
             },
             {
-              name: 'Doctor ID',
-              selector:row =>row.doctor_id
-            },
-            {
               name: 'Payment Date',
               selector:row =>row.date
             },
