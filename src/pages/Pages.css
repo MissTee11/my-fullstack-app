@@ -1,5 +1,6 @@
 .MainContent{
     margin-left: 300px;
+    text-align: left;
     
 }
 .AddBtn{
@@ -41,60 +42,9 @@
 .iconBtn{
     font-size: 15px;
 }
-.Form{
-    border: #3674B5 3px solid;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    padding: 20px;
-    margin: auto;
-    position: relative;
-    top:20px;
-}
-.Form h1{
-    text-align: center;
-    color: #3674B5;
-    font-size: 40px;
-}
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    color: #3674B5;
-}
-input, .cell{
-    padding: 10px;
-    font-size: 18px;
-    width: 500px;
-    margin: 15px;
-    color: #9E9E9E;
-    border-radius: 8px;
-    border: #3674B5 1px solid;
-}
-select{
-    padding: 10px;
-    font-size: 18px;
-    width: 523px;
-    margin: 15px;
-    color: #9E9E9E;
-    border-radius: 8px;
-    border: #3674B5 1px solid;
-}
-label{
-    font-size: 24px;
-    margin-left: 15px;
-}
-.Buttons{
-   display: flex;
-   margin-top: 10px;
-}
 .SaveBtn, .ResetBtn{
     padding: 10px;
-    width: 300px;
-    margin: 10px 0px 10px 0px;
+    width: 250px;
     border: none;
     border-radius: 8px;
     font-size: 18px;
@@ -108,6 +58,59 @@ label{
     background-color: #3674B5;
     color: white;
 }
+.Form{
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+    position: relative;
+    top:20px;
+}
+.Buttons{
+    display: flex;
+    margin-left: 5%;
+    width: 50%;
+    padding: 20px;
+ }
+.DetailForm{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.Form h1{
+    text-align: center;
+    color: #3674B5;
+    font-size: 40px;
+}
+#gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role,#department{
+    padding: 10px;
+    width: 523px;
+    border-radius: 8px;
+    border: #3674B5 1px solid;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    color: #3674B5;
+}
+input, .cell, select{
+    padding: 10px;
+    font-size: 18px;
+    width: 500px;
+    margin: 15px;
+    color: #9E9E9E;
+    border-radius: 8px;
+    border: #3674B5 1px solid;
+}
+label{
+    font-size: 24px;
+    margin-left: 15px;
+}
+
 .popup{
     position: fixed;
     bottom: 50px;
@@ -132,9 +135,20 @@ select{
 }
 .LoginForm{
     align-items: center;
+    background-color: white ;
+    width: 40vw;
+    height: 60vh;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(
+            60deg,
+              #6e473b 0%,
+             #3674B5 90%);
+   
 }
 .LoginBtn{
-    width: 15%;
+    width: 20%;
     text-align: center;
     padding: 20px;
     border-radius: 30px;
@@ -143,10 +157,25 @@ select{
     color: white;
     font-size: 15px ;
     margin: auto;
+    
+    
 }
 .LogIn h1{
  font-size: 60px;
- color: #3674B5;
+ color: #9fccfd;
  text-align: center;
+}
+.LogIn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(
+            60deg,
+                #3674B5 0%,
+                #6e473b 90%);
+}
+.profile{
+    color: #9fccfd;
 }
 

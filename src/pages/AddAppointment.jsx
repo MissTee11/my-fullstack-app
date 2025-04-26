@@ -11,8 +11,8 @@ function AddAppointments(){
      const [values, setValues] = useState({
       appointment_date: '',
       time: '',
-      patient_id: '',
-      doctor_id: '',
+      patient_ID: '',
+      doctor_ID: '',
       status:'',
        });
 
@@ -28,7 +28,7 @@ function AddAppointments(){
       };
 
     const resetInfo=() =>{
-        setValues({date: '', time: '', patient_id:'', doctor_id:'',status:'',})
+        setValues({date: '', time: '', patient_ID:'', doctor_ID:'',status:'',})
       }
 
 
@@ -39,43 +39,48 @@ function AddAppointments(){
             <div className="Form">
             <h1> Appointment Registration</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="DetailForm">
+                <div>
                 <label htmlFor="appointment_date" >Appointment Date</label>
                 <input type="date" placeholder='Enter appointment date'name='appointment_date' 
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.appointment_date}/>
-    
+                </div>
+                <div>
                 <label htmlFor="time" >Time</label>
                 <input type="time" placeholder='Enter time' name='time'
                 onChange={(e)=> handleChanges(e)} 
                 required value={values.time}/>
-
-                <label htmlFor="patient_id">Select Patient</label>
+                </div>
+                <div>
+                <label htmlFor="patient_ID">Select Patient</label>
                 <select
-                name="patient_id"
-                id="patient_id"
+                name="patient_ID"
+                id="patient_ID"
                 onChange={handleChanges}
                 required
-                value={values.patient_id}
+                value={values.patient_ID}
                 >
                 <option value="" disabled>Select Patient</option>
                 <option>John</option>
                 <option>Mary</option>
                 </select>
-
-                <label htmlFor="doctor_id">Select Doctor</label>
+                </div>
+                <div>
+                <label htmlFor="doctor_ID">Select Doctor</label>
                 <select
-                name="doctor_id"
-                id="doctor_id"
+                name="doctor_ID"
+                id="doctor_ID"
                 onChange={handleChanges}
                 required
-                value={values.doctor_id}
+                value={values.doctor_ID}
                 >
                 <option value="" disabled>Select Doctor</option>
                 <option>John</option>
                 <option>Mary</option>
                 </select>
-
+                </div>
+                <div>
                 <label htmlFor="status" >Status</label>
                 <select 
                 name="status" 
@@ -91,15 +96,14 @@ function AddAppointments(){
                  </option>
                 ))}
                 </select>
-                
-                <div className="Buttons">
-                <button className="SaveBtn"type="submit">Save</button>
-                <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
     
-            </form>
-          
+            </form> 
         </div>
+        <div className="Buttons">
+                <button className="SaveBtn"type="submit">Save</button>
+                <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
+            </div>
 
             </div>
 

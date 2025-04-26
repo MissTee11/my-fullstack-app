@@ -8,22 +8,14 @@ function LoginPage(){
     return(
     
             <div className="LogIn">
-            <h1>Login to Your Account</h1>
-
             <form className="LoginForm">
-                
-                <label htmlFor='profile'>Choose Profile</label>
-                <select id='profile' name='profile'>
-                    <option value='receptionist'>Receptionist</option>
-                    <option value='doctor'>Doctor</option>
-                    <option value='admin'>Administration</option>
-                    
-                </select>
+                <h1>LogIn</h1>
+                <label htmlFor='profile' className="profile">ADMIN PANEL LOGIN</label>
                 <input type='text' placeholder="Enter username"/>
                 <input type='text' placeholder="Enter password"/>
 
                 <Link to='/Dashboard' className="LoginBtn">
-                Log In
+                LOGIN
                 </Link>
                 
             </form>
