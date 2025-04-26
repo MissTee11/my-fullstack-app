@@ -9,14 +9,14 @@ function UpdatePayment(){
      const navigate = useNavigate();
 
     const [values, setValues] = useState({
-            patient_id: '',
+            patient_ID: '',
             total_amount: '',
             billing_date: '',
-            payment_status: '',
+            status: '',
         });
 
     const resetInfo=() =>{
-            setValues({patient_id: '', total_amount: '', billing_date: '',payment_status:'',})
+            setValues({patient_ID: '', total_amount: '', billing_date: '',status:'',})
         }
 
     const handleChanges = (e) => {
@@ -35,34 +35,38 @@ function UpdatePayment(){
             <div className="MainContent">
                 <div className="Form">
                 <h1> Payment Update Form</h1>
-                <form onSubmit={handleSubmit}>
-                <label htmlFor="patient_id">Select Patient</label>
-                <select
-                name="patient_id"
-                id="patient_id"
-                onChange={handleChanges}
-                required
-                value={values.patient_id}
-                >
-                <option value="" disabled>Select Patient</option>
-                <option value="john">John</option>
-                <option value="mary">Mary</option>
-                </select>
-
+                <form onSubmit={handleSubmit} className="DetailForm">
+                <div>
+                    <label htmlFor="patient_ID">Select Patient</label>
+                    <select
+                    name="patient_ID"
+                    id="patient_ID"
+                    onChange={handleChanges}
+                    required
+                    value={values.patient_ID}
+                    >
+                    <option value="" disabled>Select Patient</option>
+                    <option value="john">John</option>
+                     <option value="mary">Mary</option>
+                    </select>
+                </div>
+                <div>
                 <label htmlFor="total_amount" >Total Amount</label>
                 <input type="number" placeholder='Enter total amount'name='total_amount' 
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.total_amount}/>
-
+                </div>
+                <div>
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' 
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.billing_date}/>
-
-                <label htmlFor="payment_status" >Status</label>
+                </div>
+                <div>
+                <label htmlFor="status" >Status</label>
                 <select 
-                name="payment_status" 
-                id="payment_status" 
+                name="status" 
+                id="status" 
                 onChange={(e) => handleChanges(e)} 
                 required 
                 value={values.payment_status}>
@@ -74,14 +78,13 @@ function UpdatePayment(){
                  </option>
                 ))}
                 </select>
-
-                <div className="Buttons">
+                </div>
+            </form>
+            </div>
+            <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
-
-            </form>
-                </div>
+            </div>
              
         </div>
         </div>

@@ -36,16 +36,19 @@ function UpdateDoctor(){
             <div className="MainContent">
             <div className="Form">
             <h1> Doctor Update Form</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="first_name" > First Name</label>
+            <form onSubmit={handleSubmit} className="DetailForm">
+              <div>
+              <label htmlFor="first_name" > First Name</label>
                 <input type="text" placeholder='Enter doctor name'name='first_name' 
                  onChange={(e)=> handleChanges(e)} required value={values.first_name}/>
-    
-                <label htmlFor="last_name" >Last Name</label>
+              </div>
+              <div>
+              <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name'
                 onChange={(e)=> handleChanges(e)} required value={values.last_name}/>
-
-                <label htmlFor="gender"  >Gender</label>
+              </div>
+              <div>
+              <label htmlFor="gender"  >Gender</label>
                 <select name='gender'
                 onChange={(e)=> handleChanges(e)}
                 required 
@@ -54,9 +57,9 @@ function UpdateDoctor(){
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
-    
-
-                <label htmlFor="specialty" >Specialty</label>
+              </div>
+              <div>
+              <label htmlFor="specialty" >Specialty</label>
                 <select 
                 name="specialty" 
                 id="specialty" 
@@ -68,14 +71,13 @@ function UpdateDoctor(){
                 <option value="Male">General Practitioner</option>
                 <option value="Female">Surgeon</option>
                 </select>
-                <div className="Buttons">
+              </div>
+            </form>
+            </div>
+            <div className="Buttons">
                 <button class="SaveBtn"type="submit">Save Changes</button>
                 <button class="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
-                
-    
-            </form>
-            </div>
           
         </div>
         </div>

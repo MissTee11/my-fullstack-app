@@ -38,9 +38,9 @@ function UpdateAdmissions(){
             <div className="MainContent">
             <div className="Form">
             <h1>Admission Update Form</h1>
-            <form onSubmit={handleSubmit}>
-           
-                        <label htmlFor="patient_ID">Select Patient</label>
+            <form onSubmit={handleSubmit} className="DetailForm">
+              <div>
+              <label htmlFor="patient_ID">Select Patient</label>
                         <select
                         name="patient_ID"
                         id="patient_ID"
@@ -52,8 +52,9 @@ function UpdateAdmissions(){
                         <option value="john">John</option>
                         <option value="mary">Mary</option>
                         </select>
-
-                        <label htmlFor="room_ID">Select Room</label>
+              </div>
+              <div>
+              <label htmlFor="room_ID">Select Room</label>
                         <select
                         name="room_ID"
                         id="room_ID"
@@ -67,26 +68,29 @@ function UpdateAdmissions(){
                         <option value="A3">A3</option>
                         <option value="A4">A4</option>
                         </select>
-
-                <label htmlFor="admission_date">Admission Date</label>
+              </div>
+              <div>
+              <label htmlFor="admission_date">Admission Date</label>
                 <input type="date" placeholder="Enter Admission Date"name="admission_date"
                 onChange={(e) => handleChanges(e)}
                 required
                 value={values.admission_date}
                 />
-
-                <label htmlFor="discharge_date">Discharge Date</label>
+              </div>
+              <div>
+              <label htmlFor="discharge_date">Discharge Date</label>
                 <input type="date" placeholder="Enter Discharge Date" name="discharge_date"
                 onChange={(e) => handleChanges(e)}
                 value={values.discharge_date}
                 />
-
-                <div className="Buttons">
+              </div>
+               
+            </form>
+            </div>
+            <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save Changes </button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
-            </form>
-            </div>
             </div>
 
         </div>
