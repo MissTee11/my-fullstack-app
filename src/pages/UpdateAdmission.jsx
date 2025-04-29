@@ -84,13 +84,13 @@ function UpdateAdmissions(){
                 value={values.discharge_date}
                 />
               </div>
-               
-            </form>
-            </div>
-            <div className="Buttons">
+              <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save Changes </button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
+            </div>
+            </form>
+            </div>
+           
             </div>
 
         </div>

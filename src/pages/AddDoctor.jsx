@@ -76,13 +76,12 @@ function AddDoctor(){
                 <option value="Female">Surgeon</option>
                 </select>
               </div>
-            </form>
-            </div>
-
-            <div className="Buttons">
+              <div className="Buttons">
                 <button class="SaveBtn"type="submit">Save</button>
                 <button class="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
+            </div>
+            </form>
+            </div>
         </div>
         </div>
         

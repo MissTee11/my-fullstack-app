@@ -36,7 +36,7 @@ const [medicalRecords, setMedicalRecords] = useState([]);
       name: 'Actions',
       cell: (row) => (
          <div >
-            <Link to='/UpdateStaff'>
+              <Link to='/UpdateRecord'>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
             <button className="DeleteBtn" ><MdDelete/></button>
@@ -89,13 +89,10 @@ return (
     <div>
         <Sidebar/>
         <div className="MainContent">
-        <Link to={'/'}>
-        <button className="AddBtn"><IoAddSharp/>Add Record</button>
-        </Link>
 
       <DataTable
       columns={columns}
-      data={medicalRecords}
+      data={columns}
       customStyles={customStyles}
       theme="blue">
       </DataTable>

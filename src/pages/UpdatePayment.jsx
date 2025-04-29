@@ -79,12 +79,14 @@ function UpdatePayment(){
                 ))}
                 </select>
                 </div>
-            </form>
-            </div>
-            <div className="Buttons">
+                <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
             </div>
+            </form>
+            
+            </div>
+           
              
         </div>
         </div>

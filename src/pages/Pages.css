@@ -71,8 +71,6 @@
 }
 .Buttons{
     display: flex;
-    margin-left: 5%;
-    width: 50%;
     padding: 20px;
  }
 .DetailForm{
@@ -109,6 +107,10 @@ input, .cell, select{
 label{
     font-size: 24px;
     margin-left: 15px;
+}
+#diagnosis{
+    border-radius: 8px;
+    border: #3674B5 1px solid;
 }
 
 .popup{

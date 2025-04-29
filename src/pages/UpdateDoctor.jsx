@@ -72,13 +72,13 @@ function UpdateDoctor(){
                 <option value="Female">Surgeon</option>
                 </select>
               </div>
-            </form>
-            </div>
-            <div className="Buttons">
+              <div className="Buttons">
                 <button class="SaveBtn"type="submit">Save Changes</button>
                 <button class="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
-          
+            </div>
+            </form>
+            </div>
+           
         </div>
         </div>
         

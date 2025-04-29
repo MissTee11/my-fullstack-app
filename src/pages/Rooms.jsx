@@ -12,6 +12,8 @@ function Rooms(){
     const navigate = useNavigate();
 
     const handleMakeAppointment= async (availability_status, event)=>{
+      if (event) event.preventDefault();
+      
         if(availability_status !=="available"){
             setMessageText("ROOM IN USE");
 
