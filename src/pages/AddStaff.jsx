@@ -71,7 +71,7 @@ function AddStaff(){
                 id="department"
                 onChange={handleChanges}
                 required
-                value={values.department}
+                value={values.department} 
                 >
                 <option value="" disabled>Select Department</option>
                 <option>Eye Diseases</option>

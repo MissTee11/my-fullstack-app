@@ -180,4 +180,36 @@ select{
 .profile{
     color: #9fccfd;
 }
+@media screen and (max-width:767px){
+    .DetailForm{
+        grid-template-columns: auto;
+    }
+    input, .cell, select{
+        width: 200px;
+    }
+    #gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role,#department{
+        width: 223px;
+    }
+    .Buttons{
+        flex-direction: column;
+
+    }
+    .MainContent{
+        margin-left: 50px;
+    }
+    .SaveBtn, .ResetBtn {
+        width: 100px;
+        margin: 5px;
+    }
+    .UpdateBtn, .DeleteBtn {
+        margin: 4px 0;
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+    
+      .AddBtn {
+        font-size: 12px;
+        padding: 6px;
+      }
+}
 
