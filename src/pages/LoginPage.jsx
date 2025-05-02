@@ -10,7 +10,7 @@ function LoginPage(){
             <div className="LogIn">
             <form className="LoginForm">
                 <h1>LogIn</h1>
-                <label htmlFor='profile' className="profile">ADMIN PANEL LOGIN</label>
+                <label htmlFor='profile' className="profile">ADMIN</label>
                 <input type='text' placeholder="Enter username"/>
                 <input type='text' placeholder="Enter password"/>
 
