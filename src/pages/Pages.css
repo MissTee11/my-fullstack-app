@@ -4,7 +4,11 @@
     
 }
 .AddBtn{
-    background-color: #3674B5;
+    background: linear-gradient(
+        60deg,
+            #3674B5 0%,
+            #6e473b 90%);
+
     color: white;
     padding: 15px;
     border-radius: 12px;
@@ -55,7 +59,10 @@
     color: white;
 }
 .SaveBtn{
-    background-color: #3674B5;
+    background: linear-gradient(
+        60deg,
+          #6e473b 0%,
+         #3674B5 90%);
     color: white;
 }
 .Form{
@@ -228,6 +235,20 @@ select{
       }
       .Form{
         margin-left: 30px;
+      }
+      .LoginForm{
+        width: 80vw;
+        border-radius: 8px;
+      }
+      .LoginBtn{
+        width: 40vw;
+        font-size: 18px;
+      }
+      .LoginForm input{
+        width: 60vw;
+      }
+      .LoginForm h1{
+        font-size: 60px;
       }
     
     
