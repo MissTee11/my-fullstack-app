@@ -6,31 +6,32 @@ import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import './Pages.css';
 
+createTheme(
+  'blue',
+{
+  text: {
+      primary: '#4C3BCF',
+  },
+  background: {
+      default: 'white',
+  },
+  context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+  },
+  divider: {
+      default: '#3674B5',
+  },
+  sortFocus: {
+      default: '#2aa198',
+  },
+  
+},
+'dark',
+);
+
 function Appointments(){
 
-    createTheme(
-        'blue',
-    {
-        text: {
-            primary: '#4C3BCF',
-        },
-        background: {
-            default: 'white',
-        },
-        context: {
-            background: '#cb4b16',
-            text: '#FFFFFF',
-        },
-        divider: {
-            default: '#3674B5',
-        },
-        sortFocus: {
-            default: '#2aa198',
-        },
-        
-    },
-    'dark',
-    );
  
     const columns =[
         {

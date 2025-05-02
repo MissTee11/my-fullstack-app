@@ -7,31 +7,31 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { TbReportMedical } from "react-icons/tb";
 import './Pages.css';
 
-function Patients(){
+createTheme(
+  'blue',
+{
+  text: {
+      primary: '#4C3BCF',
+  },
+  background: {
+      default: 'white',
+  },
+  context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+  },
+  divider: {
+      default: '#3674B5',
+  },
+  sortFocus: {
+      default: '#2aa198',
+  },
+  
+},
+'dark',
+);
 
-     createTheme(
-            'blue',
-        {
-            text: {
-                primary: '#4C3BCF',
-            },
-            background: {
-                default: 'white',
-            },
-            context: {
-                background: '#cb4b16',
-                text: '#FFFFFF',
-            },
-            divider: {
-                default: '#3674B5',
-            },
-            sortFocus: {
-                default: '#2aa198',
-            },
-            
-        },
-        'dark',
-        );
+function Patients(){
      
     const columns =[
         {

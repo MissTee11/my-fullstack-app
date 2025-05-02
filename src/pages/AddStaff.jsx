@@ -37,7 +37,7 @@ function AddStaff(){
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
               <label htmlFor="first_name" >Name</label>
-                <input type="text" placeholder='Enter staff first name'name='first_name' 
+                <input type="text" placeholder='Enter staff first name'name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} 
                  required
                   value={values.first_name}/>
@@ -45,7 +45,7 @@ function AddStaff(){
 
               <div>
               <label htmlFor="last_name" >Last Name</label>
-                <input type="text" placeholder='Enter last name' name='last_name'
+                <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)}
                  required 
                  value={values.last_name}/>
@@ -93,10 +93,12 @@ function AddStaff(){
                 <option value="Receptionist"></option>
                 <option value="Guard"></option>
                 </select>
-              </div>
-              <div className="Buttons">
+
+                <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
+              </div>
+              
               </div>
             </form> 
         </div>

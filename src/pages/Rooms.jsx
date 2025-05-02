@@ -6,6 +6,29 @@ import Sidebar from '../components/Sidebar';
 import {  useNavigate } from 'react-router-dom';
 import './Pages.css';
 
+createTheme(
+  'blue',
+{
+  text: {
+      primary: '#4C3BCF',
+  },
+  background: {
+      default: 'white',
+  },
+  context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+  },
+  divider: {
+      default: '#3674B5',
+  },
+  sortFocus: {
+      default: '#2aa198',
+  },
+  
+},
+'dark',
+);
 
 function Rooms(){
     const [messageText, setMessageText] =useState("");
@@ -27,30 +50,6 @@ function Rooms(){
         }
 
     }
-
-    createTheme(
-        'blue',
-    {
-        text: {
-            primary: '#4C3BCF',
-        },
-        background: {
-            default: 'white',
-        },
-        context: {
-            background: '#cb4b16',
-            text: '#FFFFFF',
-        },
-        divider: {
-            default: '#3674B5',
-        },
-        sortFocus: {
-            default: '#2aa198',
-        },
-        
-    },
-    'dark',
-    );
 
     const columns =[
         {

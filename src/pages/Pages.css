@@ -73,6 +73,7 @@
     display: flex;
     padding: 20px;
  }
+ 
 .DetailForm{
     display: grid;
     grid-template-columns: auto auto;
@@ -84,10 +85,12 @@
 }
 #gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role,#department{
     padding: 10px;
-    width: 523px;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 523px;
+    border-radius: 0px;
     border: #3674B5 1px solid;
 }
+
 form{
     display: flex;
     flex-direction: column;
@@ -101,7 +104,6 @@ input, .cell, select{
     width: 500px;
     margin: 15px;
     color: #9E9E9E;
-    border-radius: 8px;
     border: #3674B5 1px solid;
 }
 label{
@@ -109,7 +111,6 @@ label{
     margin-left: 15px;
 }
 #diagnosis{
-    border-radius: 8px;
     border: #3674B5 1px solid;
 }
 
@@ -184,18 +185,27 @@ select{
     .DetailForm{
         grid-template-columns: auto;
     }
-    input, .cell, select{
+    input, .cell{
         width: 200px;
     }
-    #gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role,#department{
-        width: 223px;
+    #gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role,#department,#diagnosis,#appointment_ID, #record_ID{
+        width: 100%;
+        max-width: 223px;
     }
+    #diagnosis{
+        margin-left: 25px;
+    }
+    
+      select option {
+        font-size: 14px;
+      }
+    
     .Buttons{
         flex-direction: column;
 
     }
     .MainContent{
-        margin-left: 50px;
+        margin-left: 100px;
     }
     .SaveBtn, .ResetBtn {
         width: 100px;
@@ -209,7 +219,17 @@ select{
     
       .AddBtn {
         font-size: 12px;
-        padding: 6px;
+        padding: 10px;
+      
+    }
+    .rdt_Table {
+        width: 100%;
+        min-width: 600px; 
       }
+      .Form{
+        margin-left: 30px;
+      }
+    
+    
 }
 

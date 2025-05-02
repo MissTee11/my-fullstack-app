@@ -7,6 +7,30 @@ import React,{useState,useEffect} from 'react';
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 
+createTheme(
+  'blue',
+{
+  text: {
+      primary: '#4C3BCF',
+  },
+  background: {
+      default: 'white',
+  },
+  context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+  },
+  divider: {
+      default: '#3674B5',
+  },
+  sortFocus: {
+      default: '#2aa198',
+  },
+  
+},
+'dark',
+);
+
 function MedicalRecord(){
 
 const [medicalRecords, setMedicalRecords] = useState([]);
@@ -44,30 +68,6 @@ const [medicalRecords, setMedicalRecords] = useState([]);
       ),
     },
 ];
-
- createTheme(
-                  'blue',
-              {
-                  text: {
-                      primary: '#4C3BCF',
-                  },
-                  background: {
-                      default: 'white',
-                  },
-                  context: {
-                      background: '#cb4b16',
-                      text: '#FFFFFF',
-                  },
-                  divider: {
-                      default: '#3674B5',
-                  },
-                  sortFocus: {
-                      default: '#2aa198',
-                  },
-                  
-              },
-              'dark',
-              );
 
               const customStyles = {
                 headCells: {

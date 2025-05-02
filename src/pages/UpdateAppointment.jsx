@@ -42,13 +42,13 @@ function UpdateAppointments(){
             <form onSubmit={handleSubmit} className="DetailForm">
                 <div>
                 <label htmlFor="appointment_date" >Appointment Date</label>
-                <input type="date" placeholder='Enter appointment date'name='appointment_date' 
+                <input type="date" placeholder='Enter appointment date'name='appointment_date' id='appointment_date'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.appointment_date}/>
                 </div>
                 <div>
                 <label htmlFor="time" >Time</label>
-                <input type="time" placeholder='Enter time' name='time'
+                <input type="time" placeholder='Enter time' name='time' id='time'
                 onChange={(e)=> handleChanges(e)} 
                 required value={values.time}/>
                 </div>
@@ -96,11 +96,12 @@ function UpdateAppointments(){
                  </option>
                 ))}
                 </select>
-                </div>
                 <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save Changes</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
+                </div>
+                
             </form>
         </div>
 

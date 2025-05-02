@@ -32,6 +32,7 @@ return(
   <div>
     <Sidebar/>
     <div className="MainContent">
+      
       <div className="Form">
         <h1>Medical Record</h1>
         <form onSubmit={handleSubmit} className="DetailForm">
@@ -81,11 +82,13 @@ return(
           rows={20}
           cols={75}
             />
-        </div>
+
         <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-      </div>
+        </div>
+        </div>
+       
         </form>
 
       </div>

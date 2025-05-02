@@ -54,14 +54,14 @@ function AddPayment(){
 
                 <div>
                 <label htmlFor="total_amount" >Total Amount</label>
-                <input type="number" placeholder='Enter total amount'name='total_amount' 
+                <input type="number" placeholder='Enter total amount'name='total_amount' id='total_amount'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.total_amount}/>
                 </div>
 
                 <div>
                 <label htmlFor="billing_date" >Billing Date</label>
-                <input type="date" placeholder='Enter date'name='billing_date' 
+                <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.billing_date}/>
                 </div>

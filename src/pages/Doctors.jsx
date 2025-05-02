@@ -96,6 +96,7 @@ function Doctors(){
                   data={columns}
                   theme="blue"
                   customStyles={customStyles}
+                  responsive
                     >
                   </DataTable>
             </div>

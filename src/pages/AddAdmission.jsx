@@ -71,7 +71,7 @@ function AddAdmissions(){
               </div>
               <div>
               <label htmlFor="admission_date">Admission Date</label>
-                <input type="date" placeholder="Enter Admission Date"name="admission_date"
+                <input type="date" placeholder="Enter Admission Date"name="admission_date" id="admission_date"
                 onChange={(e) => handleChanges(e)}
                 required
                 value={values.admission_date}
@@ -79,7 +79,7 @@ function AddAdmissions(){
               </div>
               <div>
               <label htmlFor="discharge_date">Discharge Date</label>
-                <input type="date" placeholder="Enter Discharge Date" name="discharge_date"
+                <input type="date" placeholder="Enter Discharge Date" name="discharge_date" id="discharge_date"
                 onChange={(e) => handleChanges(e)}
                 value={values.discharge_date}
                 />

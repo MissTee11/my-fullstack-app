@@ -40,21 +40,21 @@ function UpdatePatient(){
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
               <label htmlFor="first_name" >First Name</label>
-                <input type="text" placeholder='Enter patient name'name='first_name' 
+                <input type="text" placeholder='Enter patient name'name='first_name' id='first_name'
                 onChange={(e)=> handleChanges(e)} 
                 required
                 value={values.first_name}/>
               </div>
               <div>
               <label htmlFor="last_name" >Last Name</label>
-                <input type="text" placeholder='Enter last name' name='last_name'
+                <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.last_name}/>
               </div>
               <div>
               <label htmlFor="date_of_birth" >Date Of Birth</label> 
-                <input type="date" placeholder='Enter patient date of birth' name='date_of_birth'
+                <input type="date" placeholder='Enter patient date of birth' name='date_of_birth' id='date_of_birth'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.date_of_birth}/>
@@ -73,14 +73,14 @@ function UpdatePatient(){
               </div>
               <div>
               <label htmlFor="contact_number" >Contact Number</label>
-                <input type="number" className='cell'  placeholder='Enter Phone Number'name='contact_number'
+                <input type="number" className='cell'  placeholder='Enter Phone Number'name='contact_number'id='contact_number'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.contact_number}/>
               </div>
               <div>
               <label htmlFor="city" >City of Residence</label>
-                <input type="text" placeholder='Enter Patient City of residence' name='city'
+                <input type="text" placeholder='Enter Patient City of residence' name='city' id='city'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.city}/>

@@ -6,31 +6,33 @@ import Sidebar from '../components/Sidebar';
 import { IoPersonAddSharp } from "react-icons/io5";
 import './Pages.css';
 
-function Staff(){
-    createTheme(
-        'blue',
-    {
-        text: {
-            primary: '#4C3BCF',
-        },
-        background: {
-            default: 'white',
-        },
-        context: {
-            background: '#cb4b16',
-            text: '#FFFFFF',
-        },
-        divider: {
-            default: '#3674B5',
-        },
-        sortFocus: {
-            default: '#2aa198',
-        },
-        
-    },
-    'dark',
-    );
+createTheme(
+  'blue',
+{
+  text: {
+      primary: '#4C3BCF',
+  },
+  background: {
+      default: 'white',
+  },
+  context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+  },
+  divider: {
+      default: '#3674B5',
+  },
+  sortFocus: {
+      default: '#2aa198',
+  },
+  
+},
+'dark',
+);
 
+
+function Staff(){
+    
     const columns =[
         {
           name: 'Staff ID',

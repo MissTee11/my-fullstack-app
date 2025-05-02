@@ -39,17 +39,18 @@ function UpdateDoctor(){
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
               <label htmlFor="first_name" > First Name</label>
-                <input type="text" placeholder='Enter doctor name'name='first_name' 
+                <input type="text" placeholder='Enter doctor name'name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} required value={values.first_name}/>
               </div>
               <div>
               <label htmlFor="last_name" >Last Name</label>
-                <input type="text" placeholder='Enter last name' name='last_name'
+                <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)} required value={values.last_name}/>
               </div>
               <div>
               <label htmlFor="gender"  >Gender</label>
                 <select name='gender'
+                id='gender'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.gender}>
