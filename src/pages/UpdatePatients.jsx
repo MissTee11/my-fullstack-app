@@ -1,11 +1,15 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate,useParams } from 'react-router-dom';
+import { getSinglePatient, updatePatient } from '../api'; 
+
 
 function UpdatePatient(){
 
+    const{id} = useParams();
     const navigate = useNavigate();
+
     const[values, setValues]= useState({
       first_name: '',
       last_name: '',
@@ -14,6 +18,20 @@ function UpdatePatient(){
       contact_number: '',
       city: '',
     });
+
+    useEffect(() => {
+      const fetchPatient = async () => {
+        try {
+          const res = await getSinglePatient(id);
+          console.log(res.data);
+          setValues(res.data); 
+        } catch (err) {
+          console.error("Error fetching patient:", err);
+        }
+      };
+      fetchPatient();
+    }, [id]);
+    
 
     const handleChanges = (e) => {
       const { name, value } = e.target;
@@ -26,10 +44,13 @@ function UpdatePatient(){
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/Patients')
+    try {
+      await updatePatient(id, values);
+      navigate('/Patients');
+    } catch (err) {
+      console.error("Error updating patient:", err);
     }
-        
-
+  };
 
     return(
     <div>

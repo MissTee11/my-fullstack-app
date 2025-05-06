@@ -1,14 +1,12 @@
 import axios from "axios";
 
-const API_BASE_URL ="http://localhost:5000";
+const API_BASE_URL ="http://localhost:5000/api";
 
-export const fetchMessage= async ()=>{
-    try{
-        const response= await axios.get(`${API_BASE_URL}/`);
-        return response.data;
-    }
-    catch(error){
-        console.error("Error fetching data", error);
-        return null;
-    }
-};
+/*PATIENTS*/
+export const getPatients = () => axios.get(`${API_BASE_URL}/patients`);
+export const getSinglePatient = (id) => axios.get(`${API_BASE_URL}/patients/${id}`);
+export const updatePatient = (id, patientData) => axios.put(`${API_BASE_URL}/patients/${id}`, patientData);
+export const deletePatient = (id) => axios.delete(`${API_BASE_URL}/patients/${id}`);
+export const createPatient = (patientData) => axios.post(`${API_BASE_URL}/patients`, patientData);
+
+

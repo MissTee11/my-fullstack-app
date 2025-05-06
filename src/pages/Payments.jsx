@@ -52,6 +52,10 @@ function Payments(){
               selector:row =>row.total_amount
             },
             {
+              name: 'Amount Paid',
+              selector:row =>row.amount_paid
+            },
+            {
                 name: 'Status',
                 selector:row =>row.status
             },
