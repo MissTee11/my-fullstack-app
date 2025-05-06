@@ -5,6 +5,9 @@ import { FaPen } from "react-icons/fa";
 import Sidebar from '../components/Sidebar';
 import { IoPersonAddSharp } from "react-icons/io5";
 import { TbReportMedical } from "react-icons/tb";
+import { useEffect, useState } from 'react';
+import { getPatients, deletePatient } from '../api'; 
+
 import './Pages.css';
 
 createTheme(
@@ -32,6 +35,33 @@ createTheme(
 );
 
 function Patients(){
+
+    const[patients, setPatients] = useState([]);
+
+    useEffect(()=>{
+      const fetchPatients = async()=>{
+        try{
+          const res = await getPatients();
+          setPatients(res.data);
+        }
+        catch(err){
+          console.error("Failed to fetch patients:", err);
+        }
+      };
+      fetchPatients();
+    }, []);
+
+    const handleDelete = async (id) => {
+      if (window.confirm("Are you sure you want to delete this patient?")) {
+        try {
+          await deletePatient(id);
+          setPatients(patients.filter(p => p.patient_id !== id));
+        } catch (err) {
+          console.error("Error deleting patient:", err);
+        }
+      }
+    };
+    
      
     const columns =[
         {
@@ -69,10 +99,13 @@ function Patients(){
               <Link to='/MedicalRecord'>
               <button className="UpdateBtn"><TbReportMedical/></button>
               </Link>
-                <Link to='/UpdatePatient'>
+
+                <Link to={`/UpdatePatient/${row.patient_id}`}>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
-               <button className="DeleteBtn" ><MdDelete/></button>
+
+              <button className="DeleteBtn"  onClick={() => handleDelete(row.patient_id)}>
+              <MdDelete/></button>
             </div>
           ),
         },
@@ -105,9 +138,10 @@ function Patients(){
             
             <DataTable
             columns={columns}
-            data={columns}
+            data={patients}
             customStyles={customStyles}
-            theme="blue">
+            theme="blue"
+            responsive>
             </DataTable>
             </div>
            

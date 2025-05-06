@@ -2,6 +2,7 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { createPatient } from '../api';
 
 function AddPatient(){
 
@@ -26,11 +27,17 @@ function AddPatient(){
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/Patients')
+    try{
+      await createPatient(values);
+      alert("Patient added successfully!");
+      navigate('/Patients');
     }
+    catch(error){
+      console.error("Error adding patient:", error)
+      alert("Failed to add patient. Please try again.");
+    } 
+    };
         
-
-
     return(
     <div>
         <Sidebar/>
