@@ -57,6 +57,12 @@ function UpdatePayment(){
                  required value={values.total_amount}/>
                 </div>
                 <div>
+                <label htmlFor="amount_paid" >Amount Paid</label>
+                <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
+                 onChange={(e)=> handleChanges(e)} 
+                 required value={values.amount_paid}/>
+                </div>
+                <div>
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 

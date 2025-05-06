@@ -12,11 +12,12 @@ function AddPayment(){
             patient_ID: '',
             total_amount: '',
             billing_date: '',
+            amount_paid: '',
             status: '',
         });
 
     const resetInfo=() =>{
-            setValues({patient_ID: '', total_amount: '', billing_date: '',status:'',})
+            setValues({patient_ID: '', total_amount: '', amount_paid:'', billing_date: '',status:'',})
         }
 
     const handleChanges = (e) => {
@@ -60,6 +61,13 @@ function AddPayment(){
                 </div>
 
                 <div>
+                <label htmlFor="amount_paid" >Amount Paid</label>
+                <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
+                 onChange={(e)=> handleChanges(e)} 
+                 required value={values.amount_paid}/>
+                </div>
+
+                <div>
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 
@@ -75,7 +83,7 @@ function AddPayment(){
                 required 
                 value={values.payment_status}>
 
-                <option value="" disabled>Select status</option>
+                <option value="" disabled >Select status</option>
                 {paymentStatus.map((status) => (
                 <option key={status} value={status}>
                 {status}
