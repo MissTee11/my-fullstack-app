@@ -11,6 +11,7 @@ function UpdatePatient(){
 
     const{id} = useParams();
     const navigate = useNavigate();
+    const[messageText, setMessageText]=useState("")
 
     const[values, setValues]= useState({
       first_name: '',
@@ -49,9 +50,16 @@ function UpdatePatient(){
     e.preventDefault();
     try {
       await updatePatient(id, values);
-      navigate('/Patients');
+      setMessageText("Patient updated successfully!")
+
+      setTimeout(()=>{
+        setMessageText("");
+        navigate('/Patients');
+      }, 3000)
+
     } catch (err) {
       console.error("Error updating patient:", err);
+      setMessageText("Failed to update patient. Please try again.")
     }
   };
 
@@ -114,6 +122,13 @@ function UpdatePatient(){
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
             </form>
+
+            {messageText &&(
+              <div className='popup'>
+                <p>{messageText}</p>
+              </div>
+            )}
+            
         </div>
         </div>
     </div>
