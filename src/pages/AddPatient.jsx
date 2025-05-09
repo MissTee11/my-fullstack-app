@@ -3,6 +3,7 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createPatient } from '../api';
+import { formatDateInput } from '../utilities/DateFormat';
 
 function AddPatient(){
 
@@ -66,7 +67,7 @@ function AddPatient(){
                 <input type="date" placeholder='Enter patient date of birth' name='date_of_birth' id='date_of_birth'
                 onChange={(e)=> handleChanges(e)}
                 required 
-                value={values.date_of_birth}/>
+                value={formatDateInput(values.date_of_birth)}/>
               </div>
               <div>
               <label htmlFor="gender" >Gender</label>

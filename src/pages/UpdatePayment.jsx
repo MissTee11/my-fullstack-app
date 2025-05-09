@@ -2,6 +2,7 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { formatDateInput } from '../utilities/DateFormat';
 
 function UpdatePayment(){
 
@@ -66,7 +67,7 @@ function UpdatePayment(){
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 
-                 required value={values.billing_date}/>
+                 required value={formatDateInput(values.billing_date)}/>
                 </div>
                 <div>
                 <label htmlFor="status" >Status</label>

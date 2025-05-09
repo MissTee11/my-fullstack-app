@@ -2,6 +2,7 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { formatDateInput } from '../utilities/DateFormat';
 
 function AddAppointments(){
 
@@ -44,7 +45,7 @@ function AddAppointments(){
                 <label htmlFor="appointment_date" >Appointment Date</label>
                 <input type="date" placeholder='Enter appointment date'name='appointment_date' id='appointment_date'
                  onChange={(e)=> handleChanges(e)} 
-                 required value={values.appointment_date}/>
+                 required value={formatDateInput(values.appointment_date)}/>
                 </div>
                 <div>
                 <label htmlFor="time" >Time</label>
