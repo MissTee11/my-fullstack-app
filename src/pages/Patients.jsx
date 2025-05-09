@@ -15,6 +15,7 @@ import './Pages.css';
 function Patients(){
 
     const[patients, setPatients] = useState([]);
+    const[messageText, setMessageText] = useState("");
 
     useEffect(()=>{
       const fetchPatients = async()=>{
@@ -32,10 +33,17 @@ function Patients(){
     const handleDelete = async (id) => {
       if (window.confirm("Are you sure you want to delete this patient?")) {
         try {
-          await deletePatient(id);
-          setPatients(patients.filter(p => p.patient_id !== id));
-        } catch (err) {
-          console.error("Error deleting patient:", err);
+        await deletePatient(id);
+        setPatients(patients.filter(p => p.patient_id !== id));
+
+        setMessageText("Patient deleted successfully!");
+        setTimeout(() => setMessageText(""), 3000);
+        }
+        catch (err) {
+        console.error("Error deleting patient:", err);
+
+        setMessageText("Failed to delete patient. Please try again.");
+        setTimeout(() => setMessageText(""), 3000);
         }
       }
     };
@@ -93,22 +101,29 @@ function Patients(){
     return(
     <div>
 
-            <Sidebar/>
-            <div className="MainContent">
-              <Link to="/AddPatient">
-              <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Patient </button>
-              </Link>
+      <Sidebar/>
+        <div className="MainContent">
+          <Link to="/AddPatient">
+            <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Patient </button>
+          </Link>
             
-            <DataTable
-            columns={columns}
-            data={patients}
-            customStyles={customStyles}
-            theme="myCustomTheme"
-            responsive>
-            </DataTable>
-            </div>
-           
+        <DataTable
+          columns={columns}
+          data={patients}
+          customStyles={customStyles}
+          theme="myCustomTheme"
+          responsive>
+        </DataTable>
         </div>
+
+        {messageText && (
+          <div className="popup">
+          <p>{messageText}</p>
+          </div>
+        )}
+
+           
+      </div>
 
     )
 }

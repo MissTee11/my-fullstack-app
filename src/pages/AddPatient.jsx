@@ -7,8 +7,9 @@ import { formatDateInput } from '../utilities/DateFormat';
 
 function AddPatient(){
 
-    const navigate = useNavigate();
-    const[values, setValues]= useState({
+  const [messageText, setMessageText] =useState("");
+  const navigate = useNavigate();
+  const[values, setValues]= useState({
       first_name: '',
       last_name: '',
       date_of_birth: '',
@@ -30,12 +31,21 @@ function AddPatient(){
     e.preventDefault();
     try{
       await createPatient(values);
-      alert("Patient added successfully!");
-      navigate('/Patients');
+      setMessageText("Patient added successfully!");
+
+      setTimeout(() => {
+        setMessageText("");
+        navigate('/Patients');
+    }, 3000)
+
     }
     catch(error){
       console.error("Error adding patient:", error)
-      alert("Failed to add patient. Please try again.");
+      setMessageText("Failed to add patient. Please try again.");
+
+      setTimeout(() => {
+        setMessageText("");
+    }, 3000)
     } 
     };
         
@@ -46,6 +56,7 @@ function AddPatient(){
        
             <div className="Form">
             <h1> Patient Registration</h1>
+
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
               <label htmlFor="first_name" >First Name</label>
@@ -100,6 +111,12 @@ function AddPatient(){
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
               </div>
             </form> 
+
+            {messageText && (
+                <div className="popup">
+                    <p>{messageText}</p>
+                </div>
+            )}
         </div>
        
 
