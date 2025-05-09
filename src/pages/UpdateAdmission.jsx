@@ -2,6 +2,7 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { formatDateInput } from '../utilities/DateFormat';
 
 function UpdateAdmissions(){
 
@@ -74,14 +75,14 @@ function UpdateAdmissions(){
                 <input type="date" placeholder="Enter Admission Date"name="admission_date" id='admission_date'
                 onChange={(e) => handleChanges(e)}
                 required
-                value={values.admission_date}
+                value={formatDateInput(values.admission_date)}
                 />
               </div>
               <div>
               <label htmlFor="discharge_date">Discharge Date</label>
                 <input type="date" placeholder="Enter Discharge Date" name="discharge_date" id='discharge_date'
                 onChange={(e) => handleChanges(e)}
-                value={values.discharge_date}
+                value={formatDateInput(values.discharge_date)}
                 />
               </div>
               <div className="Buttons">

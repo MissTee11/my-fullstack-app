@@ -3,6 +3,8 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate,useParams } from 'react-router-dom';
 import { getSinglePatient, updatePatient } from '../api'; 
+import { formatDateInput } from '../utilities/DateFormat';
+
 
 
 function UpdatePatient(){
@@ -13,8 +15,8 @@ function UpdatePatient(){
     const[values, setValues]= useState({
       first_name: '',
       last_name: '',
-      date_of_birth: '',
       gender: '',
+      date_of_birth: '',
       contact_number: '',
       city: '',
     });
@@ -24,7 +26,8 @@ function UpdatePatient(){
         try {
           const res = await getSinglePatient(id);
           console.log(res.data);
-          setValues(res.data); 
+          setValues(res.data);
+           
         } catch (err) {
           console.error("Error fetching patient:", err);
         }
@@ -78,7 +81,7 @@ function UpdatePatient(){
                 <input type="date" placeholder='Enter patient date of birth' name='date_of_birth' id='date_of_birth'
                 onChange={(e)=> handleChanges(e)}
                 required 
-                value={values.date_of_birth}/>
+                value={formatDateInput(values.date_of_birth)}/>
               </div>
               <div>
               <label htmlFor="gender" >Gender</label>

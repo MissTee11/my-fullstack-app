@@ -4,33 +4,10 @@ import React,{useState} from "react";
 import { MdOutlinePayment } from "react-icons/md";
 import Sidebar from '../components/Sidebar';
 import { IoMdAdd } from "react-icons/io";
-import {  useNavigate } from 'react-router-dom';
+import { customStyles } from "../utilities/dataTableCustomStyles";
+import { myCustomTheme } from "../utilities/dataTableTheme";
+import { formatDateInput } from '../utilities/DateFormat';
 import './Pages.css';
-
-createTheme(
-  'blue',
-{
-  text: {
-      primary: '#4C3BCF',
-  },
-  background: {
-      default: 'white',
-  },
-  context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-  },
-  divider: {
-      default: '#3674B5',
-  },
-  sortFocus: {
-      default: '#2aa198',
-  },
-  
-},
-'dark',
-);
-
 
 function Payments(){
 
@@ -45,7 +22,7 @@ function Payments(){
             },
             {
               name: 'Payment Date',
-              selector:row =>row.date
+              selector:row =>formatDateInput(row.date)
             },
             {
               name: 'Total Amount',
@@ -71,22 +48,6 @@ function Payments(){
             },
         
           ];
-              const customStyles = {
-                headCells: {
-                  style: {
-                    fontSize: '15px', 
-                    fontWeight: 'bold',
-                    color: '#3674B5',
-                  },
-                },
-                cells: {
-                  style: {
-                    fontSize: '15px', 
-                    color: '#3674B5',
-                  },
-                },
-              };
-        
 
            return(
 
@@ -101,7 +62,7 @@ function Payments(){
                     columns={columns}
                     data={columns}
                     customStyles={customStyles}
-                    theme="blue">
+                    theme="myCustomTheme">
                       </DataTable>
           
             </div>

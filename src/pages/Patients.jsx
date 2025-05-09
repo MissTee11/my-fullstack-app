@@ -1,5 +1,5 @@
-import DataTable, {createTheme} from "react-data-table-component";
 import { Link } from 'react-router-dom';
+import DataTable from 'react-data-table-component';
 import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import Sidebar from '../components/Sidebar';
@@ -7,32 +7,10 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { TbReportMedical } from "react-icons/tb";
 import { useEffect, useState } from 'react';
 import { getPatients, deletePatient } from '../api'; 
-
+import { formatDateInput } from "../utilities/DateFormat";
+import { customStyles } from "../utilities/dataTableCustomStyles";
+import { myCustomTheme } from "../utilities/dataTableTheme";
 import './Pages.css';
-
-createTheme(
-  'blue',
-{
-  text: {
-      primary: '#4C3BCF',
-  },
-  background: {
-      default: 'white',
-  },
-  context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-  },
-  divider: {
-      default: '#3674B5',
-  },
-  sortFocus: {
-      default: '#2aa198',
-  },
-  
-},
-'dark',
-);
 
 function Patients(){
 
@@ -78,7 +56,7 @@ function Patients(){
         },
         {
           name: 'Date of Birth',
-          selector:row =>row.date_of_birth
+          selector:row =>formatDateInput(row.date_of_birth)
         },
         {
           name: 'Gender',
@@ -111,21 +89,6 @@ function Patients(){
         },
     
       ];
-      const customStyles = {
-        headCells: {
-          style: {
-            fontSize: '15px', 
-            fontWeight: 'bold',
-            color: '#3674B5',
-          },
-        },
-        cells: {
-          style: {
-            fontSize: '15px', 
-            color: '#3674B5',
-          },
-        },
-      };
 
     return(
     <div>
@@ -140,7 +103,7 @@ function Patients(){
             columns={columns}
             data={patients}
             customStyles={customStyles}
-            theme="blue"
+            theme="myCustomTheme"
             responsive>
             </DataTable>
             </div>

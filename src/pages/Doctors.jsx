@@ -1,34 +1,12 @@
 import Sidebar from '../components/Sidebar'
-import DataTable, {createTheme} from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import './Pages.css'
-
-createTheme(
-  'blue',
-{
-text: {
-primary: '#4C3BCF',
-},
-background: {
-default: 'white',
-},
-context: {
-background: '#cb4b16',
-text: '#FFFFFF',
-},
-divider: {
-default: '#3674B5',
-},
-sortFocus: {
-default: '#2aa198',
-},
-  
-},
-'dark',
-);
+import './Pages.css';
+import { customStyles } from "../utilities/dataTableCustomStyles";
+import { myCustomTheme } from "../utilities/dataTableTheme";
 
 function Doctors(){
 
@@ -65,21 +43,6 @@ function Doctors(){
           ),
         },
       ];
-      const customStyles = {
-        headCells: {
-          style: {
-            fontSize: '15px', 
-            fontWeight: 'bold',
-            color: '#3674B5',
-          },
-        },
-        cells: {
-          style: {
-            fontSize: '15px', 
-            color: '#3674B5',
-          },
-        },
-      };
 
     return(
         <div>
@@ -94,7 +57,7 @@ function Doctors(){
                   <DataTable
                   columns={columns}
                   data={columns}
-                  theme="blue"
+                  theme="myCustomTheme"
                   customStyles={customStyles}
                   responsive
                     >

@@ -5,34 +5,12 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
+import { customStyles } from "../utilities/dataTableCustomStyles";
+import { myCustomTheme } from "../utilities/dataTableTheme";
+import { formatDateInput } from '../utilities/DateFormat';
 import './Pages.css';
 
-createTheme(
-  'blue',
-{
-  text: {
-      primary: '#4C3BCF',
-  },
-  background: {
-      default: 'white',
-  },
-  context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-  },
-  divider: {
-      default: '#3674B5',
-  },
-  sortFocus: {
-      default: '#2aa198',
-  },
-  
-},
-'dark',
-);
-
 function Admissions(){
-    
 
     const columns =[
         {
@@ -49,11 +27,11 @@ function Admissions(){
         },
         {
           name: 'Admission Date',
-          selector:row =>row.admission_date
+          selector:row =>formatDateInput(row.admission_date)
         },
         {
           name: 'Discharge Date',
-          selector:row =>row.discharge_date
+          selector:row =>formatDateInput(row.discharge_date)
         },
         {
           name: 'Actions',
@@ -68,21 +46,6 @@ function Admissions(){
         },
     
       ];
-      const customStyles = {
-        headCells: {
-          style: {
-            fontSize: '15px', 
-            fontWeight: 'bold',
-            color: '#3674B5',
-          },
-        },
-        cells: {
-          style: {
-            fontSize: '15px', 
-            color: '#3674B5',
-          },
-        },
-      };
 
       return(
         <div>
@@ -96,7 +59,7 @@ function Admissions(){
         columns={columns}
         data={columns}
         customStyles={customStyles}
-        theme="blue">
+        theme="myCustomTheme">
         </DataTable>
         </div>
        
