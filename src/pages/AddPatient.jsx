@@ -9,6 +9,7 @@ function AddPatient(){
 
   const [messageText, setMessageText] =useState("");
   const navigate = useNavigate();
+
   const[values, setValues]= useState({
       first_name: '',
       last_name: '',
@@ -18,16 +19,16 @@ function AddPatient(){
       city: '',
     });
 
-    const handleChanges = (e) => {
+  const handleChanges = (e) => {
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
-    };
+  };
 
-    const resetInfo=() =>{
+  const resetInfo=() =>{
       setValues({first_name: '', last_name: '', date_of_birth:'', gender:'',contact_number:'',city:'',});
-    };
+  };
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try{
       await createPatient(values);
@@ -40,14 +41,14 @@ function AddPatient(){
 
     }
     catch(error){
-      console.error("Error adding patient:", error)
+      console.error("Error adding patient!", error)
       setMessageText("Failed to add patient. Please try again.");
 
       setTimeout(() => {
         setMessageText("");
     }, 3000)
     } 
-    };
+  };
         
     return(
     <div>

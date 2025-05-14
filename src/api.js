@@ -9,4 +9,13 @@ export const updatePatient = (id, patientData) => axios.put(`${API_BASE_URL}/pat
 export const deletePatient = (id) => axios.delete(`${API_BASE_URL}/patients/${id}`);
 export const createPatient = (patientData) => axios.post(`${API_BASE_URL}/patients`, patientData);
 
+/*DOCTORS*/
+export const getDoctors = () => axios.get(`${API_BASE_URL}/doctors`);
+export const getSingleDoctor =(id)=> axios.get(`${API_BASE_URL}/doctors/${id}`);
+export const updateDoctor= (id, doctorData) => axios.put(`${API_BASE_URL}/doctors/${id, doctorData}`)
+export const deleteDoctor = (id)=> axios.delete(`${API_BASE_URL}/doctors/${id}`);
+export const createDoctor=(doctorData)=> axios.post(`${API_BASE_URL}/doctors`, doctorData);
+
+/*SPECIALTIES*/
+export const getSpecialties= () => axios.get(`${API_BASE_URL}/specialty`)
 
