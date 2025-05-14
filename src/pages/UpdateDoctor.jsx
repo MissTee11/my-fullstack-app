@@ -1,33 +1,65 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
+import { getSingleDoctor, getSpecialties, updateDoctor } from '../api';
 
 
 function UpdateDoctor(){
-    const navigate = useNavigate();
-    const [specialties, setSpecialties] = useState([]);
 
-    const [values, setValues] = useState({
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const [specialties, setSpecialties] = useState([]);
+  const[messageText, setMessageText]=useState("")
+
+  const [values, setValues] = useState({
         first_name: '',
         last_name: '',
         gender: '',
         specialty: '',
-      });
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+            const doctorRes = await getSingleDoctor(id);
+            setValues(doctorRes.data);
+
+            const specialtyRes = await getSpecialties();
+            setSpecialties(specialtyRes.data);
+
+      } catch (err) {
+            console.error("Error fetching data:", err);
+      }
+    };
+    fetchData();
+  }, [id]);
       
    
-      const handleChanges = (e) => {
-       const { name, value } = e.target;
-       setValues({ ...values, [name]: value });
-     };
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+    };
    
-       const resetInfo=() =>{
-           setValues({first_name: '', last_name: '', gender:'', specialty: '',})
-         }
+  const resetInfo=() =>{
+    setValues({first_name: '', last_name: '', gender:'', specialty: '',})
+    }
    
-       const handleSubmit =  async (e) => {
-           e.preventDefault();
-           navigate('/Doctors');
+  const handleSubmit =  async (e) => {
+    e.preventDefault();
+      try {
+            await updateDoctor(id, values);
+            setMessageText("Doctor updated successfully!")
+           
+            setTimeout(()=>{
+            setMessageText("");
+            navigate('/Doctors');
+            }, 3000)
+           
+      } catch (err) {
+            console.error("Error updating doctor:", err);
+            setMessageText("Failed to update doctor. Please try again.")
+            }
        };
 
     return (
@@ -37,16 +69,19 @@ function UpdateDoctor(){
             <div className="Form">
             <h1> Doctor Update Form</h1>
             <form onSubmit={handleSubmit} className="DetailForm">
+
               <div>
               <label htmlFor="first_name" > First Name</label>
                 <input type="text" placeholder='Enter doctor name'name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} required value={values.first_name}/>
               </div>
+
               <div>
               <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)} required value={values.last_name}/>
               </div>
+
               <div>
               <label htmlFor="gender"  >Gender</label>
                 <select name='gender'
@@ -59,25 +94,33 @@ function UpdateDoctor(){
                 <option value="Female">Female</option>
                 </select>
               </div>
+
               <div>
               <label htmlFor="specialty" >Specialty</label>
                 <select 
                 name="specialty" 
                 id="specialty" 
                 onChange={(e) => handleChanges(e)} 
-                required 
-                value={values.specialty}
-            >
-                <option value="" disabled>Select specialty</option>
-                <option value="Male">General Practitioner</option>
-                <option value="Female">Surgeon</option>
+                required>
+                <option value={values.specialty}>Select specialty</option>
+                {specialties.map((specialty)=>(
+                  <option key={specialty.id} value={specialty.id}>{specialty.specialty}
+                  </option>
+                ))}
                 </select>
               </div>
+
               <div className="Buttons">
-                <button class="SaveBtn"type="submit">Save Changes</button>
-                <button class="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
+                <button className="SaveBtn"type="submit">Save Changes</button>
+                <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
             </div>
             </form>
+
+            {messageText &&(
+              <div className='popup'>
+                <p>{messageText}</p>
+              </div>
+            )}
             </div>
            
         </div>

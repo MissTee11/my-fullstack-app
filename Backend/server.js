@@ -25,8 +25,13 @@ app.get('/api/patients', async(req,res)=>{
     try{
        // const result = await pool.query('SELECT*FROM patients')
 
-       const query= `SELECT patient.id AS patient_id, person.first_name, person.last_name, person.gender,
-             patient.date_of_birth, patient.contact_number, patient.city
+       const query= `SELECT patient.id AS patient_id,
+        person.first_name, 
+        person.last_name, 
+        person.gender,
+        patient.date_of_birth, 
+        patient.contact_number, 
+        patient.city
       FROM patient
       JOIN person ON patient.person_id = person.id `;
 
@@ -45,8 +50,6 @@ app.get('/api/patients/:id', async(req,res)=>{
     const { id } = req.params;
 
     try{
-       // const result = await pool.query('SELECT*FROM patients')
-
     const query= `SELECT patient.id AS patient_id,
         person.first_name,
         person.last_name,
@@ -153,6 +156,154 @@ app.delete('/api/patients/:id', async (req, res) => {
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
   });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*DOCTORS*/
+
+//Get all doctors
+app.get('/api/doctors', async(req,res)=>{
+
+    try{
+
+       const query= `SELECT doctor.id AS doctor_id, 
+          person.first_name,
+          person.last_name,
+          person.gender,
+          doctor.specialty
+      FROM doctor
+      JOIN person ON doctor.person_id = person.id `;
+
+      const result = await pool.query(query);
+      res.json(result.rows);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:'Server Error'});
+    }
+});
+
+//Get one doctor
+app.get('/api/doctors/:id', async(req,res)=>{
+
+  const{id} = req.params;
+
+    try{
+
+       const query= `SELECT doctor.id AS doctor_id, 
+          person.first_name,
+          person.last_name,
+          person.gender,
+          doctor.specialty
+      FROM doctor
+      JOIN person ON doctor.person_id = person.id
+      WHERE doctor.id= $1 `;
+
+    const result = await pool.query(query, [id]);
+
+    if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Doctor not found' });
+    }
+    res.json(result.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:'Server Error'});
+    }
+});
+
+//Add new doctor
+app.post('/api/doctors', async(req,res)=>{
+    const {first_name, last_name, gender, specialty}= req.body;
+
+    try{
+        const personResult = await pool.query(
+        `INSERT INTO person (first_name, last_name, gender) VALUES ($1, $2, $3) RETURNING id`,
+        [first_name, last_name, gender]
+        ); 
+
+        const personId=personResult.rows[0].id;
+
+        const doctorResult = await pool.query(
+        `INSERT INTO doctor (person_id, specialty)
+        VALUES ($1, $2) RETURNING *`,
+        [personId, specialty]
+        );
+        res.status(201).json(doctorResult.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to add doctor'});
+    }
+});
+
+//Update doctor
+app.put('/api/doctors/:id', async (req, res) => {
+    const doctorId = req.params.id;
+    const { first_name, last_name, gender, specialty } = req.body;
+
+    try {
+        const personIdResult = await pool.query(
+          `SELECT person_id FROM doctor WHERE id = $1`,
+          [doctorId]
+        );
+
+        const personId = personIdResult.rows[0]?.person_id;
+        if 
+        (!personId) return res.status(404).json({ error: 'Doctor not found' });
+
+        await pool.query(
+            `UPDATE person SET first_name=$1, last_name=$2, gender=$3 WHERE id=$4`,
+            [first_name, last_name, gender, personId]
+          );
+        
+        await pool.query(
+            `UPDATE doctor SET specialty=$1 WHERE id=$2`,
+            [specialty, doctorId]
+          );
+          res.json({ message: 'Doctor updated successfully' });
+    } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Could not update doctor' });
+    }
+});
+
+//Delete a doctor
+app.delete('/api/doctor/:id', async (req, res) => {
+    const doctorId = req.params.id;
+  
+    try {
+      const personResult = await pool.query(
+        `SELECT person_id FROM doctor WHERE id = $1`,
+        [doctorId]
+      );
+  
+      const personId = personResult.rows[0]?.person_id;
+      if (!personId) return res.status(404).json({ error: 'Doctor not found' });
+  
+      await pool.query(`DELETE FROM person WHERE id = $1`, [personId]); 
+      res.json({ message: 'Doctor deleted successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Could not delete doctor' });
+    }
+  });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Get speacialty
+app.get('/api/specialty',async(req, res) =>{
+  try{
+    const result = await pool.query('SELECT id, specialty FROM specialty');
+   res.json(result.rows);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Could not get specialties'});
+  }
+  
+});
+
+
+
       
 
 
