@@ -170,9 +170,10 @@ app.get('/api/doctors', async(req,res)=>{
           person.first_name,
           person.last_name,
           person.gender,
-          doctor.specialty
+          specialty.specialty AS specialty_name
       FROM doctor
-      JOIN person ON doctor.person_id = person.id `;
+      JOIN person ON doctor.person_id = person.id 
+      JOIN specialty ON doctor.specialty::int = specialty.id`;
 
       const result = await pool.query(query);
       res.json(result.rows);

@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 function Doctors(){
 
   const[doctors, setDoctors] = useState([]);
-  const[messageText, setMessageText]=("");
+  const[messageText, setMessageText]=useState("");
 
   useEffect(()=>{
     const fetchDoctors = async()=>{
@@ -67,16 +67,16 @@ function Doctors(){
         },
         {
             name: 'Specialty',
-            selector:row =>row.specialty
+            selector:row =>row.specialty_name
         },
         {
           name: 'Actions',
           cell: row => (
             <div >
-             <Link to='/UpdateDoctor'>
+             <Link to={`/UpdateDoctor/${row.doctor_id}`}>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
-            <button className="DeleteBtn" ><MdDelete/></button>
+            <button onClick = {() =>handleDelete(row.doctor_id)} className="DeleteBtn" ><MdDelete/></button>
             </div>
           ),
         },
