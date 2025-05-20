@@ -8,6 +8,7 @@ import { getSingleDoctor, getSpecialties, updateDoctor } from '../api';
 function UpdateDoctor(){
 
   const {id} = useParams();
+
   const navigate = useNavigate();
   const [specialties, setSpecialties] = useState([]);
   const[messageText, setMessageText]=useState("")
@@ -48,7 +49,10 @@ function UpdateDoctor(){
   const handleSubmit =  async (e) => {
     e.preventDefault();
       try {
-            await updateDoctor(id, values);
+
+            const updatedValues = { ...values, specialty: parseInt(values.specialty) };//backend expects integer
+
+            await updateDoctor(id, updatedValues);
             setMessageText("Doctor updated successfully!")
            
             setTimeout(()=>{
@@ -99,10 +103,11 @@ function UpdateDoctor(){
               <label htmlFor="specialty" >Specialty</label>
                 <select 
                 name="specialty" 
-                id="specialty" 
+                id="specialty"
+                value={values.specialty} //prefilling the form
                 onChange={(e) => handleChanges(e)} 
                 required>
-                <option value={values.specialty}>Select specialty</option>
+                <option value= "">Select specialty</option>
                 {specialties.map((specialty)=>(
                   <option key={specialty.id} value={specialty.id}>{specialty.specialty}
                   </option>
