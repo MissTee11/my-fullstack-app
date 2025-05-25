@@ -290,7 +290,7 @@ app.delete('/api/doctor/:id', async (req, res) => {
     }
   });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Get speacialty
+//Get specialty
 app.get('/api/specialty',async(req, res) =>{
   try{
     const result = await pool.query('SELECT id, specialty FROM specialty');
@@ -302,6 +302,173 @@ app.get('/api/specialty',async(req, res) =>{
   }
   
 });
+
+//Get department
+app.get('/api/department',async(req, res) =>{
+  try{
+    const result = await pool.query('SELECT id, department FROM department');
+   res.json(result.rows);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Could not get departments'});
+  }
+  
+});
+
+//Get role
+app.get('/api/roles',async(req, res) =>{
+  try{
+    const result = await pool.query('SELECT id, role_name FROM roles');
+   res.json(result.rows);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Could not get roles'});
+  }
+  
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*STAFF MEMBERS*/
+
+//get all staff
+app.get('/api/staff', async(req,res)=>{
+
+    try{
+
+       const query= `SELECT staff.id AS staff_id, 
+          person.first_name,
+          person.last_name,
+          person.gender,
+          department.department AS department_name
+          roles.role_name AS role_name
+      FROM staff
+      JOIN person ON staff.person_id = person.id 
+      JOIN department ON staff.department::int = department.id
+      JOIN roles ON staff.roles::int = role.id`;
+
+      const result = await pool.query(query);
+      res.json(result.rows);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:'Server Error'});
+    }
+});
+
+//get one staff member
+app.get('/api/staff/:id', async(req,res)=>{
+
+  const{id} = req.params;
+
+    try{
+
+       const query= `SELECT staff.id AS staff_id, 
+          person.first_name,
+          person.last_name,
+          person.gender,
+          staff.department,
+          staff.role_name
+          
+      FROM staff
+      JOIN person ON staff.person_id = person.id
+      WHERE staff.id= $1 `;
+
+    const result = await pool.query(query, [id]);
+
+    if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Staff member not found' });
+    }
+    res.json(result.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:'Server Error'});
+    }
+});
+
+//add new staff member
+app.post('/api/staff', async(req,res)=>{
+    const {first_name, last_name, gender, department, role_name}= req.body;
+
+    try{
+        const personResult = await pool.query(
+        `INSERT INTO person (first_name, last_name, gender) VALUES ($1, $2, $3) RETURNING id`,
+        [first_name, last_name, gender]
+        ); 
+
+        const personId=personResult.rows[0].id;
+
+        const staffResult = await pool.query(
+        `INSERT INTO staff (person_id, department, role_name)
+        VALUES ($1, $2, $3) RETURNING *`,
+        [personId, department, role_name]
+        );
+        res.status(201).json(staffResult.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to add staff member'});
+    }
+});
+
+//update staff member
+app.put('/api/staff/:id', async (req, res) => {
+    const staffId = req.params.id;
+    const { first_name, last_name, gender, department, role_name } = req.body;
+
+    try {
+        const personIdResult = await pool.query(
+          `SELECT person_id FROM staff WHERE id = $1`,
+          [staffId]
+        );
+
+        const personId = personIdResult.rows[0]?.person_id;
+        if 
+        (!personId) return res.status(404).json({ error: 'Staff member not found' });
+
+        await pool.query(
+            `UPDATE person SET first_name=$1, last_name=$2, gender=$3 WHERE id=$4`,
+            [first_name, last_name, gender, personId]
+          );
+        
+        await pool.query(
+            `UPDATE staff SET department=$1, role_name=$2 WHERE id=$3`,
+            [department, role_name, staffId]
+          );
+          res.json({ message: 'Staff member updated successfully' });
+    } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Could not update staff member' });
+    }
+});
+
+//delete staff member
+app.delete('/api/staff/:id', async (req, res) => {
+    const staffId = req.params.id;
+  
+    try {
+      const personResult = await pool.query(
+        `SELECT person_id FROM staff WHERE id = $1`,
+        [staffId]
+      );
+  
+      const personId = personResult.rows[0]?.person_id;
+      if (!personId) return res.status(404).json({ error: 'Staff not found' });
+  
+      await pool.query(`DELETE FROM person WHERE id = $1`, [personId]); 
+      res.json({ message: 'Staff member deleted successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Could not delete staff member' });
+    }
+  });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
