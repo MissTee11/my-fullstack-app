@@ -6,14 +6,50 @@ import Sidebar from '../components/Sidebar';
 import { IoPersonAddSharp } from "react-icons/io5";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
+import { getStaff, deleteStaff } from "../api";
+import { useState, useEffect } from "react";
 import './Pages.css';
 
 function Staff(){
+
+  const[staff, setStaff]=useState([]);
+  const[messageText, setMessageText]= useState("");
+
+  useEffect(()=>{
+      const fetchStaff = async()=>{
+        try{
+            const res = await getStaff();
+            setStaff(res.data);
+          }
+        catch(err){
+            console.error("Failed to fetch staff members:", err);
+            }
+          };
+          fetchStaff();
+        }, []);
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this staff member?")) {
+          try {
+            await deleteStaff(id);
+            setStaff(staff.filter(s => s.staff_id !== id));
+      
+            setMessageText("Staff member deleted successfully!");
+            setTimeout(() => setMessageText(""), 3000);
+            }
+            catch (err) {
+            console.error("Error deleting staff member:", err);
+      
+            setMessageText("Failed to delete staff memmber. Please try again.");
+            setTimeout(() => setMessageText(""), 3000);
+            }
+          }
+        };
     
     const columns =[
         {
           name: 'Staff ID',
-          selector:row =>row.person_id
+          selector:row =>row.staff_id
         },
         {
           name: 'First Name',
@@ -25,7 +61,7 @@ function Staff(){
         },
         {
           name: 'Role',
-          selector:row =>row.roles
+          selector:row =>row.role_name
         },
         {
           name: 'Department',
@@ -38,7 +74,7 @@ function Staff(){
             <Link to='/UpdateStaff'>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
-            <button className="DeleteBtn" ><MdDelete/></button>
+            <button  onClick = {() =>handleDelete(row.staff_id)} className="DeleteBtn" ><MdDelete/></button>
          </div>
           ),
         },
@@ -62,6 +98,12 @@ function Staff(){
         </DataTable>
         </div>
        
+        {messageText && (
+          <div className="popup">
+          <p>{messageText}</p>
+          </div>
+        )}
+        
     </div>
     )
 }

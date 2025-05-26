@@ -1,21 +1,63 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams} from 'react-router-dom';
+import { getSingleStaff, getRoles, getDepartments,updateStaff } from '../api';
 
 function UpdateStaff(){
+
+  const navigate = useNavigate();
+  const {id} = useParams();
+  const[roles, setRoles]=useState([]);
+  const[department, setDepartment]=useState([]);
+  const [messageText,setMessageText]=useState("");
 
     const [values, setValues] = useState({
         first_name: '',
         last_name: '',
         gender: '',
         department: '',
-        role: '',
+        role_name: '',
       });
+
+    useEffect (()=>{
+        const fetchData = async ()=>{
+          try{
+            const staffRes= await getSingleStaff();
+            setValues(staffRes.data);
+
+            const roleRes= await getRoles();
+            setRoles(roleRes.data);
+    
+            const departmentRes= await getDepartments();
+            setDepartment(departmentRes.data);
+          }
+          catch (err) {
+            console.error("Error fetching data:", err);
+          }
+        };
+        fetchData();
+      },[]);
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        Navigate('/Staff')
+      try{
+          await updateStaff(values);
+          setMessageText("Staff member updates successfuly!");
+      
+          setTimeout(()=>{
+          setMessageText("");
+          navigate('/Staff');
+          }, 3000);
+          }
+          catch(error){
+          console.error("Error updating staff member", error);
+          setMessageText("Failed to update staff member.Please try again.");
+      
+          setTimeout(()=>{
+          setMessageText("");
+          }, 3000)
+          } 
     };
       
     
@@ -24,7 +66,7 @@ function UpdateStaff(){
        setValues({ ...values, [name]: value });
      };
         const resetInfo=() =>{
-            setValues({first_name: '', last_name: '',gender:'', department:'', role:'',})
+            setValues({first_name: '', last_name: '',gender:'', department:'', role_name:'',})
           }
 
     return(
@@ -65,37 +107,42 @@ function UpdateStaff(){
                 <select
                 name="department"
                 id="department"
-                onChange={handleChanges}
-                required
                 value={values.department}
-                >
+                onChange={handleChanges}
+                required>
                 <option value="" disabled>Select Department</option>
-                <option>Eye Diseases</option>
-                <option>Heart Diseases</option>
+                {department.map((department)=>(
+                  <option key={department.id} value={department.id}>{department.department}
+                  </option>
+                ))}
                 </select>
               </div>
               <div>
               <label htmlFor="role" >Role</label>
                 <select 
                 name="role" 
-                id="role" 
+                id="role"
+                value={values.role_name}
                 onChange={(e) => handleChanges(e)} 
-                required 
-                value={values.role}>
-
+                required >
                 <option value="" disabled>Select role</option>
-                <option value="Nurse"></option>
-                <option value="Receptionist"></option>
-                <option value="Guard"></option>
+                {roles.map((roles)=>(
+                  <option key={roles.id} value={roles.id}>{roles.role_name}
+                  </option>
+                ))}
                 </select>
                 <div className="ButtonsStaff">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
               </div>
               </div>
-
-             
             </form>
+
+             {messageText && (
+                <div className="popup">
+                    <p>{messageText}</p>
+                </div>
+            )}
             
          </div>
         </div>

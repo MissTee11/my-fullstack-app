@@ -2,30 +2,68 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
+import { createStaff, getDepartments, getRoles } from '../api';
 
 function AddStaff(){
 
-    const [values, setValues] = useState({
-        first_name: '',
-        last_name: '',
-        gender: '',
-        department: '',
-        role: '',
-      });
+  const navigate = useNavigate();
+  const[roles, setRoles]= useState([]);
+  const[department, setDepartment] = useState([]);
+  const[messageText, setMessageText]=useState([]);
+
+  const [values, setValues] = useState({
+      first_name: '',
+      last_name: '',
+      gender: '',
+      department: '',
+      role_name: '',
+    });
+
+  useEffect (()=>{
+    const fetchData = async ()=>{
+      try{
+        const roleRes= await getRoles();
+        setRoles(roleRes.data);
+
+        const departmentRes= await getDepartments();
+        setDepartment(departmentRes.data);
+      }
+      catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+    fetchData();
+  },[]);
     
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        Navigate('/Staff')
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      try{
+          await createStaff(values);
+          setMessageText("Staff member added successfuly!");
+      
+          setTimeout(()=>{
+          setMessageText("");
+          navigate('/Staff');
+          }, 3000);
+          }
+          catch(error){
+          console.error("Error adding staff member", error);
+          setMessageText("Failed to add staff member.Please try again.");
+      
+          setTimeout(()=>{
+          setMessageText("");
+          }, 3000)
+          }     
     };
       
     
-      const handleChanges = (e) => {
-       const { name, value } = e.target;
-       setValues({ ...values, [name]: value });
-     };
-        const resetInfo=() =>{
-            setValues({first_name: '', last_name: '',gender:'', department:'', role:'',})
-          }
+  const handleChanges = (e) => {
+      const { name, value } = e.target;
+      setValues({ ...values, [name]: value });
+    };
+  const resetInfo=() =>{
+      setValues({first_name: '', last_name: '',gender:'', department:'', role_name:'',})
+    }
 
     return(
     <div>
@@ -70,12 +108,12 @@ function AddStaff(){
                 name="department"
                 id="department"
                 onChange={handleChanges}
-                required
-                value={values.department} 
-                >
+                required>
                 <option value="" disabled>Select Department</option>
-                <option>Eye Diseases</option>
-                <option>Heart Diseases</option>
+                {department.map((department)=>(
+                  <option key={department.id} value={department.id}>{department.department}
+                  </option>
+                ))}
                 </select>
               </div>
 
@@ -85,13 +123,11 @@ function AddStaff(){
                 name="role" 
                 id="role" 
                 onChange={(e) => handleChanges(e)} 
-                required 
-                value={values.role}>
-
-                <option value="" disabled>Select role</option>
-                <option value="Nurse"></option>
-                <option value="Receptionist"></option>
-                <option value="Guard"></option>
+                required>
+               {roles.map((roles)=>(
+                  <option key={roles.id} value={roles.id}>{roles.role_name}
+                  </option>
+                ))}
                 </select>
 
                 <div className="Buttons">
@@ -101,6 +137,13 @@ function AddStaff(){
               
               </div>
             </form> 
+
+            {messageText && (
+                <div className="popup">
+                    <p>{messageText}</p>
+                </div>
+            )}
+
         </div>
        
          </div>

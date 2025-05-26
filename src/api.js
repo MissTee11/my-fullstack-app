@@ -28,9 +28,9 @@ export const getRoles= () => axios.get(`${API_BASE_URL}/roles`);
 /*STAFF MEMBERS*/
 export const getStaff = () => axios.get(`${API_BASE_URL}/staff`);
 export const getSingleStaff =(id)=> axios.get(`${API_BASE_URL}/staff/${id}`);
-export const updateStaff= (id, doctorData) => axios.put(`${API_BASE_URL}/staff/${id}`, doctorData)
+export const updateStaff= (id, staffData) => axios.put(`${API_BASE_URL}/staff/${id}`, staffData)
 export const deleteStaff = (id)=> axios.delete(`${API_BASE_URL}/staff/${id}`);
-export const createStaff=(doctorData)=> axios.post(`${API_BASE_URL}/staff`, doctorData);
+export const createStaff=(staffData)=> axios.post(`${API_BASE_URL}/staff`, staffData);
 
 
 

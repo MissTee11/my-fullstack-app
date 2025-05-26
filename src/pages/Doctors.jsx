@@ -46,8 +46,6 @@ function Doctors(){
         }
       };
       
-
-
     const columns =[
         {
           name: 'Doctor ID',
@@ -108,7 +106,6 @@ function Doctors(){
           </div>
         )}
            
-
         </div>
 
     );
