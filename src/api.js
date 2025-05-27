@@ -32,6 +32,13 @@ export const updateStaff= (id, staffData) => axios.put(`${API_BASE_URL}/staff/${
 export const deleteStaff = (id)=> axios.delete(`${API_BASE_URL}/staff/${id}`);
 export const createStaff=(staffData)=> axios.post(`${API_BASE_URL}/staff`, staffData);
 
+/*APPOINTMENTS*/
+export const getAppointment = () => axios.get(`${API_BASE_URL}/appointments`);
+export const getSingleAppointment =(id)=> axios.get(`${API_BASE_URL}/appointments/${id}`);
+export const updateAppointment= (id, appData) => axios.put(`${API_BASE_URL}/appointments/${id}`, appData)
+export const deleteAppointment = (id)=> axios.delete(`${API_BASE_URL}/appointments/${id}`);
+export const createAppointment=(appData)=> axios.post(`${API_BASE_URL}/appointments`, appData);
+
 
 
 
