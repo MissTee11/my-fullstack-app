@@ -15,8 +15,8 @@ function AddStaff(){
       first_name: '',
       last_name: '',
       gender: '',
-      department: '',
-      role_name: '',
+      department_id: '',
+      role_id: '',
     });
 
   useEffect (()=>{
@@ -44,12 +44,11 @@ function AddStaff(){
           setTimeout(()=>{
           setMessageText("");
           navigate('/Staff');
-          }, 3000);
-          }
+          }, 3000);}
+
           catch(error){
           console.error("Error adding staff member", error);
           setMessageText("Failed to add staff member.Please try again.");
-      
           setTimeout(()=>{
           setMessageText("");
           }, 3000)
@@ -62,7 +61,7 @@ function AddStaff(){
       setValues({ ...values, [name]: value });
     };
   const resetInfo=() =>{
-      setValues({first_name: '', last_name: '',gender:'', department:'', role_name:'',})
+      setValues({first_name: '', last_name: '',gender:'', department_id:'', role_id:'',})
     }
 
     return(
@@ -103,10 +102,10 @@ function AddStaff(){
               </div>
 
               <div>
-              <label htmlFor="department">Select Department</label>
+              <label htmlFor="department_id">Select Department</label>
                 <select
-                name="department"
-                id="department"
+                name="department_id"
+                id="department_id"
                 onChange={handleChanges}
                 required>
                 <option value="" disabled>Select Department</option>
@@ -118,12 +117,13 @@ function AddStaff(){
               </div>
 
               <div>
-              <label htmlFor="role" >Role</label>
+              <label htmlFor="role_id" >Select Role</label>
                 <select 
-                name="role" 
-                id="role" 
+                name="role_id" 
+                id="role_id" 
                 onChange={(e) => handleChanges(e)} 
                 required>
+              <option value="" disabled>Select Role</option>
                {roles.map((roles)=>(
                   <option key={roles.id} value={roles.id}>{roles.role_name}
                   </option>

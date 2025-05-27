@@ -19,6 +19,7 @@ function Staff(){
       const fetchStaff = async()=>{
         try{
             const res = await getStaff();
+            console.log("Fetched staff data:", res.data); 
             setStaff(res.data);
           }
         catch(err){
@@ -65,13 +66,13 @@ function Staff(){
         },
         {
           name: 'Department',
-          selector:row =>row.department
+          selector:row =>row.department_name
         },
         {
           name: 'Actions',
           cell: row => (
             <div >
-            <Link to='/UpdateStaff'>
+            <Link to= {`/UpdateStaff/${row.staff_id}`}>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
             <button  onClick = {() =>handleDelete(row.staff_id)} className="DeleteBtn" ><MdDelete/></button>
@@ -92,9 +93,11 @@ function Staff(){
         
         <DataTable
         columns={columns}
-        data={columns}
+        data={staff}
         customStyles={customStyles}
-        theme="myCustomTheme">
+        theme="myCustomTheme"
+        responsive
+        >
         </DataTable>
         </div>
        
