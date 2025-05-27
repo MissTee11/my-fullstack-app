@@ -471,6 +471,105 @@ app.delete('/api/staff/:id', async (req, res) => {
   });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*APPOINTMENTS*/
+
+//Add appointment
+app.post('/api/appointments', async(req,res)=>{
+    const {patient_id, doctor_id, appointment_date, time ,status}= req.body;
+
+    try{
+        const result = await pool.query(
+          `INSERT INTO appointments (patient_id, doctor_id, appointment_date, time,status) 
+          VALUES ($1, $2, $3, $4, COALESCE($5, 'Scheduled)) RETURNING *`,
+          [patient_id, doctor_id, appointment_date, time, status]
+        );
+        res.status(201).json(result.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to add appointment'});
+    }
+});
+
+//Get all appointments
+app.get('/api/appointments', async(req,res)=>{
+  try{
+    const query= `SELECT * FROM appointments`;
+
+      const result = await pool.query(query);
+      res.json(result.rows);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch appointments'});
+  }
+});
+
+//Get one appointment
+app.get('/api/appointments/:id', async(req,res)=>{
+
+  const{id} = req.params;
+  try{
+
+    const query= `SELECT * FROM appointments where id=$1`;
+
+    const result = await pool.query(query,[id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+
+    res.json(result.rows[0]);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch appointment'});
+  }
+});
+
+//Update Appointment
+app.put('/api/appointments/:id', async(req,res)=>{
+    const{id}= req.params;
+    const {patient_id, doctor_id, appointment_date, time ,status}= req.body;
+
+    try{
+        const result = await pool.query(
+          `UPDATE appointments SET patient_id=$1, doctor_id=$2, appointment_date=$3, time=$4,status=$5
+          WHERE id=$6
+          RETURNING *) 
+         `,
+          [patient_id, doctor_id, appointment_date, time, status,id]
+        );
+       res.json({ message: 'Appointment updated successfully' });
+    } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Could not update appointment' });
+    }
+});
+
+//Delete appointment
+app.delete('/api/appointments/:id', async (req, res) => {
+    const {id} = req.params;
+  
+    try {
+      const result=await pool.query(
+        `DELETE FROM appointments WHERE id = $1 RETURNING*`, 
+        [id]); 
+      if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Appointment not found' });
+      }
+      res.json({ message: 'Appointment deleted successfully' });
+    }
+
+    catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Could not delete appointment' });
+    }
+  });
+
+
 
 
 
