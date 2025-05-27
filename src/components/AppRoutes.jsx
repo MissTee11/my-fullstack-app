@@ -41,7 +41,7 @@ function AppRoutes(){
             <Route path ='/AddAppointment' element={<AddAppointments/>}/>
             <Route path='/AddAdmissions' element={<AddAdmissions/>}/>
             <Route path='/UpdateAdmission' element={<UpdateAdmissions/>}/>
-            <Route path='/UpdateAppointment' element={<UpdateAppointment/>}/>
+            <Route path='/UpdateAppointment/:id' element={<UpdateAppointment/>}/>
             <Route path='/UpdateDoctor/:id' element={<UpdateDoctor/>}/>
             <Route path='/UpdatePatient/:id' element={<UpdatePatient/>}/>
             <Route path='/UpdateStaff/:id' element={<UpdateStaff/>}/>

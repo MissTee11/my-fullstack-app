@@ -90,7 +90,7 @@
     color: #3674B5;
     font-size: 40px;
 }
-#gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role_id,#department_id{
+#gender, #patient_id, #room_id, #doctor_id,#status,#specialty,#role_id,#department_id{
     padding: 10px;
     width: 100%;
     max-width: 523px;
@@ -195,7 +195,7 @@ select{
     input, .cell{
         width: 200px;
     }
-    #gender, #patient_ID, #room_ID, #doctor_ID,#status,#specialty,#role_id,#department_id,#diagnosis,#appointment_ID, #record_ID{
+    #gender, #patient_id, #room_id, #doctor_id,#status,#specialty,#role_id,#department_id,#diagnosis,#appointment_id, #record_id{
         width: 100%;
         max-width: 223px;
     }
