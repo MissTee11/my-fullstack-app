@@ -16,14 +16,14 @@ function UpdateStaff(){
         first_name: '',
         last_name: '',
         gender: '',
-        department: '',
-        role_name: '',
+        department_id: '',
+        role_id: '',
       });
 
     useEffect (()=>{
         const fetchData = async ()=>{
           try{
-            const staffRes= await getSingleStaff();
+            const staffRes= await getSingleStaff(id);
             setValues(staffRes.data);
 
             const roleRes= await getRoles();
@@ -37,12 +37,12 @@ function UpdateStaff(){
           }
         };
         fetchData();
-      },[]);
+      },[id]);
     
       const handleSubmit = async (e) => {
         e.preventDefault();
       try{
-          await updateStaff(values);
+          await updateStaff(id, values);
           setMessageText("Staff member updates successfuly!");
       
           setTimeout(()=>{
@@ -66,7 +66,7 @@ function UpdateStaff(){
        setValues({ ...values, [name]: value });
      };
         const resetInfo=() =>{
-            setValues({first_name: '', last_name: '',gender:'', department:'', role_name:'',})
+            setValues({first_name: '', last_name: '',gender:'', department_id:'', role_id:'',})
           }
 
     return(
@@ -103,11 +103,11 @@ function UpdateStaff(){
                 </select>
               </div>
               <div>
-              <label htmlFor="department">Select Department</label>
+              <label htmlFor="department_id">Select Department</label>
                 <select
-                name="department"
-                id="department"
-                value={values.department}
+                name="department_id"
+                id="department_id"
+                value={values.department_id}
                 onChange={handleChanges}
                 required>
                 <option value="" disabled>Select Department</option>
@@ -118,11 +118,11 @@ function UpdateStaff(){
                 </select>
               </div>
               <div>
-              <label htmlFor="role" >Role</label>
+              <label htmlFor="role_id" >Role</label>
                 <select 
-                name="role" 
-                id="role"
-                value={values.role_name}
+                name="role_id" 
+                id="role_id"
+                value={values.role_id}
                 onChange={(e) => handleChanges(e)} 
                 required >
                 <option value="" disabled>Select role</option>

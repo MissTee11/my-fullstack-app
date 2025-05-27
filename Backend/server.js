@@ -342,12 +342,12 @@ app.get('/api/staff', async(req,res)=>{
           person.first_name,
           person.last_name,
           person.gender,
-          department.department AS department_name
+          department.department AS department_name,
           roles.role_name AS role_name
       FROM staff
       JOIN person ON staff.person_id = person.id 
-      JOIN department ON staff.department::int = department.id
-      JOIN roles ON staff.roles::int = roles.id`;
+      JOIN department ON staff.department_id = department.id
+      JOIN roles ON staff.role_id = roles.id`;
 
       const result = await pool.query(query);
       res.json(result.rows);
@@ -369,11 +369,15 @@ app.get('/api/staff/:id', async(req,res)=>{
           person.first_name,
           person.last_name,
           person.gender,
-          staff.department,
-          staff.role_name
+          department.id AS department_id,
+          department.department AS department_name,
+          roles.id AS role_id,
+          roles.role_name AS role_name
           
       FROM staff
       JOIN person ON staff.person_id = person.id
+      JOIN department ON staff.department_id = department.id
+      JOIN roles ON staff.role_id = roles.id
       WHERE staff.id= $1 `;
 
     const result = await pool.query(query, [id]);
@@ -391,7 +395,7 @@ app.get('/api/staff/:id', async(req,res)=>{
 
 //add new staff member
 app.post('/api/staff', async(req,res)=>{
-    const {first_name, last_name, gender, roles ,department}= req.body;
+    const {first_name, last_name, gender, role_id ,department_id}= req.body;
 
     try{
         const personResult = await pool.query(
@@ -402,9 +406,9 @@ app.post('/api/staff', async(req,res)=>{
         const personId=personResult.rows[0].id;
 
         const staffResult = await pool.query(
-        `INSERT INTO staff (person_id, roles, department)
+        `INSERT INTO staff (person_id, role_id, department_id)
         VALUES ($1, $2, $3) RETURNING *`,
-        [personId, roles, department]
+        [personId, role_id, department_id]
         );
         res.status(201).json(staffResult.rows[0]);
     }
@@ -417,7 +421,7 @@ app.post('/api/staff', async(req,res)=>{
 //update staff member
 app.put('/api/staff/:id', async (req, res) => {
     const staffId = req.params.id;
-    const { first_name, last_name, gender, department, roles } = req.body;
+    const { first_name, last_name, gender, role_id, department_id } = req.body;
 
     try {
         const personIdResult = await pool.query(
@@ -435,8 +439,8 @@ app.put('/api/staff/:id', async (req, res) => {
           );
         
         await pool.query(
-            `UPDATE staff SET department=$1, roles=$2 WHERE id=$3`,
-            [department, roles, staffId]
+            `UPDATE staff SET role_id=$1, department_id=$2 WHERE id=$3`,
+            [role_id, department_id, staffId]
           );
           res.json({ message: 'Staff member updated successfully' });
     } catch (err) {
