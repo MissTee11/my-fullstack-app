@@ -3,23 +3,60 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
+import { createAppointment, getDoctors, getPatients} from '../api';
 
 function AddAppointments(){
 
     const statuses = ["Scheduled", "Completed", "Cancelled"];
     const navigate=useNavigate();
+    const [messageText, setMessageText] = useState("");
+    const[ patients, setPatients] = useState([]);
+    const[doctors, setDoctors] = useState([]);
 
-     const [values, setValues] = useState({
+    const [values, setValues] = useState({
       appointment_date: '',
       time: '',
-      patient_ID: '',
-      doctor_ID: '',
+      patient_id: '',
+      doctor_id: '',
       status:'',
        });
 
+    useEffect (()=>{
+        const fetchData = async ()=>{
+          try{
+            const docRes= await getDoctors();
+            setPatients(docRes.data);
+    
+            const patientRes= await getPatients();
+            setDoctors(patientRes.data);
+          }
+          catch (err) {
+            console.error("Error fetching data:", err);
+          }
+        };
+        fetchData();
+      },[]);
+
        const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/Appointments');
+        try{
+            await createAppointment(values);
+            setMessageText("Appointment added successfully!");
+        
+            setTimeout(() => {
+            setMessageText("");
+            navigate('/Appointments');
+            }, 3000)
+        
+            }
+            catch(error){
+            console.error("Error adding appointment!", error)
+            setMessageText("Failed to add appointment. Please try again.");
+        
+            setTimeout(() => {
+            setMessageText("");
+            }, 3000)
+            } 
              
     };
 
@@ -29,7 +66,7 @@ function AddAppointments(){
       };
 
     const resetInfo=() =>{
-        setValues({date: '', time: '', patient_ID:'', doctor_ID:'',status:'',})
+        setValues({appointment_date: '', time: '', patient_id:'', doctor_id:'',status:'',})
       }
 
 
@@ -54,31 +91,33 @@ function AddAppointments(){
                 required value={values.time}/>
                 </div>
                 <div>
-                <label htmlFor="patient_ID">Select Patient</label>
+                <label htmlFor="patient_id">Select Patient</label>
                 <select
-                name="patient_ID"
-                id="patient_ID"
+                name="patient_id"
+                id="patient_id"
                 onChange={handleChanges}
                 required
-                value={values.patient_ID}
                 >
                 <option value="" disabled>Select Patient</option>
-                <option>John</option>
-                <option>Mary</option>
+               {patients.map((patient)=>(
+                <option key={patient.id} value={patient.id}>{patient.first_name}
+                </option>
+                ))}
                 </select>
                 </div>
                 <div>
-                <label htmlFor="doctor_ID">Select Doctor</label>
+                <label htmlFor="doctor_id">Select Doctor</label>
                 <select
-                name="doctor_ID"
-                id="doctor_ID"
+                name="doctor_id"
+                id="doctor_id"
                 onChange={handleChanges}
                 required
-                value={values.doctor_ID}
                 >
                 <option value="" disabled>Select Doctor</option>
-                <option>John</option>
-                <option>Mary</option>
+               {doctors.map((doctor)=>(
+                <option key={doctor.id} value={doctor.id}>{doctor.first_name}
+                </option>
+                ))}
                 </select>
                 </div>
                 <div>
@@ -106,6 +145,11 @@ function AddAppointments(){
                 
     
             </form> 
+            {messageText && (
+                <div className="popup">
+                    <p>{messageText}</p>
+                </div>
+            )}
         </div>
 
             </div>

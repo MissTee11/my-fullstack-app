@@ -7,9 +7,46 @@ import { FaPen } from "react-icons/fa";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { formatDateInput } from '../utilities/DateFormat';
+import { getAppointment } from "../api";
+import { useState, useEffect } from "react";
 import './Pages.css';
 
 function Appointments(){
+
+  const[appointments, setAppointments]= useState([]);
+  const[messageText, setMessageText]= useState("")
+
+   useEffect(()=>{
+        const fetchAppointments = async()=>{
+        try{
+          const res = await getAppointment();
+          console.log("Fetched appointment data:", res.data); 
+          setAppointments(res.data);
+        }
+        catch(err){
+          console.error("Failed to fetch appointment:", err);
+        }
+      };
+        fetchAppointments();
+      }, []);
+
+     const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this appointment?")) {
+          try {
+                await deleteStaff(id);
+                setStaff(staff.filter(s => s.staff_id !== id));
+          
+                setMessageText("Appointment deleted successfully!");
+                setTimeout(() => setMessageText(""), 3000);
+                }
+                catch (err) {
+                console.error("Error deleting appointment:", err);
+          
+                setMessageText("Failed to delete appointment. Please try again.");
+                setTimeout(() => setMessageText(""), 3000);
+                }
+              }
+            };
 
  
     const columns =[
@@ -19,11 +56,11 @@ function Appointments(){
         },
         {
           name: 'Patient ID',
-          selector:row =>row.patient_name
+          selector:row =>row.patient_id
         },
         {
           name: 'Doctor ID',
-          selector:row =>row.doctor_name
+          selector:row =>row.doctor_id
         },
         {
           name: 'Appointment Date',
@@ -41,10 +78,10 @@ function Appointments(){
           name: 'Actions',
           cell: row => (
         <div >
-            <Link to='/UpdateAppointment'>
+            <Link to={`/UpdateAppointment/${row.appointment_id}`}>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
-            <button className="DeleteBtn" ><MdDelete/></button>
+            <button onClick = {() =>handleDelete(row.appointment_id)} className="DeleteBtn" ><MdDelete/></button>
         </div>
           ),
         },
@@ -61,7 +98,7 @@ function Appointments(){
       
         <DataTable
         columns={columns}
-        data={columns}
+        data={appointments}
         customStyles={customStyles}
         theme="myCustomTheme">
         </DataTable>

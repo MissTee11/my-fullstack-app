@@ -480,7 +480,7 @@ app.post('/api/appointments', async(req,res)=>{
     try{
         const result = await pool.query(
           `INSERT INTO appointments (patient_id, doctor_id, appointment_date, time,status) 
-          VALUES ($1, $2, $3, $4, COALESCE($5, 'Scheduled)) RETURNING *`,
+          VALUES ($1, $2, $3, $4, COALESCE($5, 'Scheduled')) RETURNING *`,
           [patient_id, doctor_id, appointment_date, time, status]
         );
         res.status(201).json(result.rows[0]);
@@ -498,6 +498,7 @@ app.get('/api/appointments', async(req,res)=>{
 
       const result = await pool.query(query);
       res.json(result.rows);
+      
 
   }
   catch(err){
