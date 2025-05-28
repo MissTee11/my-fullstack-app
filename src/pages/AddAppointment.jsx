@@ -25,10 +25,10 @@ function AddAppointments(){
         const fetchData = async ()=>{
           try{
             const docRes= await getDoctors();
-            setPatients(docRes.data);
+            setDoctors(docRes.data);
     
             const patientRes= await getPatients();
-            setDoctors(patientRes.data);
+            setPatients(patientRes.data);
           }
           catch (err) {
             console.error("Error fetching data:", err);
@@ -62,7 +62,9 @@ function AddAppointments(){
 
      const handleChanges = (e) => {
         const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
+        setValues({ ...values,
+           [name]: name === 'doctor_id' || name === 'patient_id' ? parseInt(value) : value,//sents id to backend because backend expects an integer
+          });
       };
 
     const resetInfo=() =>{
@@ -90,17 +92,19 @@ function AddAppointments(){
                 onChange={(e)=> handleChanges(e)} 
                 required value={values.time}/>
                 </div>
+                
                 <div>
                 <label htmlFor="patient_id">Select Patient</label>
                 <select
                 name="patient_id"
                 id="patient_id"
                 onChange={handleChanges}
+                value={values.patient_id}
                 required
                 >
                 <option value="" disabled>Select Patient</option>
                {patients.map((patient)=>(
-                <option key={patient.id} value={patient.id}>{patient.first_name}
+                <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}
                 </option>
                 ))}
                 </select>
@@ -112,10 +116,11 @@ function AddAppointments(){
                 id="doctor_id"
                 onChange={handleChanges}
                 required
+                value={values.doctor_id}
                 >
                 <option value="" disabled>Select Doctor</option>
                {doctors.map((doctor)=>(
-                <option key={doctor.id} value={doctor.id}>{doctor.first_name}
+                <option key={doctor.id} value={doctor.id}>{doctor.first_name} {doctor.last_name}
                 </option>
                 ))}
                 </select>
@@ -137,12 +142,12 @@ function AddAppointments(){
                 ))}
                 </select>
 
+
                 <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
                 </div>
-                
     
             </form> 
             {messageText && (
