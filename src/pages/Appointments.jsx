@@ -7,7 +7,7 @@ import { FaPen } from "react-icons/fa";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { formatDateInput } from '../utilities/DateFormat';
-import { getAppointment } from "../api";
+import { getAppointment, deleteAppointment } from "../api";
 import { useState, useEffect } from "react";
 import './Pages.css';
 
@@ -33,7 +33,7 @@ function Appointments(){
      const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this appointment?")) {
           try {
-                await deleteStaff(id);
+                await deleteAppointment(id);
                 setStaff(staff.filter(s => s.staff_id !== id));
           
                 setMessageText("Appointment deleted successfully!");
