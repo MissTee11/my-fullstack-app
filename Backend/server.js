@@ -494,7 +494,7 @@ app.post('/api/appointments', async(req,res)=>{
 //Get all appointments
 app.get('/api/appointments', async(req,res)=>{
   try{
-    const query= `SELECT * FROM appointments`;
+    const query= `SELECT id FROM appointments`;
 
       const result = await pool.query(query);
       res.json(result.rows);
