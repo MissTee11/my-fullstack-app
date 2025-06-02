@@ -102,7 +102,7 @@ function AddAppointments(){
                 >
                 <option value="" disabled>Select Patient</option>
                {patients.map((patient)=>(
-                <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}
+                <option key={patient.patient_id} value={patient.patient_id}>{patient.first_name} {patient.last_name}
                 </option>
                 ))}
                 </select>
@@ -117,8 +117,9 @@ function AddAppointments(){
                 value={values.doctor_id}
                 >
                 <option value="" disabled>Select Doctor</option>
+
                {doctors.map((doctor)=>(
-                <option key={doctor.id} value={doctor.id}>{doctor.first_name} {doctor.last_name}
+                <option key={doctor.doctor_id} value={doctor.doctor_id}>{doctor.first_name} {doctor.last_name}
                 </option>
                 ))}
                 </select>
