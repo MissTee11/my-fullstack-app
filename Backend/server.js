@@ -544,7 +544,7 @@ app.put('/api/appointments/:id', async(req,res)=>{
         const result = await pool.query(
           `UPDATE appointments SET patient_id=$1, doctor_id=$2, appointment_date=$3, time=$4,status=$5
           WHERE id=$6
-          RETURNING *) 
+          RETURNING *;
          `,
           [patient_id, doctor_id, appointment_date, time, status,id]
         );
