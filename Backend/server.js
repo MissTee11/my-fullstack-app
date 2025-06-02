@@ -472,7 +472,6 @@ app.delete('/api/staff/:id', async (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*APPOINTMENTS*/
-/*ERROR HERE: Slectibf name so it records id but recording name instead which is not integer */
 //Add appointment
 app.post('/api/appointments', async(req,res)=>{
     const {patient_id, doctor_id, appointment_date, time ,status}= req.body;

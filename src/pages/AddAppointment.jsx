@@ -117,7 +117,6 @@ function AddAppointments(){
                 value={values.doctor_id}
                 >
                 <option value="" disabled>Select Doctor</option>
-
                {doctors.map((doctor)=>(
                 <option key={doctor.doctor_id} value={doctor.doctor_id}>{doctor.first_name} {doctor.last_name}
                 </option>
