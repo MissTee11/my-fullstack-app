@@ -62,9 +62,7 @@ function AddAppointments(){
 
      const handleChanges = (e) => {
         const { name, value } = e.target;
-        setValues({ ...values,
-           [name]: name === 'doctor_id' || name === 'patient_id' ? parseInt(value) : value,//sents id to backend because backend expects an integer
-          });
+        setValues({ ...values, [name]: value });
       };
 
     const resetInfo=() =>{
