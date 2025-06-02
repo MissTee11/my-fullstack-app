@@ -116,7 +116,6 @@ function AddDoctor(){
             </div>
             
             </form>
-
              {messageText && (
                 <div className="popup">
                     <p>{messageText}</p>

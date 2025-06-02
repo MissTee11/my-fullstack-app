@@ -35,27 +35,7 @@ function AddStaff(){
     fetchData();
   },[]);
     
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      try{
-          await createStaff(values);
-          setMessageText("Staff member added successfuly!");
-      
-          setTimeout(()=>{
-          setMessageText("");
-          navigate('/Staff');
-          }, 3000);}
-
-          catch(error){
-          console.error("Error adding staff member", error);
-          setMessageText("Failed to add staff member.Please try again.");
-          setTimeout(()=>{
-          setMessageText("");
-          }, 3000)
-          }     
-    };
-      
-    
+        
   const handleChanges = (e) => {
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
@@ -63,6 +43,28 @@ function AddStaff(){
   const resetInfo=() =>{
       setValues({first_name: '', last_name: '',gender:'', department_id:'', role_id:'',})
     }
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try{
+          await createStaff(values);
+          setMessageText("Staff member added successfuly!");
+      
+          setTimeout(()=>{
+          setMessageText("");
+          navigate('/Staff');
+          }, 3000);
+        }
+      catch(error){
+          console.error("Error adding staff member", error);
+          setMessageText("Failed to add staff member.Please try again.");
+
+          setTimeout(()=>{
+          setMessageText("");
+          }, 3000)
+      }     
+    };
 
     return(
     <div>
@@ -137,7 +139,6 @@ function AddStaff(){
               
               </div>
             </form> 
-
             {messageText && (
                 <div className="popup">
                     <p>{messageText}</p>

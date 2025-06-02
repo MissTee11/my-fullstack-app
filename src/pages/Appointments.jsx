@@ -103,6 +103,12 @@ function Appointments(){
         theme="myCustomTheme">
         </DataTable>
         </div>
+
+        {messageText && (
+          <div className="popup">
+          <p>{messageText}</p>
+          </div>
+        )}
        
     </div>
       )
