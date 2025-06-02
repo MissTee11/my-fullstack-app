@@ -34,7 +34,7 @@ function Appointments(){
         if (window.confirm("Are you sure you want to delete this appointment?")) {
           try {
                 await deleteAppointment(id);
-                setStaff(staff.filter(s => s.staff_id !== id));
+                setAppointments(appointments.filter(a => a.appointment_id !== id));
           
                 setMessageText("Appointment deleted successfully!");
                 setTimeout(() => setMessageText(""), 3000);
