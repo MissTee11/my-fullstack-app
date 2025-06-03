@@ -575,6 +575,50 @@ app.delete('/api/appointments/:id', async (req, res) => {
     }
   });
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*ADMISSIONS */
+
+  //Add admission
+app.post('/api/admissions', async(req,res)=>{
+    const {patient_id, room_id, admission_date, discharge_date}= req.body;
+
+    try{
+        const result = await pool.query(
+          `INSERT INTO admissions (patient_id, room_id, admission_date, discharge_date) 
+          VALUES ($1, $2, $3, $4, COALESCE($5, 'Scheduled')) RETURNING *`,
+          [patient_id, room_id, admission_date, discharge_date]
+        );
+        res.status(201).json(result.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to add admission'});
+    }
+});
+
+//Get all admissions
+app.get('/api/admissions', async(req,res)=>{
+  try{
+    const query= `SELECT id AS admission_id,
+    patient_id,
+    room_id,
+    admission_date,
+    discharge_date
+    FROM appointments`;
+
+      const result = await pool.query(query);
+      res.json(result.rows);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch admissions'});
+  }
+});
+
+
+
+
 
 
 
