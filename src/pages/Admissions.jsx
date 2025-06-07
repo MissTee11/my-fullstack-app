@@ -93,7 +93,7 @@ function Admissions(){
         
         <DataTable
         columns={columns}
-        data={columns}
+        data={admissions}
         customStyles={customStyles}
         theme="myCustomTheme">
         </DataTable>

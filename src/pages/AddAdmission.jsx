@@ -1,6 +1,6 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
-import React,{useState,useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
 import { createAdmission, getPatients, getRooms } from '../api';
@@ -8,9 +8,9 @@ import { createAdmission, getPatients, getRooms } from '../api';
 function AddAdmissions(){
 
   const navigate= useNavigate();
+  const [patients, setPatients] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [messageText, setMessageText] = useState("");
-  const[patients, setPatients] =([]);
-  const[rooms, setRooms]=([]);
 
   const [values, setValues] = useState({
     patient_id: '',
@@ -19,24 +19,15 @@ function AddAdmissions(){
     discharge_date: '',
   });
 
-  const handleChanges = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-  const resetInfo = () => {
-    setValues({
-      patient_id: '', room_id: '', admission_date: '',discharge_date: '',});
-  };
-
-  useEffect (()=>{
+   useEffect (()=>{
     const fetchData = async ()=>{
         try{
+            const patientRes= await getPatients();
+            setPatients(patientRes.data);
+
             const roomRes= await getRooms();
             setRooms(roomRes.data);
       
-            const patientRes= await getPatients();
-            setPatients(patientRes.data);
             }
         catch (err) {
             console.error("Error fetching data:", err);
@@ -47,7 +38,7 @@ function AddAdmissions(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   try{
+    try{
         await createAdmission(values);
         setMessageText("Admission record added successfully!");
            
@@ -64,8 +55,16 @@ function AddAdmissions(){
         setTimeout(() => {
         setMessageText("");
         }, 3000)
-        } 
-                
+        }             
+  };
+
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const resetInfo = () => {
+    setValues({ patient_id: '', room_id: '', admission_date: '',discharge_date: '',});
   };
 
     return(
@@ -81,11 +80,11 @@ function AddAdmissions(){
               name="patient_id"
               id="patient_id"
               onChange={handleChanges}
-              required
               value={values.patient_id}
+              required
               >
               <option value="" disabled>Select Patient</option>
-              {patients.map((patient)=>(
+              {patients.map((patient)=> (
               <option key={patient.patient_id} value={patient.patient_id}>{patient.first_name} {patient.last_name}
               </option>
               ))}
@@ -140,5 +139,5 @@ function AddAdmissions(){
 
         </div>
     )
-}
+};
 export default AddAdmissions;
