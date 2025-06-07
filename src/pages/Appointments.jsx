@@ -14,10 +14,10 @@ import './Pages.css';
 function Appointments(){
 
   const[appointments, setAppointments]= useState([]);
-  const[messageText, setMessageText]= useState("")
+  const[messageText, setMessageText]= useState("");
 
-   useEffect(()=>{
-        const fetchAppointments = async()=>{
+  useEffect(()=>{
+      const fetchAppointments = async()=>{
         try{
           const res = await getAppointment();
           console.log("Fetched appointment data:", res.data); 
@@ -30,21 +30,21 @@ function Appointments(){
         fetchAppointments();
       }, []);
 
-     const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this appointment?")) {
-          try {
-                await deleteAppointment(id);
-                setAppointments(appointments.filter(a => a.appointment_id !== id));
+  const handleDelete = async (id) => {
+      if (window.confirm("Are you sure you want to delete this appointment?")) {
+        try {
+              await deleteAppointment(id);
+              setAppointments(appointments.filter(a => a.appointment_id !== id));
           
-                setMessageText("Appointment deleted successfully!");
-                setTimeout(() => setMessageText(""), 3000);
-                }
-                catch (err) {
-                console.error("Error deleting appointment:", err);
+              setMessageText("Appointment deleted successfully!");
+              setTimeout(() => setMessageText(""), 3000);
+              }
+              catch (err) {
+              console.error("Error deleting appointment:", err);
           
-                setMessageText("Failed to delete appointment. Please try again.");
-                setTimeout(() => setMessageText(""), 3000);
-                }
+              setMessageText("Failed to delete appointment. Please try again.");
+              setTimeout(() => setMessageText(""), 3000);
+              }
               }
             };
 

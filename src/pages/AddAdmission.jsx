@@ -128,6 +128,13 @@ function AddAdmissions(){
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
               </div>
             </form>
+            
+            {messageText && (
+            <div className="popup">
+            <p>{messageText}</p>
+            </div>
+           )}
+       
             </div>   
             </div>
 
