@@ -1,15 +1,21 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
+import { getSingleAdmission, getPatients, getRooms, updateAdmission } from '../api';
 
 function UpdateAdmissions(){
 
-    const navigate= useNavigate();
+  const navigate= useNavigate();
+  const [messageText, setMessageText] = useState("");
+  const[patients, setPatients] =([]);
+  const[rooms, setRooms]=([]);
+  const {id} = useParams();
+
   const [values, setValues] = useState({
-    patient_ID: '',
-    room_ID: '',
+    patient_id: '',
+    room_id: '',
     admission_date: '',
     discharge_date: '',
   });
@@ -21,16 +27,50 @@ function UpdateAdmissions(){
 
   const resetInfo = () => {
     setValues({
-      patient_ID: '',
-      room_ID: '',
-      admission_date: '',
-      discharge_date: '',
+      patient_id: '', room_id: '', admission_date: '', discharge_date: '',
     });
   };
 
+  useEffect (()=>{
+    const fetchData = async ()=>{
+      try{
+          const roomRes= await getRooms();
+          setRooms(roomRes.data);
+        
+          const patientRes= await getPatients();
+          setPatients(patientRes.data);
+
+          const singleAdmission= await getSingleAdmission(id);
+          setValues(singleAdmission.data)
+          }
+          catch (err) {
+            console.error("Error fetching data:", err);
+          }
+        };
+        fetchData();
+    },[id]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/Admissions');
+      try{
+          await updateAdmission(values);
+          setMessageText("Admission record updated successfully!");
+              
+          setTimeout(() => {
+          setMessageText("");
+          navigate('/Admissions');
+          }, 3000)
+              
+          }
+          catch(error){
+          console.error("Error updating admission record!", error)
+          setMessageText("Failed to updateadmission. Please try again.");
+              
+          setTimeout(() => {
+          setMessageText("");
+          }, 3000)
+          } 
+                   
   };
 
     return(
@@ -41,34 +81,36 @@ function UpdateAdmissions(){
             <h1>Admission Update Form</h1>
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
-              <label htmlFor="patient_ID">Select Patient</label>
-                        <select
-                        name="patient_ID"
-                        id="patient_ID"
-                        onChange={handleChanges}
-                        required
-                        value={values.patient_ID}
-                        >
-                        <option value="" disabled>Select Patient</option>
-                        <option value="john">John</option>
-                        <option value="mary">Mary</option>
-                        </select>
+              <label htmlFor="patient_id">Select Patient</label>
+              <select
+              name="patient_id"
+              id="patient_id"
+              onChange={handleChanges}
+              required
+              value={values.patient_id}
+              >
+              <option value="" disabled>Select Patient</option>
+              {patients.map((patient)=>(
+              <option key={patient.patient_id} value={patient.patient_id}>{patient.first_name} {patient.last_name}
+              </option>
+              ))}
+              </select>
               </div>
+
               <div>
-              <label htmlFor="room_ID">Select Room</label>
-                        <select
-                        name="room_ID"
-                        id="room_ID"
-                        onChange={handleChanges}
-                        required
-                        value={values.room_ID}
-                        >
-                        <option value="" disabled>Select Room</option>
-                        <option value="A1">A1</option>
-                        <option value="A2">A2</option>
-                        <option value="A3">A3</option>
-                        <option value="A4">A4</option>
-                        </select>
+              <label htmlFor="room_id">Select Room</label>
+              <select
+              name="room_id"
+              id="room_id"
+              onChange={handleChanges}
+              required
+              value={values.room_id}
+              >
+              <option value="" disabled>Select Room</option>
+              {rooms.map((room)=>(
+              <option key={room.id} value={room.id}>{room.room_number} {room.room_type}</option>
+              ))}
+              </select>
               </div>
               <div>
               <label htmlFor="admission_date">Admission Date</label>
@@ -90,6 +132,13 @@ function UpdateAdmissions(){
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
             </div>
             </form>
+
+            {messageText && (
+            <div className="popup">
+            <p>{messageText}</p>
+            </div>
+           )}
+           
             </div>
            
             </div>

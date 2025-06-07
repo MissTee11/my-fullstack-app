@@ -23,6 +23,7 @@ function UpdateAppointments(){
       doctor_id: '',
       status:'',
     });
+    
     useEffect (()=>{
         const fetchData = async ()=>{
         try{
