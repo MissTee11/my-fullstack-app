@@ -9,8 +9,8 @@ function UpdateAdmissions(){
 
   const navigate= useNavigate();
   const [messageText, setMessageText] = useState("");
-  const[patients, setPatients] =([]);
-  const[rooms, setRooms]=([]);
+  const[patients, setPatients] =useState([]);
+  const[rooms, setRooms]=useState([]);
   const {id} = useParams();
 
   const [values, setValues] = useState({
@@ -53,7 +53,7 @@ function UpdateAdmissions(){
   const handleSubmit = async (e) => {
     e.preventDefault();
       try{
-          await updateAdmission(values);
+          await updateAdmission(id, values);
           setMessageText("Admission record updated successfully!");
               
           setTimeout(() => {
@@ -138,7 +138,7 @@ function UpdateAdmissions(){
             <p>{messageText}</p>
             </div>
            )}
-           
+
             </div>
            
             </div>
