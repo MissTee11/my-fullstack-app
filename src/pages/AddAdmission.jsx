@@ -112,8 +112,7 @@ function AddAdmissions(){
                 <input type="date" placeholder="Enter Admission Date"name="admission_date" id="admission_date"
                 onChange={(e) => handleChanges(e)}
                 required
-                value={formatDateInput(values.admission_date)}
-                />
+                value={formatDateInput(values.admission_date)}/>
               </div>
               <div>
               <label htmlFor="discharge_date">Discharge Date</label>

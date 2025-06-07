@@ -613,15 +613,17 @@ app.post('/api/admissions', async(req,res)=>{
 //Get all admissions
 app.get('/api/admissions', async(req,res)=>{
   try{
-    const query= `SELECT id AS admission_id,
+    const query= `SELECT admissions.id AS admission_id,
     patient_id,
-    room_id,
+    rooms.room_number AS room_number,
     admission_date,
     discharge_date
-    FROM admissions`;
+    FROM admissions
+    JOIN rooms ON admissions.room_id = rooms.id`;
 
-      const result = await pool.query(query);
-      res.json(result.rows);
+
+    const result = await pool.query(query);
+    res.json(result.rows);
 
   }
   catch(err){
