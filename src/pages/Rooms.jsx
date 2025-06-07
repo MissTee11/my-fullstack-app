@@ -7,7 +7,7 @@ import {  useNavigate } from 'react-router-dom';
 import './Pages.css';
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
-
+import { getRooms } from "../api";
 function Rooms(){
     const [messageText, setMessageText] =useState("");
     const navigate = useNavigate();

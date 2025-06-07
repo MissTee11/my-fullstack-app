@@ -34,7 +34,7 @@ function Admissions(){
         if (window.confirm("Are you sure you want to delete this amdission record?")) {
           try {
                 await deleteAdmission(id);
-                setAdmissions(admissions.filter(a => a.admissions !== id));
+                setAdmissions(admissions.filter(a => a.admission_id !== id));
             
                 setMessageText("Admission record deleted successfully!");
                 setTimeout(() => setMessageText(""), 3000);
@@ -59,7 +59,7 @@ function Admissions(){
           },
           {
             name: 'Room',
-            selector:row =>row.room_name
+            selector:row =>row.room_number
           },
           {
             name: 'Admission Date',
