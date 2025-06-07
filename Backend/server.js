@@ -585,7 +585,7 @@ app.post('/api/admissions', async(req,res)=>{
     try{
         const result = await pool.query(
           `INSERT INTO admissions (patient_id, room_id, admission_date, discharge_date) 
-          VALUES ($1, $2, $3, $4, COALESCE($5, 'Scheduled')) RETURNING *`,
+          VALUES ($1, $2, $3, $4) RETURNING *`,
           [patient_id, room_id, admission_date, discharge_date]
         );
         res.status(201).json(result.rows[0]);
@@ -604,7 +604,7 @@ app.get('/api/admissions', async(req,res)=>{
     room_id,
     admission_date,
     discharge_date
-    FROM appointments`;
+    FROM admissions`;
 
       const result = await pool.query(query);
       res.json(result.rows);
@@ -615,6 +615,70 @@ app.get('/api/admissions', async(req,res)=>{
     res.status(500).json({error: 'Failed to fetch admissions'});
   }
 });
+
+//Get one admission
+app.get('/api/admissions/:id', async(req,res)=>{
+
+  const{id} = req.params;
+  try{
+
+    const query= `SELECT * FROM admissions where id=$1`;
+
+    const result = await pool.query(query,[id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Admission record not found' });
+    }
+
+    res.json(result.rows[0]);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch admission record'});
+  }
+});
+
+//Update Admission Record
+app.put('/api/admissions/:id', async(req,res)=>{
+    const{id}= req.params;
+    const {patient_id, room_id, admission_date, discharge_date }= req.body;
+
+    try{
+        const result = await pool.query(
+          `UPDATE admissions SET patient_id=$1, room_id=$2, admission_date=$3, discharge_date=$4
+          WHERE id=$5
+          RETURNING *;
+         `,
+          [patient_id, room_id, admission_date, discharge_date,id]
+        );
+       res.json({ message: 'Admission record updated successfully' });
+    } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Could not update admission record' });
+    }
+});
+
+//Delete admission record
+app.delete('/api/admissions/:id', async (req, res) => {
+    const {id} = req.params;
+  
+    try {
+      const result=await pool.query(
+        `DELETE FROM admissions WHERE id = $1 RETURNING*`, 
+        [id]); 
+      if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Admission record not found' });
+      }
+      res.json({ message: 'Admission record deleted successfully' });
+    }
+
+    catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Could not delete admission record' });
+    }
+  });
+
 
 
 
