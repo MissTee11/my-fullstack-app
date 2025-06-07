@@ -67,7 +67,7 @@ function AddAppointments(){
 
     const resetInfo=() =>{
         setValues({appointment_date: '', time: '', patient_id:'', doctor_id:'',status:'',})
-      }
+      };
 
 
     return(
@@ -107,6 +107,7 @@ function AddAppointments(){
                 ))}
                 </select>
                 </div>
+                
                 <div>
                 <label htmlFor="doctor_id">Select Doctor</label>
                 <select

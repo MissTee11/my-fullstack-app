@@ -3,13 +3,18 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
+import { createAdmission, getPatients, getRooms } from '../api';
 
 function AddAdmissions(){
 
-    const navigate= useNavigate();
+  const navigate= useNavigate();
+  const [messageText, setMessageText] = useState("");
+  const[patients, setPatients] =([]);
+  const[rooms, setRooms]=([]);
+
   const [values, setValues] = useState({
-    patient_ID: '',
-    room_ID: '',
+    patient_id: '',
+    room_id: '',
     admission_date: '',
     discharge_date: '',
   });
@@ -21,16 +26,46 @@ function AddAdmissions(){
 
   const resetInfo = () => {
     setValues({
-      patient_ID: '',
-      room_ID: '',
-      admission_date: '',
-      discharge_date: '',
-    });
+      patient_id: '', room_id: '', admission_date: '',discharge_date: '',});
   };
+
+  useEffect (()=>{
+    const fetchData = async ()=>{
+        try{
+            const roomRes= await getRooms();
+            setRooms(roomRes.data);
+      
+            const patientRes= await getPatients();
+            setPatients(patientRes.data);
+            }
+        catch (err) {
+            console.error("Error fetching data:", err);
+            }
+      };
+      fetchData();
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/Admissions');
+   try{
+        await createAdmission(values);
+        setMessageText("Admission record added successfully!");
+           
+        setTimeout(() => {
+        setMessageText("");
+        navigate('/Admissions');
+        }, 3000)
+           
+        }
+        catch(error){
+        console.error("Error adding admission record!", error)
+        setMessageText("Failed to add admission. Please try again.");
+           
+        setTimeout(() => {
+        setMessageText("");
+        }, 3000)
+        } 
+                
   };
 
     return(
@@ -41,35 +76,38 @@ function AddAdmissions(){
             <h1>Admission Registration</h1>
             <form onSubmit={handleSubmit} className="DetailForm">
               <div>
-              <label htmlFor="patient_ID">Select Patient</label>
-                        <select
-                        name="patient_ID"
-                        id="patient_ID"
-                        onChange={handleChanges}
-                        required
-                        value={values.patient_ID}
-                        >
-                        <option value="" disabled>Select Patient</option>
-                        <option>John</option>
-                        <option>Mary</option>
-                        </select>
+              <label htmlFor="patient_id">Select Patient</label>
+              <select
+              name="patient_id"
+              id="patient_id"
+              onChange={handleChanges}
+              required
+              value={values.patient_id}
+              >
+              <option value="" disabled>Select Patient</option>
+              {patients.map((patient)=>(
+              <option key={patient.patient_id} value={patient.patient_id}>{patient.first_name} {patient.last_name}
+              </option>
+              ))}
+              </select>
               </div>
+
               <div>
-              <label htmlFor="room_ID">Select Room</label>
-                        <select
-                        name="room_ID"
-                        id="room_ID"
-                        onChange={handleChanges}
-                        required
-                        value={values.room_ID}
-                        >
-                        <option value="" disabled>Select Room</option>
-                        <option>A1</option>
-                        <option>A2</option>
-                        <option>A3</option>
-                        <option>A4</option>
-                        </select>
+              <label htmlFor="room_id">Select Room</label>
+              <select
+              name="room_id"
+              id="room_id"
+              onChange={handleChanges}
+              required
+              value={values.room_id}
+              >
+              <option value="" disabled>Select Room</option>
+              {rooms.map((room)=>(
+              <option key={room.id} value={room.id}>{room.room_number} {room.room_type}</option>
+              ))}
+              </select>
               </div>
+
               <div>
               <label htmlFor="admission_date">Admission Date</label>
                 <input type="date" placeholder="Enter Admission Date"name="admission_date" id="admission_date"
