@@ -25,6 +25,9 @@ export const getDepartments= ()=> axios.get(`${API_BASE_URL}/department`);
 /*ROLES*/
 export const getRoles= () => axios.get(`${API_BASE_URL}/roles`);
 
+/*ROOMS*/
+export const getRooms=() => axios.get(`${API_BASE_URL}/rooms`)
+
 /*STAFF MEMBERS*/
 export const getStaff = () => axios.get(`${API_BASE_URL}/staff`);
 export const getSingleStaff =(id)=> axios.get(`${API_BASE_URL}/staff/${id}`);

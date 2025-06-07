@@ -329,6 +329,20 @@ app.get('/api/roles',async(req, res) =>{
   
 });
 
+//Get room
+app.get('/api/rooms',async(req, res) =>{
+  try{
+    const result = await pool.query('SELECT id, room_number, room_type, availability_status FROM rooms');
+   res.json(result.rows);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Could not get rooms'});
+  }
+  
+});
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*STAFF MEMBERS*/
