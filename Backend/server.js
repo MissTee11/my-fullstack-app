@@ -306,7 +306,7 @@ app.get('/api/specialty',async(req, res) =>{
 //Get department
 app.get('/api/department',async(req, res) =>{
   try{
-    const result = await pool.query('SELECT id, department FROM department');
+    const result = await pool.query('SELECT id, department FROM department ORDER BY id');
    res.json(result.rows);
   }
   catch(err){
@@ -319,7 +319,7 @@ app.get('/api/department',async(req, res) =>{
 //Get role
 app.get('/api/roles',async(req, res) =>{
   try{
-    const result = await pool.query('SELECT id, role_name FROM roles');
+    const result = await pool.query('SELECT id, role_name FROM roles ORDER BY id');
    res.json(result.rows);
   }
   catch(err){
@@ -332,7 +332,7 @@ app.get('/api/roles',async(req, res) =>{
 //Get room
 app.get('/api/rooms',async(req, res) =>{
   try{
-    const result = await pool.query('SELECT id, room_number, room_type, availability_status FROM rooms');
+    const result = await pool.query('SELECT id, room_number, room_type, availability_status FROM rooms ORDER BY room_number');
    res.json(result.rows);
   }
   catch(err){
