@@ -594,7 +594,11 @@ app.delete('/api/appointments/:id', async (req, res) => {
 
   //Add admission
 app.post('/api/admissions', async(req,res)=>{
-    const {patient_id, room_id, admission_date, discharge_date}= req.body;
+    let {patient_id, room_id, admission_date, discharge_date}= req.body;//const cannot be reassigned
+
+    if(discharge_date===""){
+      discharge_date=null;
+    }
 
     try{
         const result = await pool.query(
@@ -658,7 +662,11 @@ app.get('/api/admissions/:id', async(req,res)=>{
 //Update Admission Record
 app.put('/api/admissions/:id', async(req,res)=>{
     const{id}= req.params;
-    const {patient_id, room_id, admission_date, discharge_date }= req.body;
+    let {patient_id, room_id, admission_date, discharge_date }= req.body;//const cannot be reassigned
+
+    if(discharge_date===""){
+      discharge_date=null;
+    }
 
     try{
         const result = await pool.query(
