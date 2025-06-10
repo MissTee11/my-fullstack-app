@@ -60,7 +60,7 @@ function AddAdmissions(){
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value ==="" ? null : value});//empty becomes null
   };
 
   const resetInfo = () => {

@@ -67,7 +67,7 @@ function Admissions(){
           },
           {
             name: 'Discharge Date',
-            selector:row =>formatDateInput(row.discharge_date)
+            cell:row =>formatDateInput(row.discharge_date)|| "N/A",//selector is used for raw values, cell for formatting
           },
           {
             name: 'Actions',
