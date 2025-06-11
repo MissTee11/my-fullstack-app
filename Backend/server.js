@@ -629,7 +629,7 @@ app.post('/api/admissions', async(req,res)=>{
           switch(err.constraint){
             case 'unique_active_admission_per_patient':
               return res.status(400).json({error: 'Patient is already admitted to a room'});
-            case ' unique_active_patient_per_room':
+            case 'unique_active_patient_per_room':
               return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
           }
         }
@@ -708,7 +708,7 @@ app.put('/api/admissions/:id', async(req,res)=>{
           switch(err.constraint){
             case 'unique_active_admission_per_patient':
               return res.status(400).json({error: 'Patient is already admitted to a room'});
-            case ' unique_active_patient_per_room':
+            case 'unique_active_patient_per_room':
               return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
           }
         }
