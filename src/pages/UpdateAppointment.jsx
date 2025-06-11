@@ -57,7 +57,10 @@ function UpdateAppointments(){
             }
             catch(error){
             console.error("Error updating appointment!", error)
-            setMessageText("Failed to update appointment. Please try again.");
+
+            const message = error.response?.data?.error || "Failed to update appointment. Please try again.";
+            setMessageText(message);
+        
         
             setTimeout(() => {
             setMessageText("");

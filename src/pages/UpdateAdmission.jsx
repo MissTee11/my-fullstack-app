@@ -64,7 +64,10 @@ function UpdateAdmissions(){
           }
           catch(error){
           console.error("Error updating admission record!", error)
-          setMessageText("Failed to updateadmission. Please try again.");
+
+          const message = error.response?.data?.error || "Failed to update admission record. Please try again.";
+          setMessageText(message);
+        
               
           setTimeout(() => {
           setMessageText("");

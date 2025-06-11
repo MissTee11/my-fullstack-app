@@ -31,7 +31,7 @@ function Admissions(){
       }, []);
 
     const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this amdission record?")) {
+        if (window.confirm("Are you sure you want to delete this admission record?")) {
           try {
                 await deleteAdmission(id);
                 setAdmissions(admissions.filter(a => a.admission_id !== id));
