@@ -500,6 +500,13 @@ app.post('/api/appointments', async(req,res)=>{
     }
     catch(err){
         console.error(err);
+
+        if(err.code === '23505'){
+          if(err.constraint === 'unique_doctor_datetime'){
+            return res.status(400).json({ error: 'Doctor already has an appointment at this date and time.'})
+          }
+        }
+        
         res.status(500).json({error: 'Failed to add appointment'});
     }
 });
