@@ -50,8 +50,10 @@ function AddAppointments(){
         
             }
             catch(error){
-            console.error("Error adding appointment!", error)
-            setMessageText("Failed to add appointment. Please try again.");
+            console.error("Error adding appointment!", error);
+
+            const message = error.response?.data?.error || "Failed to add appointment. Please try again.";
+            setMessageText(message);
         
             setTimeout(() => {
             setMessageText("");
