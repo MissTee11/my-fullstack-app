@@ -572,7 +572,14 @@ app.put('/api/appointments/:id', async(req,res)=>{
        res.json({ message: 'Appointment updated successfully' });
     } catch (err) {
           console.error(err);
-          res.status(500).json({ error: 'Could not update appointment' });
+
+          if(err.code === '23505'){
+          if(err.constraint === 'unique_doctor_datetime'){
+            return res.status(400).json({ error: 'Doctor already has an appointment at this date and time.'})
+          }
+        }
+        
+        res.status(500).json({ error: 'Could not update appointment' });
     }
 });
 
@@ -617,6 +624,16 @@ app.post('/api/admissions', async(req,res)=>{
     }
     catch(err){
         console.error(err);
+
+         if(err.code === '23505'){
+          switch(err.constraint){
+            case 'unique_active_admission_per_patient':
+              return res.status(400).json({error: 'Patient is already admitted to a room'});
+            case ' unique_active_patient_per_room':
+              return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
+          }
+        }
+        
         res.status(500).json({error: 'Failed to add admission'});
     }
 });
@@ -686,6 +703,15 @@ app.put('/api/admissions/:id', async(req,res)=>{
        res.json({ message: 'Admission record updated successfully' });
     } catch (err) {
           console.error(err);
+
+          if(err.code === '23505'){
+          switch(err.constraint){
+            case 'unique_active_admission_per_patient':
+              return res.status(400).json({error: 'Patient is already admitted to a room'});
+            case ' unique_active_patient_per_room':
+              return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
+          }
+        }
           res.status(500).json({ error: 'Could not update admission record' });
     }
 });

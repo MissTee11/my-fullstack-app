@@ -49,8 +49,11 @@ function AddAdmissions(){
            
         }
         catch(error){
-        console.error("Error adding admission record!", error)
-        setMessageText("Failed to add admission. Please try again.");
+        console.error("Error adding admission record!", error);
+
+        const message = error.response?.data?.error || "Failed to add admission record. Please try again.";
+        setMessageText(message);
+        
            
         setTimeout(() => {
         setMessageText("");
