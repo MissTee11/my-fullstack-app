@@ -238,6 +238,21 @@ ADD CONSTRAINT unique_room_id UNIQUE (room_id);
 
 DROP TRIGGER trigger_update_room_status2 ON admissions;
 
+ALTER TABLE appointments
+ADD CONSTRAINT unique_doctor_datetime
+UNIQUE (doctor_id, appointment_date, time);
+
+CREATE UNIQUE INDEX unique_active_admission_per_patient
+ON admissions (patient_id)
+WHERE discharge_date IS NULL;
+
+CREATE UNIQUE INDEX unique_active_patient_per_room
+ON admissions (room_id)
+WHERE discharge_date IS NULL;
+
+
+
+
 
 
 
