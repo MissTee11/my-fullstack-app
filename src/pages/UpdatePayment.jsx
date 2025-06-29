@@ -3,21 +3,39 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
+import { updatePayment, getPatients,getSinglePayment } from '../api';
 
 function UpdatePayment(){
 
     const paymentStatus=["Paid","Unpaid","Pending"];
-     const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [patients, setPatients] = useState([]);
+    const [messageText, setMessageText] = useState("");
+          
 
     const [values, setValues] = useState({
             patient_id: '',
-            total_amount: '',
             billing_date: '',
+            total_amount: '',
+            amount_paid: '',
             status: '',
         });
+    
+    useEffect (()=>{
+            const fetchPatients = async ()=>{
+                try{
+                    const patientRes= await getPatients();
+                    setPatients(patientRes.data);
+                    }
+                catch (err) {
+                    console.error("Error fetching data:", err);
+                    }
+              };
+              fetchPatients();
+    },[]);
 
     const resetInfo=() =>{
-            setValues({patient_id: '', total_amount: '', billing_date: '',status:'',})
+            setValues({patient_id: '',billing_date: '', total_amount: '',amount_paid:'',status:'',})
         }
 
     const handleChanges = (e) => {
