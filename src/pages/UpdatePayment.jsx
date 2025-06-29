@@ -22,16 +22,19 @@ function UpdatePayment(){
         });
     
     useEffect (()=>{
-            const fetchPatients = async ()=>{
+            const fetchData = async ()=>{
                 try{
                     const patientRes= await getPatients();
                     setPatients(patientRes.data);
+
+                    const singlePayment= await getSingleAdmission(id);
+                    setValues(singlePayment.data)
                     }
                 catch (err) {
                     console.error("Error fetching data:", err);
                     }
               };
-              fetchPatients();
+              fetchData();
     },[]);
 
     const resetInfo=() =>{
@@ -43,10 +46,30 @@ function UpdatePayment(){
         setValues({ ...values, [name]: value });
     };
 
-    const handleSubmit =  async (e) => {
-        e.preventDefault();
-        navigate('/Payments');
-    };
+   const handleSubmit =  async (e) => {
+           e.preventDefault();
+           try{
+                  await createPayment(values);
+                  setMessageText("Payment record updated successfully!");
+                     
+                  setTimeout(() => {
+                  setMessageText("");
+                  navigate('/Payments');
+                  }, 3000)
+                     
+                  }
+                  catch(error){
+                  console.error("Error updating payment record!", error);
+          
+                  const message = error.response?.data?.error || "Failed to update payment record. Please try again.";
+                  setMessageText(message);
+                  
+                     
+                  setTimeout(() => {
+                  setMessageText("");
+                  }, 3000)
+                  }     
+       };
 
     return(
         <div>
@@ -55,39 +78,42 @@ function UpdatePayment(){
                 <div className="Form">
                 <h1> Payment Update Form</h1>
                 <form onSubmit={handleSubmit} className="DetailForm">
-                <div>
-                    <label htmlFor="patient_id">Select Patient</label>
-                    <select
-                    name="patient_id"
-                    id="patient_id"
-                    onChange={handleChanges}
-                    required
-                    value={values.patient_id}
-                    >
-                    <option value="" disabled>Select Patient</option>
-                    <option value="john">John</option>
-                     <option value="mary">Mary</option>
-                    </select>
-                </div>
-                <div>
+            <div>
+              <label htmlFor="patient_id">Select Patient</label>
+              <select
+              name="patient_id"
+              id="patient_id"
+              onChange={handleChanges}
+              value={values.patient_id}
+              required
+              >
+              <option value="" disabled>Select Patient</option>
+              {patients.map((patient)=> (
+              <option key={patient.patient_id} value={patient.patient_id}>{patient.first_name} {patient.last_name}
+              </option>
+              ))}
+              </select>
+            </div>
+
+            <div>
                 <label htmlFor="total_amount" >Total Amount</label>
                 <input type="number" placeholder='Enter total amount'name='total_amount' id='total_amount'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.total_amount}/>
-                </div>
-                <div>
+            </div>
+            <div>
                 <label htmlFor="amount_paid" >Amount Paid</label>
                 <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.amount_paid}/>
-                </div>
-                <div>
+            </div>
+            <div>
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 
                  required value={formatDateInput(values.billing_date)}/>
-                </div>
-                <div>
+            </div>
+            <div>
                 <label htmlFor="status" >Status</label>
                 <select 
                 name="status" 
@@ -106,10 +132,16 @@ function UpdatePayment(){
                 <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
-                </div>
+            </div>
+            </div>
                 
             </form>
+
+            {messageText && (
+            <div className="popup">
+            <p>{messageText}</p>
+            </div>
+           )}
             
             </div>
            
