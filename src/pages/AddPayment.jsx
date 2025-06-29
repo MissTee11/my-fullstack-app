@@ -104,7 +104,7 @@ function AddPayment(){
                 <label htmlFor="amount_paid" >Amount Paid</label>
                 <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
                  onChange={(e)=> handleChanges(e)} 
-                 required value={values.amount_paid}/>
+                 value={values.amount_paid}/>
             </div>
 
             <div>
