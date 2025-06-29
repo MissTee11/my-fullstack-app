@@ -569,6 +569,11 @@ app.put('/api/appointments/:id', async(req,res)=>{
          `,
           [patient_id, doctor_id, appointment_date, time, status,id]
         );
+
+        if (result.rowCount === 0) {//check if any rows were actually updated
+          return res.status(404).json({ error: 'Appointment not found' });
+          }
+
        res.json({ message: 'Appointment updated successfully' });
     } catch (err) {
           console.error(err);
@@ -625,14 +630,18 @@ app.post('/api/admissions', async(req,res)=>{
     catch(err){
         console.error(err);
 
-         if(err.code === '23505'){
-          switch(err.constraint){
-            case 'unique_active_admission_per_patient':
-              return res.status(400).json({error: 'Patient is already admitted to a room'});
-            case 'unique_active_patient_per_room':
-              return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
-          }
-        }
+        if(err.code === '23505'){
+        const errorText = err.message;
+
+        if (errorText.includes('unique_active_admission_per_patient')) {
+        return res.status(400).json({ error: 'Patient is already admitted to a room' });
+      }
+
+        if (errorText.includes('unique_active_patient_per_room')) {
+        return res.status(400).json({ error: 'Room is currently occupied by another patient.' });
+    }
+  }
+         
         
         res.status(500).json({error: 'Failed to add admission'});
     }
@@ -704,14 +713,18 @@ app.put('/api/admissions/:id', async(req,res)=>{
     } catch (err) {
           console.error(err);
 
-          if(err.code === '23505'){
-          switch(err.constraint){
-            case 'unique_active_admission_per_patient':
-              return res.status(400).json({error: 'Patient is already admitted to a room'});
-            case 'unique_active_patient_per_room':
-              return res.status(400).json({ error: 'Room is currently occupied by another patient.'});
-          }
+        if(err.code === '23505'){
+        const errorText = err.message;
+
+        if (errorText.includes('unique_active_admission_per_patient')) {
+        return res.status(400).json({ error: 'Patient is already admitted to a room' });
         }
+
+        if (errorText.includes('unique_active_patient_per_room')) {
+        return res.status(400).json({ error: 'Room is currently occupied by another patient.' });
+        }
+    }
+         
           res.status(500).json({ error: 'Could not update admission record' });
     }
 });
@@ -735,6 +748,125 @@ app.delete('/api/admissions/:id', async (req, res) => {
       res.status(500).json({ error: 'Could not delete admission record' });
     }
   });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*PAYMENTS*/
+
+//Add Payments
+app.post('/api/payments', async(req,res)=>{
+    let {patient_id, date, total_amount, amount_paid, status}= req.body;//const cannot be reassigned
+
+    if(amount_paid===""){
+      amount_paid=null;
+    }
+
+    try{
+        const result = await pool.query(
+          `INSERT INTO payments (patient_id, date, total_amount, amount_paid, status) 
+          VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+          [patient_id, date, total_amount, amount_paid, status]
+        );
+        res.status(201).json(result.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to add staff member'});
+    }
+});
+
+//Get all payments
+app.get('/api/payments', async(req,res)=>{
+  try{
+    const query= `SELECT payments.id AS payment_id,
+    patient_id,
+    payments.date AS billing_date,
+    total_amount,
+    amount_paid,
+    status
+    FROM payments`;
+
+
+    const result = await pool.query(query);
+    res.json(result.rows);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch payments'});
+  }
+});
+
+//Get one payment
+app.get('/api/payments/:id', async(req,res)=>{
+
+  const{id} = req.params;
+  try{
+
+    const query= `SELECT * FROM payments where id=$1`;
+
+    const result = await pool.query(query,[id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Payment record not found' });
+    }
+
+    res.json(result.rows[0]);
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch payment record'});
+  }
+});
+
+//Update Payment
+app.put('/api/payments/:id', async(req,res)=>{
+    const{id}= req.params;
+    let {patient_id, date, total_amount, amount_paid,status }= req.body;
+
+    if(amount_paid===""){
+      amount_paid=null;
+    }
+
+    try{
+        const result = await pool.query(
+          `UPDATE payments SET patient_id=$1, date=$2, total_amount=$3, amount_paid=$4, status=$5
+          WHERE id=$6
+          RETURNING *;
+         `,
+          [patient_id, date, total_amount, amount_paid,status, id]
+        );
+       res.json({ message: 'Payment record updated successfully' });
+    }  catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Failed to fetch payments'});
+  }
+});
+
+//Delete payments
+app.delete('/api/payments/:id', async (req, res) => {
+    const {id} = req.params;
+  
+    try {
+      const result=await pool.query(
+        `DELETE FROM payments WHERE id = $1 RETURNING*`, 
+        [id]); 
+      if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Payment record not found' });
+      }
+      res.json({ message: 'Payment record deleted successfully' });
+    }
+
+    catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Could not delete payment record' });
+    }
+  });
+
+
+
+
+
 
 
 

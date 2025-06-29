@@ -10,14 +10,14 @@ function UpdatePayment(){
      const navigate = useNavigate();
 
     const [values, setValues] = useState({
-            patient_ID: '',
+            patient_id: '',
             total_amount: '',
             billing_date: '',
             status: '',
         });
 
     const resetInfo=() =>{
-            setValues({patient_ID: '', total_amount: '', billing_date: '',status:'',})
+            setValues({patient_id: '', total_amount: '', billing_date: '',status:'',})
         }
 
     const handleChanges = (e) => {
@@ -38,13 +38,13 @@ function UpdatePayment(){
                 <h1> Payment Update Form</h1>
                 <form onSubmit={handleSubmit} className="DetailForm">
                 <div>
-                    <label htmlFor="patient_ID">Select Patient</label>
+                    <label htmlFor="patient_id">Select Patient</label>
                     <select
-                    name="patient_ID"
-                    id="patient_ID"
+                    name="patient_id"
+                    id="patient_id"
                     onChange={handleChanges}
                     required
-                    value={values.patient_ID}
+                    value={values.patient_id}
                     >
                     <option value="" disabled>Select Patient</option>
                     <option value="john">John</option>
@@ -85,11 +85,12 @@ function UpdatePayment(){
                  </option>
                 ))}
                 </select>
-                </div>
                 <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-            </div>
+                </div>
+                </div>
+                
             </form>
             
             </div>
