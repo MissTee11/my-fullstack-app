@@ -1,9 +1,10 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams} from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
 import { updatePayment, getPatients,getSinglePayment } from '../api';
+
 
 function UpdatePayment(){
 
@@ -11,6 +12,7 @@ function UpdatePayment(){
     const navigate = useNavigate();
     const [patients, setPatients] = useState([]);
     const [messageText, setMessageText] = useState("");
+    const {id} = useParams();
           
 
     const [values, setValues] = useState({
@@ -27,7 +29,7 @@ function UpdatePayment(){
                     const patientRes= await getPatients();
                     setPatients(patientRes.data);
 
-                    const singlePayment= await getSingleAdmission(id);
+                    const singlePayment= await getSinglePayment(id);
                     setValues(singlePayment.data)
                     }
                 catch (err) {
@@ -49,7 +51,7 @@ function UpdatePayment(){
    const handleSubmit =  async (e) => {
            e.preventDefault();
            try{
-                  await createPayment(values);
+                  await updatePayment(values);
                   setMessageText("Payment record updated successfully!");
                      
                   setTimeout(() => {
@@ -105,13 +107,13 @@ function UpdatePayment(){
                 <label htmlFor="amount_paid" >Amount Paid</label>
                 <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
                  onChange={(e)=> handleChanges(e)} 
-                 required value={values.amount_paid}/>
+                 value={values.amount_paid}/>
             </div>
             <div>
                 <label htmlFor="billing_date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
                  onChange={(e)=> handleChanges(e)} 
-                 required value={formatDateInput(values.billing_date)}/>
+               required value={formatDateInput(values.billing_date)}/>
             </div>
             <div>
                 <label htmlFor="status" >Status</label>
