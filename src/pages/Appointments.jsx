@@ -55,12 +55,12 @@ function Appointments(){
           selector:row =>row.appointment_id
         },
         {
-          name: 'Patient ID',
-          selector:row =>row.patient_id
+          name: 'Patient Name',
+           selector: (row) => `${row.patient_first_name} ${row.patient_last_name}`
         },
         {
-          name: 'Doctor ID',
-          selector:row =>row.doctor_id
+         name: 'Doctor Name',
+         selector: (row) => `${row.doctor_first_name} ${row.doctor_last_name}`
         },
         {
           name: 'Appointment Date',

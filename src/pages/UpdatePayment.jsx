@@ -51,7 +51,7 @@ function UpdatePayment(){
    const handleSubmit =  async (e) => {
            e.preventDefault();
            try{
-                  await updatePayment(values);
+                  await updatePayment(id, values);
                   setMessageText("Payment record updated successfully!");
                      
                   setTimeout(() => {
@@ -122,7 +122,8 @@ function UpdatePayment(){
                 id="status" 
                 onChange={(e) => handleChanges(e)} 
                 required 
-                value={values.status}>
+                value={values.status}
+                disabled>
 
                 <option value="" >Select status</option>
                 {paymentStatus.map((status) => (
