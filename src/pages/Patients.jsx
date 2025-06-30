@@ -82,7 +82,7 @@ function Patients(){
           name: 'Actions',
           cell: row => (
             <div >
-              <Link to='/MedicalRecord'>
+              <Link to={`/MedicalRecord/${row.patient_id}`}>
               <button className="UpdateBtn"><TbReportMedical/></button>
               </Link>
 
