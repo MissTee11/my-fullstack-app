@@ -56,7 +56,13 @@ export const updatePayment= (id, payData) => axios.put(`${API_BASE_URL}/payments
 export const deletePayment = (id)=> axios.delete(`${API_BASE_URL}/payments/${id}`);
 export const createPayment=(payData)=> axios.post(`${API_BASE_URL}/payments`, payData);
 
-
+/*MEDICAL RECORDS*/
+/*PAYMENTS*/
+export const getMedicalRecord = () => axios.get(`${API_BASE_URL}/medical_records`);
+export const getSingleRecord =(id)=> axios.get(`${API_BASE_URL}/medical_records/${id}`);
+export const updateRecord= (id, medData) => axios.put(`${API_BASE_URL}/medical_records/${id}`, medData)
+export const deleteRecord = (id)=> axios.delete(`${API_BASE_URL}/medical_records/${id}`);
+export const createRecord=(medData)=> axios.post(`${API_BASE_URL}/medical_records`, medData);
 
 
 

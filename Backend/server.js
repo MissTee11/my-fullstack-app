@@ -879,6 +879,136 @@ app.delete('/api/payments/:id', async (req, res) => {
     }
   });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*MEDICAL RECORD*/
+
+//Add medical record
+app.post('/api/medical_records', async (req, res) => {
+  const { patient_id, appointment_id, doctor_id, diagnosis } = req.body;
+
+  if (!patient_id) {
+    return res.status(400).json({ error: "patient_id is required" });
+  }
+
+  try {
+    const query = `
+      INSERT INTO medical_records (patient_id, appointment_id, doctor_id, diagnosis)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+    const values = [patient_id, appointment_id || null, doctor_id || null, diagnosis || null];
+    const result = await pool.query(query, values);
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to add medical record' });
+  }
+});
+
+//Get medical records
+app.get('/api/medical_records/patient/:id', async (req, res)=>{
+  const {id} = req.params;
+  try{
+    const query = `
+      SELECT 
+        medical_records.id AS record_id,
+        medical_records.appointment_id,
+        medical_records.doctor_id,
+        person.first_name,
+        person.last_name,
+        medical_records.diagnosis
+      FROM medical_records
+      JOIN doctor ON medical_records.doctor_id = doctor.id
+      JOIN person ON doctor.person_id = person.id
+      WHERE patient_id = $1
+    `;
+      const result = await pool.query(query, [patientId]);
+     res.json(result.rows);
+     } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch medical records' });
+  }
+});
+
+//Update medical record
+app.put('/api/medical_records/:id', async (req, res) => {
+  const { id } = req.params;
+  const { appointment_id, doctor_id, diagnosis } = req.body;
+
+  try {
+    const query = `
+      UPDATE medical_records
+      SET appointment_id = $1,
+          doctor_id = $2,
+          diagnosis = $3
+      WHERE id = $4
+      RETURNING *;
+    `;
+
+    const values = [appointment_id, doctor_id, diagnosis, id];
+    const result = await pool.query(query, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Medical record not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update medical record' });
+  }
+});
+///Delete medical record
+app.delete('/api/medical_records/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const query = `DELETE FROM medical_records WHERE id = $1 RETURNING *;`;
+    const result = await pool.query(query, [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Medical record not found' });
+    }
+
+    res.json({ message: 'Medical record deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete medical record' });
+  }
+});
+
+//Get one medical record
+app.get('/api/medical_records/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const query = `
+      SELECT 
+        medical_records.id AS record_id,
+        medical_records.appointment_id,
+        medical_records.doctor_id,
+        person.first_name,
+        person.last_name,
+        medical_records.patient_id,
+        medical_records.diagnosis
+      FROM medical_records
+      JOIN doctor ON medical_records.doctor_id = doctor.id
+      JOIN person ON doctor.person_id = person.id
+      WHERE medical_records.id = $1
+    `;
+
+    const result = await pool.query(query, [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Medical record not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch medical record' });
+  }
+});
+
+
 
 
 
