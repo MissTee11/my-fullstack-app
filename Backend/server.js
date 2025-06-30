@@ -839,7 +839,7 @@ app.put('/api/payments/:id', async(req,res)=>{
        res.json({ message: 'Payment record updated successfully' });
     }  catch(err){
     console.error(err);
-    res.status(500).json({error: 'Failed to fetch payments'});
+    res.status(500).json({error: 'Failed to update payments'});
   }
 });
 

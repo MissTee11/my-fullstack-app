@@ -17,7 +17,7 @@ function UpdatePayment(){
 
     const [values, setValues] = useState({
             patient_id: '',
-            billing_date: '',
+            date: '',
             total_amount: '',
             amount_paid: '',
             status: '',
@@ -40,7 +40,7 @@ function UpdatePayment(){
     },[]);
 
     const resetInfo=() =>{
-            setValues({patient_id: '',billing_date: '', total_amount: '',amount_paid:'',status:'',})
+            setValues({patient_id: '',date: '', total_amount: '',amount_paid:'',status:'',})
         }
 
     const handleChanges = (e) => {
@@ -110,10 +110,10 @@ function UpdatePayment(){
                  value={values.amount_paid}/>
             </div>
             <div>
-                <label htmlFor="billing_date" >Billing Date</label>
-                <input type="date" placeholder='Enter date'name='billing_date' id='billing_date'
+                <label htmlFor="date" >Billing Date</label>
+                <input type="date" placeholder='Enter date'name='date' id='date'
                  onChange={(e)=> handleChanges(e)} 
-               required value={formatDateInput(values.billing_date)}/>
+               required value={formatDateInput(values.date)}/>
             </div>
             <div>
                 <label htmlFor="status" >Status</label>
@@ -122,9 +122,9 @@ function UpdatePayment(){
                 id="status" 
                 onChange={(e) => handleChanges(e)} 
                 required 
-                value={values.payment_status}>
+                value={values.status}>
 
-                <option value="" disabled>Select status</option>
+                <option value="" >Select status</option>
                 {paymentStatus.map((status) => (
                 <option key={status} value={status}>
                 {status}

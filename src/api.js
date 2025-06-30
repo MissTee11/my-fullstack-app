@@ -54,7 +54,7 @@ export const getPayment = () => axios.get(`${API_BASE_URL}/payments`);
 export const getSinglePayment =(id)=> axios.get(`${API_BASE_URL}/payments/${id}`);
 export const updatePayment= (id, payData) => axios.put(`${API_BASE_URL}/payments/${id}`, payData)
 export const deletePayment = (id)=> axios.delete(`${API_BASE_URL}/payments/${id}`);
-export const createPayment=(payData)=> axios.post(`${API_BASE_URL}/paymets`, payData);
+export const createPayment=(payData)=> axios.post(`${API_BASE_URL}/payments`, payData);
 
 
 
