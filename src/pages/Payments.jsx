@@ -4,6 +4,7 @@ import React,{useState, useEffect} from "react";
 import { MdOutlinePayment } from "react-icons/md";
 import Sidebar from '../components/Sidebar';
 import { IoMdAdd } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { formatDateInput } from '../utilities/DateFormat';
@@ -77,8 +78,9 @@ function Payments(){
               cell: row => (
                <div >
                     <Link to={`/UpdatePayment/${row.payment_id}`}>
-                    <button className="UpdateBtn"><MdOutlinePayment/>Make Payment</button>
+                    <button className="UpdateBtn"><MdOutlinePayment/></button>
                     </Link>
+                    <button onClick = {() =>handleDelete(row.payment_id)} className="DeleteBtn" ><MdDelete/></button>
                     </div>         
               ),
             },

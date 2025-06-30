@@ -54,8 +54,8 @@ function Admissions(){
             selector:row =>row.admission_id
           },
           {
-            name: 'Patient ID',
-            selector:row =>row.patient_id
+            name: 'Patient Name',
+           selector: (row) => `${row.first_name} ${row.last_name}`
           },
           {
             name: 'Room',

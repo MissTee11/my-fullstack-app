@@ -514,13 +514,21 @@ app.post('/api/appointments', async(req,res)=>{
 //Get all appointments
 app.get('/api/appointments', async(req,res)=>{
   try{
-    const query= `SELECT id AS appointment_id,
-    patient_id,
-    doctor_id,
-    appointment_date,
-    time,
-    status
-    FROM appointments`;
+    const query= `SELECT appointments.id AS appointment_id,
+    appointments.patient_id,
+    appointments.doctor_id,
+    patient_person.first_name AS patient_first_name,
+    patient_person.last_name AS patient_last_name,
+    doctor_person.first_name AS doctor_first_name,
+    doctor_person.last_name AS doctor_last_name,
+    appointments.appointment_date,
+    appointments.time,
+    appointments.status
+    FROM appointments
+    JOIN patient ON appointments.patient_id = patient.id
+    JOIN person AS patient_person ON patient.person_id = patient_person.id
+    JOIN doctor ON appointments.doctor_id = doctor.id
+    JOIN person AS doctor_person ON doctor.person_id = doctor_person.id`;
 
       const result = await pool.query(query);
       res.json(result.rows);
@@ -651,12 +659,17 @@ app.post('/api/admissions', async(req,res)=>{
 app.get('/api/admissions', async(req,res)=>{
   try{
     const query= `SELECT admissions.id AS admission_id,
-    patient_id,
+    admissions.patient_id,
+    person.first_name,
+    person.last_name,
     rooms.room_number AS room_number,
-    admission_date,
-    discharge_date
+    admissions.admission_date,
+    admissions.discharge_date
     FROM admissions
-    JOIN rooms ON admissions.room_id = rooms.id`;
+    JOIN rooms ON admissions.room_id = rooms.id
+    JOIN patient ON admissions.patient_id = patient.id
+    JOIN person ON patient.person_id = person.id
+    `;
 
 
     const result = await pool.query(query);
@@ -777,15 +790,18 @@ app.post('/api/payments', async(req,res)=>{
 //Get all payments
 app.get('/api/payments', async(req,res)=>{
   try{
-    const query= `SELECT payments.id AS payment_id,
-    patient_id,
+    const query= `SELECT
+    payments.id AS payment_id,
+    payments.patient_id,
+    person.first_name,
+    person.last_name,
     payments.date AS billing_date,
-    total_amount,
-    amount_paid,
-    status
-    FROM payments`;
-
-
+    payments.total_amount,
+    payments.amount_paid,
+    payments.status
+    FROM payments
+    JOIN patient ON payments.patient_id = patient.id
+    JOIN person ON patient.person_id = person.id`;
     const result = await pool.query(query);
     res.json(result.rows);
 
@@ -862,6 +878,7 @@ app.delete('/api/payments/:id', async (req, res) => {
       res.status(500).json({ error: 'Could not delete payment record' });
     }
   });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
