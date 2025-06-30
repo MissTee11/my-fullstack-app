@@ -50,7 +50,7 @@ function AppRoutes(){
             <Route path ='/Rooms' element={<Rooms/>}/>
             <Route path ='/Payments' element={<Payments/>}/>
             <Route path ='/AddPayment' element={<AddPayment/>}/>
-            <Route path ='/UpdatePayment' element={<UpdatePayment/>}/>
+            <Route path ='/UpdatePayment/:id' element={<UpdatePayment/>}/>
             <Route path ='/MedicalRecord' element={<MedicalRecord/>}/>
             <Route path='/UpdateRecord' element={<UpdateRecord/>}/>
 
