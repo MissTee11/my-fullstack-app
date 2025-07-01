@@ -85,6 +85,7 @@
     display: grid;
     grid-template-columns: auto auto;
 }
+
 .Form h1{
     text-align: center;
     color: #3674B5;
@@ -96,6 +97,11 @@
     max-width: 523px;
     border-radius: 0px;
     border: #3674B5 1px solid;
+}
+#appointment_id{
+   border-radius: 0px;
+    padding: 10px; 
+    
 }
 
 form{

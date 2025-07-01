@@ -23,6 +23,7 @@ import AddPayment from "../pages/AddPayment";
 import UpdatePayment from "../pages/UpdatePayment";
 import MedicalRecord from "../pages/MedicalRecord";
 import UpdateRecord from "../pages/UpdateRecord";
+import AddRecord from "../pages/AddRecord";
 
 function AppRoutes(){
     return(
@@ -52,6 +53,7 @@ function AppRoutes(){
             <Route path ='/AddPayment' element={<AddPayment/>}/>
             <Route path ='/UpdatePayment/:id' element={<UpdatePayment/>}/>
             <Route path='/UpdateRecord' element={<UpdateRecord/>}/>
+            <Route path='/AddRecord/:id' element={<AddRecord/>}/>
             <Route path='/MedicalRecord/:id' element={<MedicalRecord/>}/>
 
         </Routes>
