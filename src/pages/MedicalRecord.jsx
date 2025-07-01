@@ -74,7 +74,7 @@ const {id} = useParams();
               <Link to={`/UpdateRecord/${row.record_id}`}>
               <button className="UpdateBtn"><FaPen/></button>
               </Link>
-           <button onClick = {() =>handleDelete(row.payment_id)} className="DeleteBtn" ><MdDelete/></button>
+           <button onClick = {() =>handleDelete(row.record_id)} className="DeleteBtn" ><MdDelete/></button>
          </div> 
       ),
     },
@@ -85,7 +85,7 @@ return (
         <Sidebar/>
         <div className="MainContent">
         <Link to={`/AddRecord/${id}`}>
-        <button className="AddBtn"><IoMdAdd />Record New Payment </button>
+        <button className="AddBtn"><IoMdAdd />Add Medical Record </button>
         </Link>
 
       <DataTable
