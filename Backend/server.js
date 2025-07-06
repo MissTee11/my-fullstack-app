@@ -888,7 +888,7 @@ app.post('/api/medical_records', async (req, res) => {
   try {
     const result = await pool.query(
     `INSERT INTO medical_records (doctor_id, diagnosis,date,patient_id)
-      VALUES ($1, $2, $3)
+      VALUES ($1, $2, $3, $4)
       RETURNING *;`,
       [doctor_id, diagnosis, date, patient_id]
     );

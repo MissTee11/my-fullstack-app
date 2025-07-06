@@ -52,7 +52,7 @@ function AppRoutes(){
             <Route path ='/Payments' element={<Payments/>}/>
             <Route path ='/AddPayment' element={<AddPayment/>}/>
             <Route path ='/UpdatePayment/:id' element={<UpdatePayment/>}/>
-            <Route path='/UpdateRecord' element={<UpdateRecord/>}/>
+            <Route path='/UpdateRecord/:id' element={<UpdateRecord/>}/>
             <Route path='/AddRecord/:id' element={<AddRecord/>}/>
             <Route path='/MedicalRecord/:id' element={<MedicalRecord/>}/>
 

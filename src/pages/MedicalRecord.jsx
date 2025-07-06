@@ -10,7 +10,8 @@ import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
-import { getMedicalRecord } from '../api';
+import { getMedicalRecord, deleteRecord } from '../api';
+import { formatDateInput } from "../utilities/DateFormat";
 
 function MedicalRecord(){
 
@@ -21,7 +22,7 @@ const {id} = useParams();
  useEffect(()=>{
       const fetchMedicalRecords = async()=>{
        try{
-          const res = await getMedicalRecord();
+          const res = await getMedicalRecord(id);
           console.log("Fetched record data:", res.data); 
           setMedicalRecords(res.data);
           }
@@ -35,8 +36,8 @@ const {id} = useParams();
     const handleDelete = async (id) => {
       if (window.confirm("Are you sure you want to delete this medical record?")) {
         try {
-              await deletePayment(id);
-              setPayments(payments.filter(p => p.payment_id !== id));
+              await deleteRecord(id);
+              setMedicalRecords(medicalRecords.filter(m => m.record_id !== id));
                     
               setMessageText("Medical record deleted successfully!");
               setTimeout(() => setMessageText(""), 3000);
@@ -56,11 +57,11 @@ const {id} = useParams();
       selector: (row) => row.record_id,
     },
     {
-      name: 'Appointment ID',
-      selector: (row) => row.appointment_id,
+      name: 'Date',
+       selector:row =>formatDateInput(row.date)
     },
     {
-      name: 'Doctor ID',
+      name: 'Doctor',
       selector: (row) => `${row.first_name} ${row.last_name}`
     },
     {

@@ -1,35 +1,30 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState,useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
-import { createRecord, getDoctors, getSinglePatient, getAppointment} from '../api';
+import {  useNavigate, useParams } from 'react-router-dom';
+import { createRecord, getDoctors, getSinglePatient} from '../api';
+import { formatDateInput } from '../utilities/DateFormat';
 
 function AddRecord(){
     const navigate=useNavigate();
     const [values, setValues]=useState({
-       
-        patient_id:'',
-        doctor_id:'',
-        symptoms:'',
-        diagnosis:'',
+      doctor_id: "",
+      date: "",
+      diagnosis: "",
+      patient_id: "",
     });
      
   const [messageText, setMessageText] = useState("");
   const[ patients, setPatients] = useState([]);
   const[doctors, setDoctors] = useState([]);
-  const[appointments, setAppointments] = useState([]);
+  const {id} = useParams();
 
-    const handleChanges = (e) => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
-      };
     const resetInfo = () => {
         setValues({
-        appointment_id:'',
-        patient_id:'',
         doctor_id:'',
-        symptoms:'',
+        date:'',
         diagnosis:'',
+        patient_id:''
         });
       };
 
@@ -40,10 +35,8 @@ function AddRecord(){
               setDoctors(docRes.data);
           
               const patientRes= await getSinglePatient(id);
-              setPatients(patientRes.data);
+              setValues(patientRes.data);
 
-              const appRes = await getAppointment();
-              setAppointments(appRes.data)
               }
               catch (err) {
                 console.error("Error fetching data:", err);
@@ -54,9 +47,33 @@ function AddRecord(){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/MedicalRecord');
+         try{
+        await createRecord(values);
+        setMessageText("Medical record added successfully!");
+           
+        setTimeout(() => {
+        setMessageText("");
+       navigate(`/MedicalRecord/${values.patient_id}`);
+        }, 3000)
+           
+        }
+        catch(error){
+        console.error("Error adding medical record!", error);
+
+        const message = error.response?.data?.error || "Failed to add medical record. Please try again.";
+        setMessageText(message);
+        
+           
+        setTimeout(() => {
+        setMessageText("");
+        }, 3000)
+        }     
       };
-    
+
+    const handleChanges = (e) => {
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value });
+      };
 
 return(
   <div>
@@ -67,15 +84,15 @@ return(
         <h1>Medical Record</h1>
         <form onSubmit={handleSubmit} className="DetailForm">
         <div>
-              <label htmlFor="patient_ID" >Patient_ID</label>
+              <label htmlFor="patient_id" >Patient_id</label>
                 <input type="text" 
-                name='patient_ID' 
-                id='patient_ID'
-                value={values.patient_ID}
+                name='patient_id' 
+                id='patient_id'
+                value={values.patient_id}
                 readOnly
                 />
         </div>
-       <div>
+        <div>
                 <label htmlFor="doctor_id">Select Doctor</label>
                 <select
                 name="doctor_id"
@@ -90,25 +107,17 @@ return(
                 </option>
                 ))}
                 </select>
-                </div>
-       <div>
-                <label htmlFor="appointment_id">Select Appointment</label>
-                <select
-                name="appointment_id"
-                id="appointment_id"
-                onChange={handleChanges}
-                value={values.appointment_id}
-                required
-                >
-                <option value="" disabled>Select Appointment</option>
-               {appointments.map((appointment)=>(
-                <option key={appointment.appointment_id} value={appointment.appointment_id}>{appointment.appointment_date}
-                </option>
-                ))}
-                </select>
-                </div>
-        <div>
+          </div>
 
+          <div>
+                <label htmlFor="date" >Select Date</label>
+                <input type="date" placeholder='Select date'name='date' id='date'
+                onChange={(e)=> handleChanges(e)} 
+                value={formatDateInput(values.date)}
+                required />
+          </div>
+
+          <div>
           <label htmlFor="diagnosis">Diagnosis</label>
           <textarea
           id="diagnosis"
@@ -125,8 +134,12 @@ return(
         </div>
        
         
-        
         </form>
+        {messageText && (
+                <div className="popup">
+                    <p>{messageText}</p>
+                </div>
+            )}
 
       </div>
      
