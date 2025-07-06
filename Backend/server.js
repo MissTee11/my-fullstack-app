@@ -911,7 +911,7 @@ app.get('/api/medical_records/patient/:id', async (req, res)=>{
         person.first_name,
         person.last_name,
         medical_records.diagnosis,
-        medical_record.date,
+        medical_records.date,
         medical_records.patient_id
       FROM medical_records
       LEFT JOIN doctor ON medical_records.doctor_id = doctor.id
