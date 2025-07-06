@@ -251,7 +251,8 @@ ON admissions (room_id)
 WHERE discharge_date IS NULL;
 
 ALTER TABLE medical_records
-DROP COLUMN patient_id;
+ADD COLUMN patient_id INT NOT NULL REFERENCES patient(id) ON DELETE CASCADE;
+
 
 ALTER TABLE medical_records
 DROP COLUMN appointment_id;
