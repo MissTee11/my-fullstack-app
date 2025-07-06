@@ -7,7 +7,7 @@ import { createRecord, getDoctors, getSinglePatient, getAppointment} from '../ap
 function AddRecord(){
     const navigate=useNavigate();
     const [values, setValues]=useState({
-        appointment_id:'',
+       
         patient_id:'',
         doctor_id:'',
         symptoms:'',
