@@ -883,22 +883,17 @@ app.delete('/api/payments/:id', async (req, res) => {
 
 //Add medical record
 app.post('/api/medical_records', async (req, res) => {
-  const { patient_id, appointment_id, doctor_id, diagnosis } = req.body;
-
-  if (!patient_id) {
-    return res.status(400).json({ error: "patient_id is required" });
-  }
+  const { doctor_id, diagnosis,date } = req.body;
 
   try {
-    const query = `
-      INSERT INTO medical_records (patient_id, appointment_id, doctor_id, diagnosis)
-      VALUES ($1, $2, $3, $4)
-      RETURNING *;
-    `;
-    const values = [patient_id, appointment_id || null, doctor_id || null, diagnosis || null];
-    const result = await pool.query(query, values);
-
+    const result = await pool.query(
+    `INSERT INTO medical_records (doctor_id, diagnosis,date)
+      VALUES ($1, $2, $3)
+      RETURNING *;`,
+      [doctor_id, diagnosis, date]
+    );
     res.status(201).json(result.rows[0]);
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to add medical record' });
@@ -912,17 +907,17 @@ app.get('/api/medical_records/patient/:id', async (req, res)=>{
     const query = `
       SELECT 
         medical_records.id AS record_id,
-        medical_records.appointment_id,
         medical_records.doctor_id,
         person.first_name,
         person.last_name,
-        medical_records.diagnosis
+        medical_records.diagnosis,
+        medical_record.date
       FROM medical_records
       JOIN doctor ON medical_records.doctor_id = doctor.id
       JOIN person ON doctor.person_id = person.id
       WHERE patient_id = $1
     `;
-      const result = await pool.query(query, [patientId]);
+      const result = await pool.query(query, [id]);
      res.json(result.rows);
      } catch (err) {
     console.error(err);
@@ -933,19 +928,19 @@ app.get('/api/medical_records/patient/:id', async (req, res)=>{
 //Update medical record
 app.put('/api/medical_records/:id', async (req, res) => {
   const { id } = req.params;
-  const { appointment_id, doctor_id, diagnosis } = req.body;
+  const {doctor_id, diagnosis, date } = req.body;
 
   try {
     const query = `
       UPDATE medical_records
-      SET appointment_id = $1,
-          doctor_id = $2,
-          diagnosis = $3
+      SET doctor_id = $1,
+          diagnosis = $2,
+          date = $3
       WHERE id = $4
       RETURNING *;
     `;
 
-    const values = [appointment_id, doctor_id, diagnosis, id];
+    const values = [doctor_id, diagnosis,date, id];
     const result = await pool.query(query, values);
 
     if (result.rows.length === 0) {
@@ -983,12 +978,11 @@ app.get('/api/medical_records/:id', async (req, res) => {
     const query = `
       SELECT 
         medical_records.id AS record_id,
-        medical_records.appointment_id,
         medical_records.doctor_id,
         person.first_name,
         person.last_name,
-        medical_records.patient_id,
-        medical_records.diagnosis
+        medical_records.diagnosis,
+        medical_records.date
       FROM medical_records
       JOIN doctor ON medical_records.doctor_id = doctor.id
       JOIN person ON doctor.person_id = person.id

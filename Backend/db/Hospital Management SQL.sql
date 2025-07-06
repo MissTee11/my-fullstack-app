@@ -250,7 +250,14 @@ CREATE UNIQUE INDEX unique_active_patient_per_room
 ON admissions (room_id)
 WHERE discharge_date IS NULL;
 
+ALTER TABLE medical_records
+DROP COLUMN patient_id;
 
+ALTER TABLE medical_records
+DROP COLUMN appointment_id;
+
+ALTER TABLE medical_records
+ADD date DATE NOT NULL;
 
 
 
