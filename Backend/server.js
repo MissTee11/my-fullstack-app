@@ -17,6 +17,33 @@ const pool= new Pool({
 app.use(cors());
 app.use(express.json());
 
+/*routes*/
+app.use('api/auth', require('./routes/auth'));
+
+router.post('/login', async(req,res)=>{
+  const {username, password_hash, role}= req.body;
+
+  try{
+    //find user by username
+    const user= await pool.query('SELECT * FROM users WHERE username = $1',[username]);
+    if(user.rows.length === 0) return res.status(400).json({msg:"Invalid credentials"});
+
+    //compare password
+    const matches = await bcrypt.compare(password, user.rows[0].password);
+    if(!matches) return res.status(400).json({msg:"Invalid credentials"});
+
+    //Create and return JWT
+    const token= jwt.sign({id: user.rows[0].id, role: user.rows[0].role}, 
+    process.env.JWT_SECRET, 
+    {expiresIn: '1h'});
+    res.json({token});
+  }
+  catch(err){
+    res.status(500).send(err.message);
+  }
+});
+
+
 /*PATIENTS*/
 
 //Get all patients
@@ -151,10 +178,6 @@ app.delete('/api/patients/:id', async (req, res) => {
       console.error(err);
       res.status(500).json({ error: 'Could not delete patient' });
     }
-  });
-  
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
   });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1002,7 +1025,10 @@ app.get('/api/medical_records/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch medical record' });
   }
 });
-
+/******************************************************************** */
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
 
 
 
