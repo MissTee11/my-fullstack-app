@@ -939,7 +939,7 @@ app.put('/api/medical_records/:id', async (req, res) => {
           date = $3,
           patient_id=$4
       WHERE id = $5
-      RETURNING *; `
+      RETURNING *; `,
   [doctor_id, diagnosis,date, patient_id, id]
   );
 
