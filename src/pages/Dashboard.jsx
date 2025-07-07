@@ -4,6 +4,7 @@ function Dashboard(){
 
         <div>
             <Sidebar/>
+            <p>Welcome %user% </p>
         </div>
     )
 
