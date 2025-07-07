@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage(){
     const navigate = useNavigate();
-    const[username,setUsername] = useState('');
-    const[password, setPassword]= useState('');
     const[messageText, setMessageText]= useState('');
+    const[password, setPassword]= useState();
+    const[username, setUsername]= useState();
+
 
     const [values, setValues]=useState({
-        role:'',
         username:'',
         password:'',
     });
@@ -53,7 +53,9 @@ function LoginPage(){
             password:'',
             });
         };   
-
+    const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    };
     return(
     
             <div className="LogIn">
@@ -63,15 +65,19 @@ function LoginPage(){
                 <label htmlFor='username'>Username:</label>
                 <input type='text'
                 placeholder="Enter username"
-                value={username}
-                onChange={(e)=> setUsername(e.target.value)}
+                id='username'
+                name='username'
+                value={values.username}
+                onChange={handleChange}
                 required/>
 
                 <label htmlFor='password'>Password:</label>
-                <input type='text' 
+                <input type='password' 
                 placeholder="Enter password"
-                value={password}
-                onChange={(e)=> setPassword(e.target.value)}
+                id='password'
+                name='password'
+                value={values.password}
+                onChange={handleChange}
                 required
                 />
 

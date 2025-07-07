@@ -2,9 +2,11 @@ import axios from "axios";
 
 const API_BASE_URL ="http://localhost:5000/api";
 
+axios.defaults.baseURL = API_BASE_URL;
+
 /*USER AUTHENTIATION*/
 
-api.interceptors.request.use(
+axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -15,8 +17,9 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const login=(credentials)=> axios.post('/auth/login', credentials);
-export const getAdminData =() => api.get('/admin/admin-data');
+export const login=(credentials)=> axios.post(`${API_BASE_URL}/auth/login`, credentials);
+//export const getAdminData =() => api.get('/admin/admin-data');
+export default axios;
 
 /*PATIENTS*/
 export const getPatients = () => axios.get(`${API_BASE_URL}/patients`);

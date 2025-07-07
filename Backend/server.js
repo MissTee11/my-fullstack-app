@@ -1,9 +1,11 @@
-import express, { json } from "express";
-import cors from "cors";
-require("dotenv").config();
-import { Pool } from 'pg';
-import authRoutes from './routes/auth.js';
-import adminRoutes from './routes/admin.js';
+const express = require('express');
+const { json } = express;
+const cors = require('cors');
+require('dotenv').config();
+const { Pool } = require('pg');
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
+
 
 const app=express();
 const PORT = process.env.PORT || 5000;
@@ -20,6 +22,7 @@ app.use(cors());
 app.use(json());
 
 /*LOGIN*/
+const authRouter = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 

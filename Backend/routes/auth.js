@@ -1,12 +1,13 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import { Pool } from 'pg';
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { Pool } = require('pg');
+
 
 const router = express.Router();
 
 router.post('/login', async(req,res)=>{
-  const {username, password_hash}= req.body;
+  const {username, password}= req.body;
 
   try{
     //find user by username
@@ -14,7 +15,7 @@ router.post('/login', async(req,res)=>{
     if(user.rows.length === 0) return res.status(400).json({msg:"Invalid credentials"});
 
     //compare password
-    const matches = await bcrypt.compare(password_hash, user.rows[0].password);
+    const matches = await bcrypt.compare(password, user.rows[0].password);
     if(!matches) return res.status(400).json({msg:"Invalid credentials"});
 
     //Create and return JWT
@@ -27,4 +28,4 @@ router.post('/login', async(req,res)=>{
     res.status(500).send(err.message);
   }
 });
-export default router;
+module.exports= router;
