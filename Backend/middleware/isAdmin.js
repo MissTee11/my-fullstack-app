@@ -6,4 +6,4 @@ function isAdmin(req, res,next){
         return res.status(403).json({message:'Permission denied'});
     }
 }
-export default isAdmin;
+module.exports = isAdmin;
