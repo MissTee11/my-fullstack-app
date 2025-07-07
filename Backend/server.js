@@ -21,7 +21,7 @@ app.use(json());
 
 /*LOGIN*/
 app.use('/api/auth', authRoutes);
-app.use('.api/admin', adminRoutes);
+app.use('/api/admin', adminRoutes);
 
 
 /*PATIENTS*/

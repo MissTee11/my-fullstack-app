@@ -2,6 +2,22 @@ import axios from "axios";
 
 const API_BASE_URL ="http://localhost:5000/api";
 
+/*USER AUTHENTIATION*/
+
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['x-auth-token'] = token;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+export const login=(credentials)=> axios.post('/auth/login', credentials);
+export const getAdminData =() => api.get('/admin/admin-data');
+
 /*PATIENTS*/
 export const getPatients = () => axios.get(`${API_BASE_URL}/patients`);
 export const getSinglePatient = (id) => axios.get(`${API_BASE_URL}/patients/${id}`);
