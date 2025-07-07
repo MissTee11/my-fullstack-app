@@ -1,7 +1,9 @@
-const express= require("express");
-const cors = require("cors");
+import express, { json } from "express";
+import cors from "cors";
 require("dotenv").config();
-const {Pool}= require('pg');
+import { Pool } from 'pg';
+import authRoutes from './routes/auth.js';
+import adminRoutes from './routes/admin.js';
 
 const app=express();
 const PORT = process.env.PORT || 5000;
@@ -15,33 +17,11 @@ const pool= new Pool({
 });
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
-/*routes*/
-app.use('api/auth', require('./routes/auth'));
-
-router.post('/login', async(req,res)=>{
-  const {username, password_hash, role}= req.body;
-
-  try{
-    //find user by username
-    const user= await pool.query('SELECT * FROM users WHERE username = $1',[username]);
-    if(user.rows.length === 0) return res.status(400).json({msg:"Invalid credentials"});
-
-    //compare password
-    const matches = await bcrypt.compare(password, user.rows[0].password);
-    if(!matches) return res.status(400).json({msg:"Invalid credentials"});
-
-    //Create and return JWT
-    const token= jwt.sign({id: user.rows[0].id, role: user.rows[0].role}, 
-    process.env.JWT_SECRET, 
-    {expiresIn: '1h'});
-    res.json({token});
-  }
-  catch(err){
-    res.status(500).send(err.message);
-  }
-});
+/*LOGIN*/
+app.use('/api/auth', authRoutes);
+app.use('.api/admin', adminRoutes);
 
 
 /*PATIENTS*/
