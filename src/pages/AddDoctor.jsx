@@ -66,23 +66,18 @@ function AddDoctor(){
         <div>
             <Sidebar/>
             <div className="MainContent">
-            <div className="Form">
-            <h1> Doctor Registration</h1>
-            <form onSubmit={handleSubmit} className="DetailForm">
-              <div>
+            <h1 className='PageHeader'> Doctor Registration</h1>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+
               <label htmlFor="first_name" > First Name</label>
                 <input type="text" placeholder='Enter doctor name' name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} required 
                  value={values.first_name}/>
-              </div>
-
-              <div>
+           
               <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)} required value={values.last_name}/>
-              </div>
-
-              <div>
+            
               <label htmlFor="gender" >Gender</label>
                 <select name='gender'
                 id='gender'
@@ -93,9 +88,7 @@ function AddDoctor(){
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
-              </div>
-
-              <div>
+              
               <label htmlFor="specialty" >Specialty</label>
                 <select 
                 name="specialty" 
@@ -108,7 +101,6 @@ function AddDoctor(){
                   </option>
                 ))}
                 </select>
-              </div>
 
               <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
@@ -124,7 +116,7 @@ function AddDoctor(){
 
             </div>
         </div>
-        </div>
+       
         
       );
 }

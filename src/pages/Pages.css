@@ -19,6 +19,13 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     transition: opacity 0.3s ease-in-out;
 }
+.PageHeader{
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    background-color: #263859;
+    padding:10px;
+}
 /*LOGIN PAGE*/
 .PageTitle{
     text-align: center;
@@ -114,10 +121,10 @@
 }
 .SaveBtn, .ResetBtn{
     padding: 10px;
-    width: 250px;
+    width: 50%;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 1.5rem;
 }
 .ResetBtn{
     margin-left: 10px;
@@ -125,83 +132,43 @@
     color: white;
 }
 .SaveBtn{
-    background: linear-gradient(
-        60deg,
-          #6e473b 0%,
-         #3674B5 90%);
+    background-color: #263859;
     color: white;
 }
 
 /**************************************************************************************/
-
-.Form{
-    border: none;
-    border-radius: 8px;
+.AddUpdateForm{
+    position: relative;
+    top:100px;
     display: flex;
     flex-direction: column;
-    width: 50%;
-    padding: 20px;
-    margin: auto;
-    position: relative;
-    top:20px;
+    justify-self: center;
+    width: 65%;
 }
 .Buttons{
     display: flex;
     padding: 20px;
  }
- 
-.DetailForm{
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.DetailForm h1{
-    text-align: center;
-    color: #3674B5;
-    font-size: 40px;
-}
-#gender, #patient_id, #room_id, #doctor_id,#status,#specialty,#role_id,#department_id{
+ .AddUpdateForm input, textarea{
+    color: #263859;
+    font-size: 1rem;
     padding: 10px;
-    width: 100%;
-    max-width: 523px;
-    border-radius: 0px;
-    border: #3674B5 1px solid;
-}
-#appointment_id{
-   border-radius: 0px;
-    padding: 10px; 
-    
-}
-
-/*form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    color: #3674B5;
-}*/
-/*input, .cell, select{
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: solid 1px;
+ }
+ .AddUpdateForm select{
+    color: #263859;
+    font-size: 1rem;
     padding: 10px;
-    font-size: 18px;
-    width: 500px;
-    margin: 15px;
-    color: #9E9E9E;
-    border: #3674B5 1px solid;
-}*/
-
-/*label{
-    font-size: 24px;
-    margin-left: 15px;
-}*/
-
-#diagnosis{
-    border: #3674B5 1px solid;
-}
-
-select{
-    padding: 20px;
-    border-radius: 30px;
-}
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: solid 1px;
+ }
+ .AddUpdateForm label{
+     color: #263859;
+    font-size: 1.5rem;
+ }
 
 @media screen and (max-width:767px){
     .DetailForm{

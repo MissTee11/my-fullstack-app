@@ -46,7 +46,6 @@ function AddStaff(){
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-
       try{
           await createStaff(values);
           setMessageText("Staff member added successfuly!");
@@ -54,43 +53,39 @@ function AddStaff(){
           setTimeout(()=>{
           setMessageText("");
           navigate('/Staff');
-          }, 3000);
-        }
-      catch(error){
-          console.error("Error adding staff member", error);
-          setMessageText("Failed to add staff member.Please try again.");
-
-          setTimeout(()=>{
-          setMessageText("");
           }, 3000)
-      }     
+
+        }
+       catch(error){
+        console.error("Error adding staff member", error);
+        setMessageText("Failed to add staff member.Please try again.");
+
+        setTimeout(()=>{
+          setMessageText("");
+        }, 3000)
+      }        
     };
 
     return(
     <div>
              <Sidebar/>
             <div className="MainContent">
-            <div className="Form">
-            <h1> Staff Registration</h1>
+            <h1 className='PageHeader'> Staff Registration</h1>
 
-            <form onSubmit={handleSubmit} className="DetailForm">
-              <div>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+              
               <label htmlFor="first_name" >Name</label>
                 <input type="text" placeholder='Enter staff first name'name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} 
                  required
                   value={values.first_name}/>
-              </div>
 
-              <div>
               <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)}
                  required 
                  value={values.last_name}/>
-              </div>
 
-              <div>
               <label htmlFor="gender" >Gender</label>
                 <select name='gender'
                 id='gender'
@@ -101,9 +96,7 @@ function AddStaff(){
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
-              </div>
 
-              <div>
               <label htmlFor="department_id">Select Department</label>
                 <select
                 name="department_id"
@@ -116,9 +109,7 @@ function AddStaff(){
                   </option>
                 ))}
                 </select>
-              </div>
 
-              <div>
               <label htmlFor="role_id" >Select Role</label>
                 <select 
                 name="role_id" 
@@ -136,20 +127,17 @@ function AddStaff(){
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
               </div>
-              
-              </div>
             </form> 
-            {messageText && (
+
+          {messageText && (
                 <div className="popup">
                     <p>{messageText}</p>
                 </div>
             )}
-
         </div>
        
          </div>
 
-    </div>
     )
 }
 export default AddStaff;
