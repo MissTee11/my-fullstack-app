@@ -76,24 +76,20 @@ function AddAppointments(){
         <div>
             <Sidebar/>
             <div className="MainContent">
-            <div className="Form">
-            <h1> Appointment Registration</h1>
+            <h1 className='PageHeader'> Appointment Registration</h1>
 
-            <form onSubmit={handleSubmit} className="DetailForm">
-                <div>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+            
                 <label htmlFor="appointment_date" >Appointment Date</label>
                 <input type="date" placeholder='Enter appointment date'name='appointment_date' id='appointment_date'
                  onChange={(e)=> handleChanges(e)} 
                  required value={formatDateInput(values.appointment_date)}/>
-                </div>
-                <div>
+                
                 <label htmlFor="time" >Time</label>
                 <input type="time" placeholder='Enter time' name='time' id='time'
                 onChange={(e)=> handleChanges(e)} 
                 required value={values.time}/>
-                </div>
-                
-                <div>
+          
                 <label htmlFor="patient_id">Select Patient</label>
                 <select
                 name="patient_id"
@@ -108,9 +104,7 @@ function AddAppointments(){
                 </option>
                 ))}
                 </select>
-                </div>
-                
-                <div>
+              
                 <label htmlFor="doctor_id">Select Doctor</label>
                 <select
                 name="doctor_id"
@@ -125,8 +119,7 @@ function AddAppointments(){
                 </option>
                 ))}
                 </select>
-                </div>
-                <div>
+
                 <label htmlFor="status" >Status</label>
                 <select 
                 name="status" 
@@ -148,7 +141,6 @@ function AddAppointments(){
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
                 </div>
-                </div>
     
             </form> 
             {messageText && (
@@ -160,7 +152,6 @@ function AddAppointments(){
 
             </div>
 
-        </div>
     )
 }
 export default AddAppointments;

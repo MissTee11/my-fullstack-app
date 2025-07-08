@@ -80,10 +80,9 @@ return(
     <Sidebar/>
     <div className="MainContent">
       
-      <div className="Form">
-        <h1>Medical Record</h1>
-        <form onSubmit={handleSubmit} className="DetailForm">
-        <div>
+        <h1 className='PageHeader'>Medical Record</h1>
+        <form onSubmit={handleSubmit} className="AddUpdateForm">
+    
               <label htmlFor="patient_id" >Patient_id</label>
                 <input type="text" 
                 name='patient_id' 
@@ -91,8 +90,7 @@ return(
                 value={values.patient_id}
                 readOnly
                 />
-        </div>
-        <div>
+        
                 <label htmlFor="doctor_id">Select Doctor</label>
                 <select
                 name="doctor_id"
@@ -107,30 +105,26 @@ return(
                 </option>
                 ))}
                 </select>
-          </div>
-
-          <div>
+          
                 <label htmlFor="date" >Select Date</label>
                 <input type="date" placeholder='Select date'name='date' id='date'
                 onChange={(e)=> handleChanges(e)} 
                 value={formatDateInput(values.date)}
                 required />
-          </div>
 
-          <div>
-          <label htmlFor="diagnosis">Diagnosis</label>
-          <textarea
-          id="diagnosis"
-          name="diagnosis"
-          value={values.diagnosis}
-          onChange={(e) => handleChanges(e)}
-          rows={20}
-          cols={65}
+                <label htmlFor="diagnosis">Diagnosis</label>
+                <textarea
+                id="diagnosis"
+                name="diagnosis"
+                value={values.diagnosis}
+                onChange={(e) => handleChanges(e)}
+                rows={20}
+                cols={65}
             />
+
             <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-        </div>
         </div>
        
         
@@ -145,10 +139,7 @@ return(
      
 
     </div>
-
-  </div>
   
-
  )
 }
 export default AddRecord;
