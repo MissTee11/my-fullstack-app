@@ -14,7 +14,7 @@ export const myCustomTheme = createTheme(
         text: '#FFFFFF',
     },
     divider: {
-        default: '#3674B5',
+        default: '#263859',
     },
     sortFocus: {
         default: '#2aa198',

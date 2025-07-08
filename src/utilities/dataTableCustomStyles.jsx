@@ -3,13 +3,13 @@ export const customStyles = {
       style: {
         fontSize: '15px', 
         fontWeight: 'bold',
-        color: '#3674B5',
+        color: '#263859',
       },
     },
     cells: {
       style: {
         fontSize: '15px', 
-        color: '#3674B5',
+        color: '#263859',
       },
     },
   };
