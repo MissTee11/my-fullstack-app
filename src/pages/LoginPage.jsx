@@ -7,6 +7,8 @@ import { login } from '../api';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
+
 function LoginPage(){
     const navigate = useNavigate();
     const[messageText, setMessageText]= useState('');
@@ -54,43 +56,43 @@ function LoginPage(){
     const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     };
-    return(
-    
-            <div className="LogIn">
-            <form onSubmit ={handleSubmit} className="LoginForm">
-                <h1>LogIn</h1>
 
-                <label htmlFor='username'>Username:</label>
-                <input type='text'
-                placeholder="Enter username"
-                id='username'
-                name='username'
-                value={values.username}
-                onChange={handleChange}
-                required/>
+return(
+        <div className='LoginPage'>
+        <h1 className='PageTitle'>Hospital Management System</h1>
 
-                <label htmlFor='password'>Password:</label>
-                <input type='password' 
-                placeholder="Enter password"
-                id='password'
-                name='password'
-                value={values.password}
-                onChange={handleChange}
-                required
-                />
+        <form onSubmit ={handleSubmit} className="LoginForm">
+            <h1 className='Login'>LogIn</h1>
 
-                 <div className="Buttons">
-                <button className="SaveBtn"type="submit">Save</button>
-                <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-                </div>
+            <label htmlFor='username'>Username:</label>
+            <input type='text'
+            placeholder="Enter username"
+            id='username'
+            name='username'
+            value={values.username}
+            onChange={handleChange}
+            required/>
 
-                
-            </form>
-            {messageText && (
+            <label htmlFor='password'>Password:</label>
+            <input type='password' 
+            placeholder="Enter password"
+            id='password'
+            name='password'
+            value={values.password}
+            onChange={handleChange}
+            required
+            />
+
+            <button className="LoginBtn"type="submit">LOGIN</button>
+        </form>
+
+        {messageText && (
                 <div className="popup">
                     <p>{messageText}</p>
                 </div>
             )}
+
+            
 
       </div>
         

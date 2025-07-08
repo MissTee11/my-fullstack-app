@@ -1,8 +1,76 @@
+*{
+    margin: 0;
+}
+
 .MainContent{
     margin-left: 300px;
-    text-align: left;
-    
+    text-align: left;   
 }
+.popup{
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background-color: #263859;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease-in-out;
+}
+/*LOGIN PAGE*/
+.PageTitle{
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    background-color: #263859;
+    padding: 20px;
+}
+.LoginForm{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    width: 40%;
+    position: relative;
+    top: 100px;
+}
+.LoginForm label{
+    color: #263859;
+    font-size: 1.5rem;
+}
+.LoginForm input{
+    color: #263859;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: solid 1px;
+}
+.Login{
+    font-size: 2.5rem;
+    color: #263859;
+    text-align: center;
+}
+.LoginBtn{
+    background-color: #263859;
+    color: white;
+    padding: 10px;
+    width: 60%;
+    margin: auto;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+}
+.LoginBtn:hover{
+    cursor: pointer;
+    background-color: #6B778D;
+
+}
+/**************************************************************************************/
+/*SIDEBAR*/
+
+/**************************************************************************************/
 .AddBtn{
     background: linear-gradient(
         60deg,
@@ -86,7 +154,7 @@
     grid-template-columns: auto auto;
 }
 
-.Form h1{
+.DetailForm h1{
     text-align: center;
     color: #3674B5;
     font-size: 40px;
@@ -104,96 +172,36 @@
     
 }
 
-form{
+/*form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
     color: #3674B5;
-}
-input, .cell, select{
+}*/
+/*input, .cell, select{
     padding: 10px;
     font-size: 18px;
     width: 500px;
     margin: 15px;
     color: #9E9E9E;
     border: #3674B5 1px solid;
-}
-label{
+}*/
+
+/*label{
     font-size: 24px;
     margin-left: 15px;
-}
+}*/
+
 #diagnosis{
     border: #3674B5 1px solid;
 }
 
-.popup{
-    position: fixed;
-    bottom: 50px;
-    right: 20px;
-    background-color: #578FCA;
-    color: white;
-    padding: 15px;
-    width: 200px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    transition: opacity 0.3s ease-in-out;
-}
-.LoginForm input{
-    padding: 20px;
-    border-radius: 30px;
-    background-color: #e9e9e9;
-}
 select{
     padding: 20px;
     border-radius: 30px;
 }
-.LoginForm{
-    align-items: center;
-    background-color: white ;
-    width: 40vw;
-    height: 60vh;
-    margin: auto;
-    padding: 20px;
-    border-radius: 12px;
-    background: linear-gradient(
-            60deg,
-              #6e473b 0%,
-             #3674B5 90%);
-   
-}
-.LoginBtn{
-    width: 20%;
-    text-align: center;
-    padding: 20px;
-    border-radius: 30px;
-    border: none;
-    background-color: #3674B5;
-    color: white;
-    font-size: 15px ;
-    margin: auto;
-    
-    
-}
-.LogIn h1{
- font-size: 60px;
- color: #9fccfd;
- text-align: center;
-}
-.LogIn{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    background: linear-gradient(
-            60deg,
-                #3674B5 0%,
-                #6e473b 90%);
-}
-.profile{
-    color: #9fccfd;
-}
+
 @media screen and (max-width:767px){
     .DetailForm{
         grid-template-columns: auto;
