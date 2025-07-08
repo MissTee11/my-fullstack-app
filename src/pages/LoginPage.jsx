@@ -10,8 +10,6 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage(){
     const navigate = useNavigate();
     const[messageText, setMessageText]= useState('');
-    const[password, setPassword]= useState();
-    const[username, setUsername]= useState();
 
 
     const [values, setValues]=useState({
@@ -23,7 +21,7 @@ function LoginPage(){
         e.preventDefault();
 
          try{
-            const res = await login({username, password});
+            const res = await login({username: values.username, password:values.password});
 
             localStorage.setItem('token', res.data.token);
             setMessageText("Login successful!");
@@ -37,7 +35,7 @@ function LoginPage(){
             catch(error){
             console.error("login failed!", error);
         
-            const message = error.response?.data?.error || "Login failed.";
+            const message = error.response?.data?.error || "Login failed. Please recheck the username and password and try again.";
             setMessageText(message);
                 
                    
