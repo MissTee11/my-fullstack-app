@@ -3,7 +3,6 @@ const { json } = express;
 const cors = require('cors');
 require('dotenv').config();
 const authRoutes = require('./routes/auth');
-const adminRoutes = require('./routes/admin');
 const pool = require('./db');
 
 
@@ -17,7 +16,7 @@ app.use(json());
 /*LOGIN*/
 const authRouter = require('./routes/auth');
 app.use('/api/auth', authRoutes);
-app.use('/api/admin', adminRoutes);
+
 
 
 /*PATIENTS*/
@@ -328,7 +327,7 @@ app.get('/api/roles',async(req, res) =>{
   
 });
 
-//Get room
+//Get rooms
 app.get('/api/rooms',async(req, res) =>{
   try{
     const result = await pool.query('SELECT id, room_number, room_type, availability_status FROM rooms ORDER BY room_number');
@@ -340,6 +339,27 @@ app.get('/api/rooms',async(req, res) =>{
   }
   
 });
+
+//Get Single Room
+app.get('/api/rooms/:room_number', async (req, res) => {
+  const { room_number } = req.params;
+  try {
+    const result = await pool.query(
+      'SELECT id, room_number, room_type, availability_status FROM rooms WHERE room_number = $1',
+      [room_number]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not get room' });
+  }
+});
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

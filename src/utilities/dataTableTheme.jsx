@@ -4,7 +4,7 @@ export const myCustomTheme = createTheme(
     'myCustomTheme',
   {
     text: {
-        primary: '#4C3BCF',
+        primary: '#263859',
     },
     background: {
         default: 'white',
