@@ -73,24 +73,21 @@ function UpdateStaff(){
     <div>
              <Sidebar/>
             <div className="MainContent">
-            <div className="Form">
-            <h1> Staff Update Form</h1>
-            <form onSubmit={handleSubmit} className="DetailForm">
-              <div>
+            <h1 className='PageHeader'> Staff Update Form</h1>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+             
               <label htmlFor="first_name" >Name</label>
                 <input type="text" placeholder='Enter staff first name'name='first_name' id='first_name'
                  onChange={(e)=> handleChanges(e)} 
                  required
                   value={values.first_name}/>
-              </div>
-              <div>
+            
               <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)}
                  required 
                  value={values.last_name}/>
-              </div>
-              <div>
+              
               <label htmlFor="gender" >Gender</label>
                 <select name='gender'
                 id='gender'
@@ -101,8 +98,7 @@ function UpdateStaff(){
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
-              </div>
-              <div>
+              
               <label htmlFor="department_id">Select Department</label>
                 <select
                 name="department_id"
@@ -116,8 +112,7 @@ function UpdateStaff(){
                   </option>
                 ))}
                 </select>
-              </div>
-              <div>
+              
               <label htmlFor="role_id" >Role</label>
                 <select 
                 name="role_id" 
@@ -131,10 +126,9 @@ function UpdateStaff(){
                   </option>
                 ))}
                 </select>
-                <div className="ButtonsStaff">
+                <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-              </div>
               </div>
             </form>
 
@@ -147,8 +141,6 @@ function UpdateStaff(){
          </div>
         </div>
         
-
-    </div>
     )
 }
 export default UpdateStaff;

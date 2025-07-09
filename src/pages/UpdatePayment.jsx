@@ -77,10 +77,9 @@ function UpdatePayment(){
         <div>
             <Sidebar/>
             <div className="MainContent">
-                <div className="Form">
-                <h1> Payment Update Form</h1>
-                <form onSubmit={handleSubmit} className="DetailForm">
-            <div>
+                <h1 className='PageHeader'> Payment Update Form</h1>
+                <form onSubmit={handleSubmit} className="AddUpdateForm">
+            
               <label htmlFor="patient_id">Select Patient</label>
               <select
               name="patient_id"
@@ -95,27 +94,22 @@ function UpdatePayment(){
               </option>
               ))}
               </select>
-            </div>
-
-            <div>
+            
                 <label htmlFor="total_amount" >Total Amount</label>
                 <input type="number" placeholder='Enter total amount'name='total_amount' id='total_amount'
                  onChange={(e)=> handleChanges(e)} 
                  required value={values.total_amount}/>
-            </div>
-            <div>
+            
                 <label htmlFor="amount_paid" >Amount Paid</label>
                 <input type="number" placeholder='Enter amount_paid'name='amount_paid' id='amount_paid'
                  onChange={(e)=> handleChanges(e)} 
                  value={values.amount_paid}/>
-            </div>
-            <div>
+            
                 <label htmlFor="date" >Billing Date</label>
                 <input type="date" placeholder='Enter date'name='date' id='date'
                  onChange={(e)=> handleChanges(e)} 
                required value={formatDateInput(values.date)}/>
-            </div>
-            <div>
+            
                 <label htmlFor="status" >Status</label>
                 <select 
                 name="status" 
@@ -136,7 +130,6 @@ function UpdatePayment(){
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
             </div>
-            </div>
                 
             </form>
 
@@ -149,7 +142,6 @@ function UpdatePayment(){
             </div>
            
              
-        </div>
         </div>
        
     );

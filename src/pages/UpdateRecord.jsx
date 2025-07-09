@@ -71,10 +71,9 @@ return(
     <Sidebar/>
     <div className="MainContent">
       
-      <div className="Form">
-        <h1>Medical Record</h1>
-        <form onSubmit={handleSubmit} className="DetailForm">
-        <div>
+        <h1 className='PageHeader'>Medical Record</h1>
+        <form onSubmit={handleSubmit} className="AddUpdateForm">
+        
               <label htmlFor="record_id" >Record_ID</label>
                 <input type="text" 
                 name='record_id' 
@@ -82,8 +81,7 @@ return(
                 value={values.record_id}
                 readOnly
                 />
-        </div>
-        <div>
+        
               <label htmlFor="date" >Date</label>
                 <input type="date" 
                 name='date' 
@@ -91,8 +89,7 @@ return(
                 value={formatDateInput(values.date)}
                 readOnly
                 />
-        </div>
-        <div>
+        
               <label htmlFor="patient_id" >Patient ID</label>
                 <input type="text" 
                 name='patient_id' 
@@ -100,8 +97,7 @@ return(
                 value={values.patient_id}
                 readOnly
                 />
-        </div>
-        <div>
+        
               <label htmlFor="doctor_id" >Doctor_ID</label>
                 <input type="text" 
                 name='doctor_id' 
@@ -109,8 +105,7 @@ return(
                 value={values.doctor_id}
                 readOnly
                 />
-        </div>
-        <div>
+    
           <label htmlFor="diagnosis">Diagnosis</label>
           <textarea
           id="diagnosis"
@@ -124,7 +119,6 @@ return(
         <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
-        </div>
         </div>
        
         </form>
@@ -140,7 +134,7 @@ return(
 
     </div>
 
-  </div>
+
   
 
  )
