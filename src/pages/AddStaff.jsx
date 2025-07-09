@@ -9,7 +9,7 @@ function AddStaff(){
   const navigate = useNavigate();
   const[roles, setRoles]= useState([]);
   const[department, setDepartment] = useState([]);
-  const[messageText, setMessageText]=useState([]);
+  const[messageText, setMessageText]=useState("");
 
   const [values, setValues] = useState({
       first_name: '',
@@ -48,7 +48,7 @@ function AddStaff(){
       e.preventDefault();
       try{
           await createStaff(values);
-          setMessageText("Staff member added successfuly!");
+          setMessageText("Staff member added successfully!");
       
           setTimeout(()=>{
           setMessageText("");
@@ -103,7 +103,7 @@ function AddStaff(){
                 id="department_id"
                 onChange={handleChanges}
                 required>
-                <option value="" disabled>Select Department</option>
+                <option value="" >Select Department</option>
                 {department.map((department)=>(
                   <option key={department.id} value={department.id}>{department.department}
                   </option>
@@ -116,7 +116,7 @@ function AddStaff(){
                 id="role_id" 
                 onChange={(e) => handleChanges(e)} 
                 required>
-              <option value="" disabled>Select Role</option>
+              <option value="" >Select Role</option>
                {roles.map((roles)=>(
                   <option key={roles.id} value={roles.id}>{roles.role_name}
                   </option>
