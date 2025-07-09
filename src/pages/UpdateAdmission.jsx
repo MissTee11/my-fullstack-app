@@ -80,10 +80,9 @@ function UpdateAdmissions(){
         <div>
             <Sidebar/>
             <div className="MainContent">
-            <div className="Form">
-            <h1>Admission Update Form</h1>
-            <form onSubmit={handleSubmit} className="DetailForm">
-              <div>
+            <h1 className='PageHeader'>Admission Update Form</h1>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+             
               <label htmlFor="patient_id">Select Patient</label>
               <select
               name="patient_id"
@@ -98,9 +97,7 @@ function UpdateAdmissions(){
               </option>
               ))}
               </select>
-              </div>
-
-              <div>
+              
               <label htmlFor="room_id">Select Room</label>
               <select
               name="room_id"
@@ -114,22 +111,20 @@ function UpdateAdmissions(){
               <option key={room.id} value={room.id}>{room.room_number} {room.room_type}</option>
               ))}
               </select>
-              </div>
-              <div>
+              
               <label htmlFor="admission_date">Admission Date</label>
                 <input type="date" placeholder="Enter Admission Date"name="admission_date" id='admission_date'
                 onChange={(e) => handleChanges(e)}
                 required
                 value={formatDateInput(values.admission_date)}
                 />
-              </div>
-              <div>
+      
               <label htmlFor="discharge_date">Discharge Date</label>
                 <input type="date" placeholder="Enter Discharge Date" name="discharge_date" id='discharge_date'
                 onChange={(e) => handleChanges(e)}
                 value={formatDateInput(values.discharge_date)}
                 />
-              </div>
+              
               <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save Changes </button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
@@ -146,7 +141,6 @@ function UpdateAdmissions(){
            
             </div>
 
-        </div>
     )
 }
 export default UpdateAdmissions;

@@ -67,31 +67,27 @@ function UpdatePatient(){
     <div>
         <Sidebar/>
         <div className="MainContent">
-            <div className="Form">
-            <h1> Patient Update Form</h1>
-            <form onSubmit={handleSubmit} className="DetailForm">
-              <div>
+            <h1 className='PageHeader'> Patient Update Form</h1>
+            <form onSubmit={handleSubmit} className="AddUpdateForm">
+              
               <label htmlFor="first_name" >First Name</label>
                 <input type="text" placeholder='Enter patient name'name='first_name' id='first_name'
                 onChange={(e)=> handleChanges(e)} 
                 required
                 value={values.first_name}/>
-              </div>
-              <div>
+              
               <label htmlFor="last_name" >Last Name</label>
                 <input type="text" placeholder='Enter last name' name='last_name' id='last_name'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.last_name}/>
-              </div>
-              <div>
+              
               <label htmlFor="date_of_birth" >Date Of Birth</label> 
                 <input type="date" placeholder='Enter patient date of birth' name='date_of_birth' id='date_of_birth'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={formatDateInput(values.date_of_birth)}/>
-              </div>
-              <div>
+            
               <label htmlFor="gender" >Gender</label>
                 <select name='gender'
                 id='gender'
@@ -102,21 +98,19 @@ function UpdatePatient(){
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
-              </div>
-              <div>
+            
               <label htmlFor="contact_number" >Contact Number</label>
                 <input type="number" className='cell'  placeholder='Enter Phone Number'name='contact_number'id='contact_number'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.contact_number}/>
-              </div>
-              <div>
+              
               <label htmlFor="city" >City of Residence</label>
                 <input type="text" placeholder='Enter Patient City of residence' name='city' id='city'
                 onChange={(e)=> handleChanges(e)}
                 required 
                 value={values.city}/>
-              </div>
+              
               <div className="Buttons">
                 <button className="SaveBtn"type="submit">Save Changes</button>
                 <button className="ResetBtn" type="button" onClick={resetInfo}>Reset</button>
@@ -131,7 +125,7 @@ function UpdatePatient(){
             
         </div>
         </div>
-    </div>
+    
     )
 }
 export default UpdatePatient;
