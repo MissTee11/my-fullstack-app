@@ -30,7 +30,7 @@ function Rooms(){
     
     
 
-    const handleMakeAppointment= async (availability_status, event)=>{
+    const handleMakeAdmission= async (availability_status, event,row)=>{
       if (event) event.preventDefault();
 
         if(availability_status !=="Available"){
@@ -42,7 +42,7 @@ function Rooms(){
 
         }
         else{
-            navigate('/AddAdmissions');
+            navigate(`/AddAdmissions/${row.room_number}`);
         }
 
     }
@@ -64,7 +64,7 @@ function Rooms(){
           name: 'Actions',
           cell: row => (
             <div >
-              <button className="UpdateBtn" onClick={(e)=>handleMakeAppointment(row.availability_status,e)}><RiCalendarScheduleFill/>Admit Patient</button>
+              <button className="UpdateBtn" onClick={(e)=>handleMakeAdmission(row.availability_status,e, row)}><RiCalendarScheduleFill/>Admit Patient</button>
              
          </div>
           ),

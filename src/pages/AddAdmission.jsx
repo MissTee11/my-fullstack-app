@@ -1,16 +1,18 @@
 import Sidebar from '../components/Sidebar';
 import './Pages.css';
 import React,{useState, useEffect} from 'react';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams} from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
-import { createAdmission, getPatients, getRooms } from '../api';
+import { createAdmission, getPatients, getRooms, getSingleRoom } from '../api';
 
 function AddAdmissions(){
 
   const navigate= useNavigate();
   const [patients, setPatients] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState();
   const [messageText, setMessageText] = useState("");
+  const { roomNumber } = useParams();
 
   const [values, setValues] = useState({
     patient_id: '',
@@ -27,6 +29,9 @@ function AddAdmissions(){
 
             const roomRes= await getRooms();
             setRooms(roomRes.data);
+
+            const res = await getSingleRoom(roomNumber);
+            setValues(prev => ({ ...prev, room_id: res.data.id }));
       
             }
         catch (err) {
@@ -34,7 +39,7 @@ function AddAdmissions(){
             }
       };
       fetchData();
-  },[]);
+  },[roomNumber]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,6 +104,7 @@ function AddAdmissions(){
               onChange={handleChanges}
               required
               value={values.room_id}
+              disabled={!!roomNumber}
               >
               <option value="" disabled>Select Room</option>
               {rooms.map((room)=>(
