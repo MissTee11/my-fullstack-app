@@ -171,6 +171,39 @@
  }
 
 @media screen and (max-width:767px){
+    .MainContent{
+        margin-left: 90px
+    }
+    .AddUpdateForm{
+        width: 95%;
+    }
+    .AddUpdateForm label{
+        font-size: 1.2rem;
+    }
+    .Buttons{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .SaveBtn{
+        width:100%
+    }
+    .ResetBtn{
+        width: 100%;
+        margin-left: 0;
+    }
+    .LoginForm{
+        width: 90%;
+    }
+    .LoginForm input{
+        padding: 15px;
+        font-size: 1.5rem;
+    }
+    .LoginBtn{
+        font-size: 1.5rem;
+    }
+    .popup{
+        font-size: 1.2rem;
+    }
     
 }
 
