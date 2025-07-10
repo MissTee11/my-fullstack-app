@@ -80,7 +80,14 @@
 /**************************************************************************************/
 /*ADD, SAVE, DELETE, UPDATE*/
 .AddBtn{
-    
+    background-color: #263859;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px;
+    border: none;
+}
+.BackBtn{
     background-color: #263859;
     color: white;
     padding: 15px;
@@ -139,7 +146,7 @@
 /**************************************************************************************/
 .AddUpdateForm{
     position: relative;
-    top:100px;
+    top:30px;
     display: flex;
     flex-direction: column;
     justify-self: center;

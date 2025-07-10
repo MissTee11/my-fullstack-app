@@ -3,6 +3,7 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createDoctor, getSpecialties } from '../api';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 function AddDoctor(){
@@ -67,6 +68,9 @@ function AddDoctor(){
             <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'> Doctor Registration</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Doctors')}><IoMdArrowRoundBack/>Back</button>
+
             <form onSubmit={handleSubmit} className="AddUpdateForm">
 
               <label htmlFor="first_name" > First Name</label>

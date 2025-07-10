@@ -30,11 +30,19 @@ function Rooms(){
     
     
 
-    const handleMakeAdmission= async (availability_status, event,row)=>{
+    const handleMakeAdmission= async (availability_status,room_type, event,row)=>{
       if (event) event.preventDefault();
 
         if(availability_status !=="Available"){
             setMessageText("ROOM IN USE");
+
+            setTimeout(() => {
+                setMessageText("");
+            }, 3000)
+
+        }
+        else if(room_type !== "general" && room_type !== "private"){
+          setMessageText("Admissions only allowed to general or private rooms");
 
             setTimeout(() => {
                 setMessageText("");
@@ -64,7 +72,7 @@ function Rooms(){
           name: 'Actions',
           cell: row => (
             <div >
-              <button className="UpdateBtn" onClick={(e)=>handleMakeAdmission(row.availability_status,e, row)}><RiCalendarScheduleFill/>Admit Patient</button>
+              <button className="UpdateBtn" onClick={(e)=>handleMakeAdmission(row.availability_status,row.room_type, e, row)}><RiCalendarScheduleFill/>Admit Patient</button>
              
          </div>
           ),

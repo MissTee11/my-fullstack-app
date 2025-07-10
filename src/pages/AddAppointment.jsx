@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
 import { createAppointment, getDoctors, getPatients} from '../api';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AddAppointments(){
 
@@ -77,6 +78,8 @@ function AddAppointments(){
             <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'> Appointment Registration</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Appointments')}><IoMdArrowRoundBack/>Back</button>
 
             <form onSubmit={handleSubmit} className="AddUpdateForm">
             

@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
 import { createPayment, getPatients } from '../api';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AddPayment(){
 
@@ -73,6 +74,9 @@ function AddPayment(){
             <Sidebar/>
             <div className="MainContent">
                 <h1 className='PageHeader'> Payment Record Details</h1>
+
+                <button className="BackBtn" type="button" onClick={() => navigate('/Payments')}><IoMdArrowRoundBack/>Back</button>
+
                 <form onSubmit={handleSubmit} className="AddUpdateForm">
 
               <label htmlFor="patient_id">Select Patient</label>
