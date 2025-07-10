@@ -3,6 +3,7 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createStaff, getDepartments, getRoles } from '../api';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AddStaff(){
 
@@ -71,6 +72,8 @@ function AddStaff(){
              <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'> Staff Registration</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Staff')}><IoMdArrowRoundBack/>Back</button>
 
             <form onSubmit={handleSubmit} className="AddUpdateForm">
               

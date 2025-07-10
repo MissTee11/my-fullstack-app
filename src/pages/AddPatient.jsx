@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createPatient } from '../api';
 import { formatDateInput } from '../utilities/DateFormat';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AddPatient(){
 
@@ -56,6 +57,8 @@ function AddPatient(){
         <div className="MainContent">
 
             <h1 className='PageHeader'> Patient Registration</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Patients')}><IoMdArrowRoundBack/>Back</button>
 
             <form onSubmit={handleSubmit} className="AddUpdateForm">
               

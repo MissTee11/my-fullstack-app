@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { createRecord, getDoctors, getSinglePatient} from '../api';
 import { formatDateInput } from '../utilities/DateFormat';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AddRecord(){
     const navigate=useNavigate();
@@ -81,6 +82,9 @@ return(
     <div className="MainContent">
       
         <h1 className='PageHeader'>Medical Record</h1>
+
+        <button className="BackBtn" type="button" onClick={() => navigate('/MedicalRecord')}><IoMdArrowRoundBack/>Back</button>
+
         <form onSubmit={handleSubmit} className="AddUpdateForm">
     
               <label htmlFor="patient_id" >Patient_id</label>
