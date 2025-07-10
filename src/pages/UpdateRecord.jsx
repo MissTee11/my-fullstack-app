@@ -72,6 +72,9 @@ return(
     <div className="MainContent">
       
         <h1 className='PageHeader'>Medical Record</h1>
+
+        <button className="BackBtn" type="button" onClick={() => navigate(`/MedicalRecord/${values.patient_id}`)}><IoMdArrowRoundBack/>Back</button>
+
         <form onSubmit={handleSubmit} className="AddUpdateForm">
         
               <label htmlFor="record_id" >Record_ID</label>
