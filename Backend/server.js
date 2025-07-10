@@ -327,9 +327,6 @@ app.get('/api/roles',async(req, res) =>{
   
 });
 
-/*No two patıents must be admıtted ınto the same room
-The same room must not me assıgned to two dıfferent patıents */
-
 //Get rooms
 app.get('/api/rooms',async(req, res) =>{
   try{
@@ -527,6 +524,9 @@ app.post('/api/appointments', async(req,res)=>{
           if(err.constraint === 'unique_doctor_datetime'){
             return res.status(400).json({ error: 'Doctor already has an appointment at this date and time.'})
           }
+          else if( err.constraint ==='unique_patient_datetime'){
+            return res.status(400).json({error: 'Patient already has an appointment at this date and time.'})
+          }
         }
         
         res.status(500).json({error: 'Failed to add appointment'});
@@ -607,10 +607,12 @@ app.put('/api/appointments/:id', async(req,res)=>{
        res.json({ message: 'Appointment updated successfully' });
     } catch (err) {
           console.error(err);
-
           if(err.code === '23505'){
           if(err.constraint === 'unique_doctor_datetime'){
             return res.status(400).json({ error: 'Doctor already has an appointment at this date and time.'})
+          }
+          else if( err.constraint ==='unique_patient_datetime'){
+            return res.status(400).json({error: 'Patient already has an appointment at this date and time.'})
           }
         }
         
