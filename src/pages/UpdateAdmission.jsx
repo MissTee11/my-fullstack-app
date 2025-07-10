@@ -81,6 +81,9 @@ function UpdateAdmissions(){
             <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'>Admission Update Form</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Admissions')}><IoMdArrowRoundBack/>Back</button>
+            
             <form onSubmit={handleSubmit} className="AddUpdateForm">
              
               <label htmlFor="patient_id">Select Patient</label>

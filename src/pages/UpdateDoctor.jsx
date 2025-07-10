@@ -71,6 +71,9 @@ function UpdateDoctor(){
             <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'> Doctor Update Form</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Doctors')}><IoMdArrowRoundBack/>Back</button>
+            
             <form onSubmit={handleSubmit} className="AddUpdateForm">
 
               <label htmlFor="first_name" > First Name</label>

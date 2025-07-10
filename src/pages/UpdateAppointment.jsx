@@ -84,6 +84,8 @@ function UpdateAppointments(){
             <div className="MainContent">
             <h1 className='PageHeader'> Appointment Update Form</h1>
 
+            <button className="BackBtn" type="button" onClick={() => navigate('/Appointments')}><IoMdArrowRoundBack/>Back</button>
+
             <form onSubmit={handleSubmit} className="AddUpdateForm">
                 
                 <label htmlFor="appointment_date" >Appointment Date</label>

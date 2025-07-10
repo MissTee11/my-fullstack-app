@@ -78,6 +78,9 @@ function UpdatePayment(){
             <Sidebar/>
             <div className="MainContent">
                 <h1 className='PageHeader'> Payment Update Form</h1>
+
+                <button className="BackBtn" type="button" onClick={() => navigate('/Payments')}><IoMdArrowRoundBack/>Back</button>
+
                 <form onSubmit={handleSubmit} className="AddUpdateForm">
             
               <label htmlFor="patient_id">Select Patient</label>

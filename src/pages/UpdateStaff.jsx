@@ -74,6 +74,9 @@ function UpdateStaff(){
              <Sidebar/>
             <div className="MainContent">
             <h1 className='PageHeader'> Staff Update Form</h1>
+
+            <button className="BackBtn" type="button" onClick={() => navigate('/Staff')}><IoMdArrowRoundBack/>Back</button>
+            
             <form onSubmit={handleSubmit} className="AddUpdateForm">
              
               <label htmlFor="first_name" >Name</label>
