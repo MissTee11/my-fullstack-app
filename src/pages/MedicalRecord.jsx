@@ -12,6 +12,7 @@ import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getMedicalRecord, deleteRecord } from '../api';
 import { formatDateInput } from "../utilities/DateFormat";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function MedicalRecord(){
 
@@ -85,9 +86,14 @@ return (
     <div>
         <Sidebar/>
         <div className="MainContent">
+        <Link to={'/Patients'}>
+        <button className="BackBtn"><IoMdArrowRoundBack/>Back </button>
+        </Link>
         <Link to={`/AddRecord/${id}`}>
         <button className="AddBtn"><IoMdAdd />Add Medical Record </button>
         </Link>
+        
+
 
       <DataTable
       columns={columns}

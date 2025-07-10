@@ -83,7 +83,7 @@ return(
       
         <h1 className='PageHeader'>Medical Record</h1>
 
-        <button className="BackBtn" type="button" onClick={() => navigate('/MedicalRecord')}><IoMdArrowRoundBack/>Back</button>
+        <button className="BackBtn" type="button" onClick={() => navigate(`/MedicalRecord/${values.patient_id}`)}><IoMdArrowRoundBack/>Back</button>
 
         <form onSubmit={handleSubmit} className="AddUpdateForm">
     
