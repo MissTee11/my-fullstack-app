@@ -327,6 +327,9 @@ app.get('/api/roles',async(req, res) =>{
   
 });
 
+/*No two patıents must be admıtted ınto the same room
+The same room must not me assıgned to two dıfferent patıents */
+
 //Get rooms
 app.get('/api/rooms',async(req, res) =>{
   try{
