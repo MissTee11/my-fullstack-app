@@ -10,12 +10,14 @@ import { getPatients, deletePatient } from '../api';
 import { formatDateInput } from "../utilities/DateFormat";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
+import SearchBar from '../components/SearchBar';
 import './Pages.css';
 
 function Patients(){
 
     const[patients, setPatients] = useState([]);
     const[messageText, setMessageText] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(()=>{
       const fetchPatients = async()=>{
@@ -98,6 +100,14 @@ function Patients(){
     
       ];
 
+      const filteredPatients = patients.filter(patient => {
+        return (
+          patient.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.city.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
     return(
     <div>
 
@@ -106,10 +116,16 @@ function Patients(){
           <Link to="/AddPatient">
             <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Patient </button>
           </Link>
+
+          <SearchBar
+          value={searchQuery}
+          onChange={(e)=> setSearchQuery(e.target.value)}
+          placeholder='Search by Name or City'
+          />
             
         <DataTable
           columns={columns}
-          data={patients}
+          data={filteredPatients}
           customStyles={customStyles}
           theme="myCustomTheme"
           responsive>

@@ -69,6 +69,18 @@
 .icon{
     padding-right:20px;
 }
+.SearchBar {
+    padding: 15px;
+    font-size: 0.9rem;
+    width: 80%;
+    border-radius: 8px;
+    border: solid 1px;
+    color: #263859;
+    margin-left: 10px;
+}
+.SearchBar:hover{
+ border-color: #17223B;
+}
 @media screen and (max-width:767px){
     .sidebar-text{
         display: none;
@@ -79,6 +91,11 @@
     .LogoutBtn{
         width: 60px;
         left:15px;
+    }
+    .SearchBar{
+        width: 90%;
+        margin-left: 5px;
+        font-size: 1rem;
     }
     
 }

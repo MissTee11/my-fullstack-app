@@ -84,7 +84,7 @@
     color: white;
     padding: 15px;
     border-radius: 12px;
-    margin: 15px;
+    margin: 10px;
     border: none;
 }
 .BackBtn{
@@ -197,6 +197,9 @@
     .ResetBtn{
         width: 100%;
         margin-left: 0;
+    }
+    .AddBtn{
+        margin: 15px 5px;
     }
     .LoginForm{
         width: 90%;

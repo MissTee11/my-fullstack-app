@@ -13,11 +13,13 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getMedicalRecord, deleteRecord } from '../api';
 import { formatDateInput } from "../utilities/DateFormat";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import SearchBar from '../components/SearchBar';
 
 function MedicalRecord(){
 
 const [medicalRecords, setMedicalRecords] = useState([]);
 const[messageText, setMessageText]= useState("");
+const [searchQuery, setSearchQuery] = useState('');
 const {id} = useParams();
 
  useEffect(()=>{
@@ -82,6 +84,15 @@ const {id} = useParams();
     },
 ];
 
+ const filteredMedicalRecord = medicalRecords.filter(medicalRecord => {
+        return (
+          medicalRecord.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          medicalRecord.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          medicalRecord.diagnosis.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
+
 return (
     <div>
         <Sidebar/>
@@ -93,11 +104,16 @@ return (
         <button className="AddBtn"><IoMdAdd />Add Medical Record </button>
         </Link>
         
+        <SearchBar
+              value={searchQuery}
+              onChange={(e)=> setSearchQuery(e.target.value)}
+              placeholder='Search by Doctor Name or Diagnosis'
+          />
 
 
       <DataTable
       columns={columns}
-      data={medicalRecords}
+      data={filteredMedicalRecord}
       customStyles={customStyles}
       theme="myCustomTheme">
       </DataTable>

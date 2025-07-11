@@ -9,11 +9,13 @@ import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getDoctors, deleteDoctor } from '../api';
 import { useEffect, useState } from 'react';
+import SearchBar from '../components/SearchBar';
 
 function Doctors(){
 
   const[doctors, setDoctors] = useState([]);
   const[messageText, setMessageText]=useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(()=>{
     const fetchDoctors = async()=>{
@@ -80,6 +82,15 @@ function Doctors(){
         },
       ];
 
+      
+      const filteredDoctors = doctors.filter(doctor => {
+        return (
+          doctor.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          doctor.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          doctor.specialty_name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
     return(
         <div>
           <Sidebar/>
@@ -88,11 +99,16 @@ function Doctors(){
               <Link to="/AddDoctor">
               <button className="AddBtn" ><IoPersonAddSharp className="iconBtn"/> Register New Doctor </button>
               </Link>
-           
-        
+
+              <SearchBar
+              value={searchQuery}
+              onChange={(e)=> setSearchQuery(e.target.value)}
+              placeholder='Search by Doctor Name or Specialty'
+              />
+      
                   <DataTable
                   columns={columns}
-                  data={doctors}
+                  data={filteredDoctors}
                   theme="myCustomTheme"
                   customStyles={customStyles}
                   responsive

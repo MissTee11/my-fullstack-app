@@ -3,6 +3,7 @@ import './Pages.css';
 import React,{useState,useEffect} from 'react';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { getSingleDoctor, getSpecialties, updateDoctor } from '../api';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 function UpdateDoctor(){
