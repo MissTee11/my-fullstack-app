@@ -14,6 +14,8 @@ function Rooms(){
     const [messageText, setMessageText] =useState("");
     const navigate = useNavigate();
     const [rooms, setRooms]= useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    
 
     useEffect(()=>{
      const fetchRooms = async () => {
@@ -81,11 +83,10 @@ function Rooms(){
     
       ];
 
-       const filteredPatients = patients.filter(patient => {
+       const filteredRooms = rooms.filter(room => {
         return (
-          patient.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          patient.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          patient.city.toLowerCase().includes(searchQuery.toLowerCase())
+          room.availability_status.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          room.room_type.toLowerCase().includes(searchQuery.toLowerCase()) 
         );
       });
 
@@ -93,10 +94,19 @@ function Rooms(){
     return(
         <div>
             <Sidebar/>
-             <div className="MainContent">          
+             <div className="MainContent"> 
+              <h1 className='PageHeader'>Rooms</h1>
+
+            <SearchBar
+            value={searchQuery}
+            onChange={(e)=> setSearchQuery(e.target.value)}
+            placeholder='Search by availability status or room type'
+            />
+
+                  
             <DataTable
             columns={columns}
-            data={rooms}
+            data={filteredRooms}
             customStyles={customStyles}
             theme="myCustomTheme"
             responsive>
