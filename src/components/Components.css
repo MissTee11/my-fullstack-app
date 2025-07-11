@@ -77,6 +77,7 @@
     border: solid 1px;
     color: #263859;
     margin-left: 10px;
+    margin-top: 10px;
 }
 .SearchBar:hover{
  border-color: #17223B;

@@ -15,7 +15,8 @@ function Staff(){
 
   const[staff, setStaff]=useState([]);
   const[messageText, setMessageText]= useState("");
-
+  const [searchQuery, setSearchQuery] = useState('');
+  
   useEffect(()=>{
       const fetchStaff = async()=>{
         try{
@@ -83,11 +84,11 @@ function Staff(){
     
       ];
 
-       const filteredPatients = patients.filter(patient => {
+       const filteredStaff = staff.filter(staff => {
         return (
-          patient.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          patient.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          patient.city.toLowerCase().includes(searchQuery.toLowerCase())
+          staff.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          staff.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          staff.role_name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       });
 
@@ -100,10 +101,16 @@ function Staff(){
           <Link to="/AddStaff">
           <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Staff </button>
           </Link>
+
+          <SearchBar
+            value={searchQuery}
+            onChange={(e)=> setSearchQuery(e.target.value)}
+            placeholder='Search by availability name or role'
+            />
         
         <DataTable
         columns={columns}
-        data={staff}
+        data={filteredStaff}
         customStyles={customStyles}
         theme="myCustomTheme"
         responsive
