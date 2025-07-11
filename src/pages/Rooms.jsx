@@ -8,6 +8,7 @@ import './Pages.css';
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getRooms } from "../api";
+import SearchBar from '../components/SearchBar';
 function Rooms(){
 
     const [messageText, setMessageText] =useState("");
@@ -79,6 +80,15 @@ function Rooms(){
         },
     
       ];
+
+       const filteredPatients = patients.filter(patient => {
+        return (
+          patient.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.city.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
 
     return(
         <div>

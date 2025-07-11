@@ -10,11 +10,13 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getAdmission, deleteAdmission } from "../api";
 import { useState, useEffect } from "react";
 import { formatDateInput } from '../utilities/DateFormat';
+import SearchBar from '../components/SearchBar';
 import './Pages.css';
 
 function Admissions(){
   const[admissions, setAdmissions] = useState([]);
   const[messageText, setMessageText]= useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(()=>{
     const fetchAdmissions = async()=>{
@@ -83,6 +85,15 @@ function Admissions(){
       
         ];
 
+         const filteredAdmissions = admissions.filter(admission => {
+        return (
+          admission.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          admission.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          admission.room_number.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
+
       return(
         <div>
         <Sidebar/>
@@ -90,10 +101,16 @@ function Admissions(){
         <Link to="/AddAdmissions">
         <button className="AddBtn " ><FaBed className="iconBtn"/> Admit Patient </button>
         </Link>
+
+         <SearchBar
+          value={searchQuery}
+          onChange={(e)=> setSearchQuery(e.target.value)}
+          placeholder='Search by Patient Name or Room Number'
+          />
         
         <DataTable
         columns={columns}
-        data={admissions}
+        data={filteredAdmissions}
         customStyles={customStyles}
         theme="myCustomTheme">
         </DataTable>

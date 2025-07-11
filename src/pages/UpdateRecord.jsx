@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate, useParams} from 'react-router-dom';
 import { getSingleRecord, updateRecord } from '../api';
 import { formatDateInput } from '../utilities/DateFormat';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function UpdateRecord(){
     const navigate=useNavigate();

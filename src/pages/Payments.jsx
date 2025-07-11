@@ -10,11 +10,13 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import { formatDateInput } from '../utilities/DateFormat';
 import { getPayment, deletePayment } from "../api";
 import './Pages.css';
+import SearchBar from '../components/SearchBar';
 
 function Payments(){
 
     const[payments, setPayments] = useState([]);
     const[messageText, setMessageText]= useState("");
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(()=>{
       const fetchPayments = async()=>{
@@ -87,6 +89,15 @@ function Payments(){
         
           ];
 
+           const filteredPayments = payments.filter(payment => {
+        return (
+          payment.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          payment.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          payment.status.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
+
            return(
             <div>
                 <Sidebar/>
@@ -94,10 +105,16 @@ function Payments(){
             <Link to="/AddPayment">
             <button className="AddBtn"><IoMdAdd />Record New Payment </button>
             </Link>
+
+            <SearchBar
+            value={searchQuery}
+            onChange={(e)=> setSearchQuery(e.target.value)}
+            placeholder='Search by Patient Name or Payment Status'
+            />
           
             <DataTable
             columns={columns}
-            data={payments}
+            data={filteredPayments}
             customStyles={customStyles}
             theme="myCustomTheme">
             </DataTable>

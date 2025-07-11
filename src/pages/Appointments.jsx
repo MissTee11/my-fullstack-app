@@ -9,12 +9,14 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import { formatDateInput } from '../utilities/DateFormat';
 import { getAppointment, deleteAppointment } from "../api";
 import { useState, useEffect } from "react";
+import SearchBar from '../components/SearchBar';
 import './Pages.css';
 
 function Appointments(){
 
   const[appointments, setAppointments]= useState([]);
   const[messageText, setMessageText]= useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(()=>{
       const fetchAppointments = async()=>{
@@ -88,6 +90,16 @@ function Appointments(){
     
       ];
 
+       const filteredAppointments = appointments.filter(appointment => {
+        return (
+          appointment.patient_first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          appointment.patient_last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          appointment.doctor_first_name.toLowerCase().includes(searchQuery.toLowerCase())||
+          appointment.doctor_last_name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
+
       return(
         <div>
         <Sidebar/>
@@ -95,10 +107,16 @@ function Appointments(){
           <Link to="/AddAppointment">
           <button className="AddBtn " ><RiCalendarScheduleFill className="iconBtn"/> Make Appointment </button>
           </Link>
+
+          <SearchBar
+          value={searchQuery}
+          onChange={(e)=> setSearchQuery(e.target.value)}
+          placeholder='Search by Patient or Doctor Name'
+          />
       
         <DataTable
         columns={columns}
-        data={appointments}
+        data={filteredAppointments}
         customStyles={customStyles}
         theme="myCustomTheme">
         </DataTable>

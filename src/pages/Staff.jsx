@@ -8,6 +8,7 @@ import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getStaff, deleteStaff } from "../api";
 import { useState, useEffect } from "react";
+import SearchBar from '../components/SearchBar';
 import './Pages.css';
 
 function Staff(){
@@ -81,6 +82,15 @@ function Staff(){
         },
     
       ];
+
+       const filteredPatients = patients.filter(patient => {
+        return (
+          patient.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          patient.city.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
 
     return(
         <div>
