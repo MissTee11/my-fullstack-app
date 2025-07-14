@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import patientReducer from '../src/features/patientSlice';
-import doctorReducer from '../src/features/doctorSlice';
-import staffReducer from '../src/features/staffSlice';
-import appointmentReducer from '../src/features/appointmentSlice';
+import patientReducer from './slices/patientSlice';
+import doctorReducer from './slices/doctorSlice';
+import staffReducer from './slices/staffSlice';
+import appointmentReducer from './slices/appointmentSlice';
 
 const store = configureStore({
     reducer: {
