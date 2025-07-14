@@ -20,4 +20,4 @@ const staffSlice= createSlice({
         });
     },
 });
-export default fetchStaff.reducer;
+export default staffSlice.reducer;
