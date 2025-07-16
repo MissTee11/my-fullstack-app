@@ -6,6 +6,7 @@ import { getSinglePatient, updatePatient } from '../api';
 import { formatDateInput } from '../utilities/DateFormat';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDispatch } from 'react-redux'
+import { fetchPatients } from '../redux/slices/patientSlice';
 
 
 
@@ -13,7 +14,8 @@ function UpdatePatient(){
 
     const{id} = useParams();
     const navigate = useNavigate();
-    const[messageText, setMessageText]=useState("")
+    const[messageText, setMessageText]=useState("");
+    const dispatch= useDispatch();
 
     const[values, setValues]= useState({
       first_name: '',
@@ -52,6 +54,7 @@ function UpdatePatient(){
     e.preventDefault();
     try {
       await updatePatient(id, values);
+      dispatch(fetchPatients());
       setMessageText("Patient updated successfully!")
 
       setTimeout(()=>{

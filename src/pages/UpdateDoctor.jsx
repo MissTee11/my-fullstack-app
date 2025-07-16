@@ -5,6 +5,7 @@ import {  useNavigate, useParams } from 'react-router-dom';
 import { getSingleDoctor, getSpecialties, updateDoctor } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDispatch } from 'react-redux'
+import { fetchDoctors } from '../redux/slices/doctorSlice';
 
 
 function UpdateDoctor(){
@@ -13,7 +14,8 @@ function UpdateDoctor(){
 
   const navigate = useNavigate();
   const [specialties, setSpecialties] = useState([]);
-  const[messageText, setMessageText]=useState("")
+  const[messageText, setMessageText]=useState("");
+  const dispatch= useDispatch();
 
   const [values, setValues] = useState({
         first_name: '',
@@ -55,6 +57,7 @@ function UpdateDoctor(){
             const updatedValues = { ...values, specialty: parseInt(values.specialty) };//backend expects integer
 
             await updateDoctor(id, updatedValues);
+            dispatch(fetchDoctors());
             setMessageText("Doctor updated successfully!")
            
             setTimeout(()=>{
