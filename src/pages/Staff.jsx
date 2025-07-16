@@ -10,13 +10,15 @@ import { getStaff, deleteStaff } from "../api";
 import { useState, useEffect } from "react";
 import SearchBar from '../components/SearchBar';
 import './Pages.css';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { fetchStaff } from "../redux/slices/staffSlice";
 
 function Staff(){
 
   const[staff, setStaff]=useState([]);
   const[messageText, setMessageText]= useState("");
   const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
   
   useEffect(()=>{
       const fetchStaff = async()=>{
@@ -37,6 +39,7 @@ function Staff(){
           try {
             await deleteStaff(id);
             setStaff(staff.filter(s => s.staff_id !== id));
+            dispatch(fetchStaff());
       
             setMessageText("Staff member deleted successfully!");
             setTimeout(() => setMessageText(""), 3000);
@@ -44,7 +47,7 @@ function Staff(){
             catch (err) {
             console.error("Error deleting staff member:", err);
       
-            setMessageText("Failed to delete staff memmber. Please try again.");
+            setMessageText("Failed to delete staff member. Please try again.");
             setTimeout(() => setMessageText(""), 3000);
             }
           }

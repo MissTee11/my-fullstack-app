@@ -18,6 +18,7 @@ function Appointments(){
   const[appointments, setAppointments]= useState([]);
   const[messageText, setMessageText]= useState("");
   const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(()=>{
       const fetchAppointments = async()=>{
@@ -38,6 +39,7 @@ function Appointments(){
         try {
               await deleteAppointment(id);
               setAppointments(appointments.filter(a => a.appointment_id !== id));
+              dispatch(fetchAppointments());
           
               setMessageText("Appointment deleted successfully!");
               setTimeout(() => setMessageText(""), 3000);
