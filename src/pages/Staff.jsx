@@ -10,6 +10,7 @@ import { getStaff, deleteStaff } from "../api";
 import { useState, useEffect } from "react";
 import SearchBar from '../components/SearchBar';
 import './Pages.css';
+import { useDispatch } from 'react-redux'
 
 function Staff(){
 

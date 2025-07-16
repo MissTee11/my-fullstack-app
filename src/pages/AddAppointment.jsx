@@ -5,6 +5,8 @@ import {  useNavigate } from 'react-router-dom';
 import { formatDateInput } from '../utilities/DateFormat';
 import { createAppointment, getDoctors, getPatients} from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from 'react-redux'
+import { fetchTodaysAppointments } from '../redux/slices/appointmentSlice';
 
 function AddAppointments(){
 
@@ -13,6 +15,7 @@ function AddAppointments(){
     const [messageText, setMessageText] = useState("");
     const[ patients, setPatients] = useState([]);
     const[doctors, setDoctors] = useState([]);
+    const dispatch = useDispatch();
 
     const [values, setValues] = useState({
       appointment_date: '',
@@ -42,6 +45,7 @@ function AddAppointments(){
         e.preventDefault();
         try{
             await createAppointment(values);
+            dispatch(fetchTodaysAppointments());
             setMessageText("Appointment added successfully!");
         
             setTimeout(() => {
