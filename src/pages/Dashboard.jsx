@@ -12,7 +12,7 @@ function Dashboard(){
 
     const doctorTotal = useSelector((state) => state.doctors.total);
     const patientTotal = useSelector((state) => state.patients.total);
-    const staffTotal = useSelector((state) => state.doctors.total);
+    const staffTotal = useSelector((state) => state.staff.total);
     const appointmentToday = useSelector((state) => state.appointments.todayTotal);
 
     useEffect(()=>{
@@ -26,28 +26,35 @@ function Dashboard(){
 
         <div>
             <Sidebar/>
-            
-            <div className='DashBoard' >
+
+            <div className='MainContent'>
+
                 <div className='CardContainer'>
-
                     <div className='Card'>
-                        <p>Total Patients: {patientTotal}</p>
+                        <p>Total Patients: </p>
+                        <p>{patientTotal}</p>
                     </div>
 
                     <div className='Card'>
-                        <p>Total Doctors: {doctorTotal}</p>
+                        <p>Total Doctors:</p>
+                        <p> {doctorTotal}</p>
                     </div>
 
                     <div className='Card'>
-                        <p>Total Staff: {staffTotal}</p>
+                        <p>Total Staff:</p>
+                        <p>{staffTotal}</p>
                     </div>
 
                     <div className='Card'>
-                        <p>Appointments Today: {appointmentToday}</p>
+                        <p>Appointments Today: </p>
+                        <p>{appointmentToday}</p>
                     </div>
                 </div>
             
             </div>
+
+            
+           
           
         </div>
     )

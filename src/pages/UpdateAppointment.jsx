@@ -6,7 +6,7 @@ import { formatDateInput } from '../utilities/DateFormat';
 import { getSingleAppointment, getDoctors, getPatients, updateAppointment } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDispatch } from 'react-redux'
-import {fetchTodaysAppointment} from '../redux/slices/appointmentSlice';
+import {fetchTodaysAppointments} from '../redux/slices/appointmentSlice';
 
 function UpdateAppointments(){
 
@@ -51,7 +51,7 @@ function UpdateAppointments(){
         e.preventDefault();
         try{
             await updateAppointment(id, values);
-            dispatch(fetchTodaysAppointment());
+            dispatch(fetchTodaysAppointments());
             setMessageText("Appointment updated successfully!");
         
             setTimeout(() => {
