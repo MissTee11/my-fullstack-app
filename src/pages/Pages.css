@@ -75,7 +75,34 @@
 
 }
 /**************************************************************************************/
-/*ADD AND UPDATE FORMS*/
+/*DASHBOARD*/
+.CardContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
+    padding: 10px;
+}
+.Card, .Card1{
+    border: solid 1px #263859;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 20%;
+}
+.Card{
+ color: #17223B;
+}
+.Card1{
+    color: white;
+    background-color: #17223B;
+}
+.TotalLabel{
+    font-size: 1.5rem;
+}
+.count{
+    font-weight: 900;
+    font-size: 2rem;
+}
 
 /**************************************************************************************/
 /*ADD, SAVE, DELETE, UPDATE*/

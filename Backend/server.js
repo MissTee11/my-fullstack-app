@@ -580,6 +580,39 @@ app.get('/api/appointments', async(req,res)=>{
     }
   });
 
+  //Get appointments by date
+  app.get('/api/appointments/date/:date', async (req, res) => {
+  const { date } = req.params;
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        appointments.id,
+        patient_person.first_name AS patient_first_name,
+        patient_person.last_name AS patient_last_name,
+        doctor_person.first_name AS doctor_first_name,
+        doctor_person.last_name AS doctor_last_name,
+        appointments.appointment_date,
+        appointments.time
+      FROM appointments
+      LEFT JOIN patient ON appointments.patient_id = patient.id
+      LEFT JOIN person AS patient_person ON patient.person_id = patient_person.id
+      LEFT JOIN doctor ON appointments.doctor_id = doctor.id
+      LEFT JOIN person AS doctor_person ON doctor.person_id = doctor_person.id
+      WHERE appointments.appointment_date = $1
+      ORDER BY appointments.time ASC;
+      `,
+      [date]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch appointments for date" });
+  }
+});
+
+
+
 
 //Get one appointment
 app.get('/api/appointments/:id', async(req,res)=>{

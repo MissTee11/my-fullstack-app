@@ -30,7 +30,7 @@
     padding: 0;
 }
 
-.sidebar-list ul, li, a{
+.sidebar-list ul,.sidebar-list li,.sidebar-list a{
     color: white;
     text-decoration: none;
     list-style: none;
@@ -82,6 +82,7 @@
 .SearchBar:hover{
  border-color: #17223B;
 }
+
 @media screen and (max-width:767px){
     .sidebar-text{
         display: none;
