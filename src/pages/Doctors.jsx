@@ -11,12 +11,14 @@ import { getDoctors, deleteDoctor } from '../api';
 import { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import { useDispatch } from 'react-redux'
+import { fetchDoctors } from '../redux/slices/doctorSlice';
 
 function Doctors(){
 
   const[doctors, setDoctors] = useState([]);
   const[messageText, setMessageText]=useState("");
   const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     const fetchDoctors = async()=>{
@@ -36,6 +38,7 @@ function Doctors(){
           try {
           await deleteDoctor(id);
           setDoctors(doctors.filter(d => d.doctor_id !== id));
+          dispatch(fetchDoctors());
   
           setMessageText("Doctor deleted successfully!");
           setTimeout(() => setMessageText(""), 3000);

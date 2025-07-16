@@ -13,12 +13,14 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import SearchBar from '../components/SearchBar';
 import { useDispatch } from 'react-redux'
 import './Pages.css';
+import { fetchPatients } from '../redux/slices/patientSlice';
 
 function Patients(){
 
     const[patients, setPatients] = useState([]);
     const[messageText, setMessageText] = useState("");
     const [searchQuery, setSearchQuery] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(()=>{
       const fetchPatients = async()=>{
@@ -38,6 +40,7 @@ function Patients(){
         try {
         await deletePatient(id);
         setPatients(patients.filter(p => p.patient_id !== id));
+        dispatch(fetchPatients());
 
         setMessageText("Patient deleted successfully!");
         setTimeout(() => setMessageText(""), 3000);
