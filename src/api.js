@@ -58,6 +58,7 @@ export const createStaff=(staffData)=> axios.post(`${API_BASE_URL}/staff`, staff
 
 /*APPOINTMENTS*/
 export const getAppointment = () => axios.get(`${API_BASE_URL}/appointments`);
+export const getAppointmentsByDate= (date)=>axios.get(`${API_BASE_URL}/appointments/date/${date}`)
 export const getTodaysAppointments = () => axios.get(`${API_BASE_URL}/appointments/today`);
 export const getSingleAppointment =(id)=> axios.get(`${API_BASE_URL}/appointments/${id}`);
 export const updateAppointment= (id, appData) => axios.put(`${API_BASE_URL}/appointments/${id}`, appData)
