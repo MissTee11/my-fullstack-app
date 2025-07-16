@@ -5,11 +5,14 @@ import {  useNavigate } from 'react-router-dom';
 import { createPatient } from '../api';
 import { formatDateInput } from '../utilities/DateFormat';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from 'react-redux'
+import { fetchPatients } from '../redux/slices/patientSlice';
 
 function AddPatient(){
 
   const [messageText, setMessageText] =useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const[values, setValues]= useState({
       first_name: '',
@@ -33,6 +36,7 @@ function AddPatient(){
     e.preventDefault();
     try{
       await createPatient(values);
+      dispatch(fetchPatients());
       setMessageText("Patient added successfully!");
 
       setTimeout(() => {

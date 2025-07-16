@@ -4,6 +4,8 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createStaff, getDepartments, getRoles } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from 'react-redux'
+import { fetchStaff } from '../redux/slices/staffSlice';
 
 function AddStaff(){
 
@@ -11,6 +13,7 @@ function AddStaff(){
   const[roles, setRoles]= useState([]);
   const[department, setDepartment] = useState([]);
   const[messageText, setMessageText]=useState("");
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState({
       first_name: '',
@@ -49,6 +52,7 @@ function AddStaff(){
       e.preventDefault();
       try{
           await createStaff(values);
+          dispatch(fetchStaff());
           setMessageText("Staff member added successfully!");
       
           setTimeout(()=>{

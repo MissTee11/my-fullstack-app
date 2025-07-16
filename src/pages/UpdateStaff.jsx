@@ -4,6 +4,7 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate, useParams} from 'react-router-dom';
 import { getSingleStaff, getRoles, getDepartments,updateStaff } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from 'react-redux'
 
 function UpdateStaff(){
 
@@ -12,6 +13,7 @@ function UpdateStaff(){
   const[roles, setRoles]=useState([]);
   const[department, setDepartment]=useState([]);
   const [messageText,setMessageText]=useState("");
+   const dispatch = useDispatch();
 
     const [values, setValues] = useState({
         first_name: '',

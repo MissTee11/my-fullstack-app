@@ -4,12 +4,15 @@ import React,{useState,useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { createDoctor, getSpecialties } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from 'react-redux'
+import { fetchDoctors } from '../redux/slices/doctorSlice';
 
 
 function AddDoctor(){
   const navigate = useNavigate();
   const [specialties, setSpecialties] = useState([]);
   const[ messageText, setMessageText] = useState("");
+  const dispatch = useDispatch();
 
   const [values, setValues] = useState({
         first_name: '',
@@ -46,6 +49,7 @@ function AddDoctor(){
 
       try{
         await createDoctor(values);
+        dispatch(fetchDoctors());
         setMessageText("Doctor added successfuly!");
 
         setTimeout(()=>{

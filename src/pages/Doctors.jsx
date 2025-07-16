@@ -10,6 +10,7 @@ import { myCustomTheme } from "../utilities/dataTableTheme";
 import { getDoctors, deleteDoctor } from '../api';
 import { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
+import { useDispatch } from 'react-redux'
 
 function Doctors(){
 

@@ -11,6 +11,7 @@ import { formatDateInput } from "../utilities/DateFormat";
 import { customStyles } from "../utilities/dataTableCustomStyles";
 import { myCustomTheme } from "../utilities/dataTableTheme";
 import SearchBar from '../components/SearchBar';
+import { useDispatch } from 'react-redux'
 import './Pages.css';
 
 function Patients(){
