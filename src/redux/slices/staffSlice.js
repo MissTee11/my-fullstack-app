@@ -2,8 +2,8 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getStaff } from '../../api';
 
 export const fetchStaff = createAsyncThunk('staff/fetchStaff', async ()=>{
-    const data = await getStaff();
-    return data;
+    const res = await getStaff();
+    return res.data;
 });
 
 const staffSlice= createSlice({

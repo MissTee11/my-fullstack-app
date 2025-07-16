@@ -2,8 +2,8 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getDoctors } from '../../api';
 
 export const fetchDoctors = createAsyncThunk('doctors/fetchDoctors', async ()=>{
-    const data = await getDoctors();
-    return data;
+    const res = await getDoctors();
+    return res.data;
 });
 
 const doctorSlice= createSlice({

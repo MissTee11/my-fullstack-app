@@ -1,22 +1,22 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { getAppointment } from '../../api';
+import { getTodaysAppointments } from '../../api';
 
-export const fetchAppointments = createAsyncThunk('appointments/fetchAppointments', async ()=>{
-    const data = await getAppointment();
-    return data;
+export const fetchTodaysAppointments = createAsyncThunk('appointments/fetchTodaysAppointments', async ()=>{
+    const res = await getTodaysAppointments();
+    return res.data;
 });
 
 const appointmentSlice= createSlice({
     name:'appointments',
     initialState:{
-        list: [],
-        total: 0,
+        today: [],
+        todayTotal: 0,
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchAppointments.fulfilled, (state, action)=>{
-            state.list = action.payload;
-            state.total = action.payload.length;
+        builder.addCase(fetchTodaysAppointments.fulfilled, (state, action)=>{
+            state.today = action.payload;
+            state.todayTotal = action.payload.length;
         });
     },
 });

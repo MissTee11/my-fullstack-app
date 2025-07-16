@@ -640,6 +640,23 @@ app.delete('/api/appointments/:id', async (req, res) => {
     }
   });
 
+  //Get Today's Appointments
+  app.get('/api/appointments/today', async (req,res)=>{
+    try{
+     const today = new Date().toISOString().split('T')[0];
+
+      const result= await pool.query(
+        `SELECT * FROM appointments WHERE appointment_date = $1`,
+        [today]
+      );
+      res.json(result.rows);
+    }
+    catch(err){
+      console.error(err.message);
+      res.status(500).json({message:'Server error'});
+    }
+  });
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /*ADMISSIONS */
 
