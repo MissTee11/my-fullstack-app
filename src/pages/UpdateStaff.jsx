@@ -5,6 +5,7 @@ import {  useNavigate, useParams} from 'react-router-dom';
 import { getSingleStaff, getRoles, getDepartments,updateStaff } from '../api';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDispatch } from 'react-redux'
+import { fetchStaff } from '../redux/slices/staffSlice';
 
 function UpdateStaff(){
 
@@ -46,6 +47,7 @@ function UpdateStaff(){
         e.preventDefault();
       try{
           await updateStaff(id, values);
+          dispatch(fetchStaff());
           setMessageText("Staff member updates successfuly!");
       
           setTimeout(()=>{
