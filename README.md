@@ -3,7 +3,7 @@
 Welcome to the Hospital Management System - Admin Panel project! This is a full-stack web application designed to simplify hospital operations by providing an intuitive interface for administrative tasks such as managing patient records, appointments, admissions, staff, and more.
 
 🚀 Project Overview
-This project was a learning journey to sharpen my frontend skills and responsive design abilities, as well as learning backend development. Over the course of 5 months, I developed it into a full-stack system using React.js, Node.js, Express, and PostgreSQL.
+This project was a learning journey to sharpen my frontend skills and responsive design abilities, as well as learning backend development. Over the course of 4 months, I developed it into a full-stack system using React.js, Node.js, Express, and PostgreSQL.
 
 Along the way, I enhanced my understanding and practical skills in:
 Frontend development: Building responsive and user-friendly interfaces with React and custom CSS
@@ -48,4 +48,4 @@ Implementing role-based authentication with multiple user types (doctors, recept
 Building personalized dashboards for different user roles
 
 📌 Final Notes
-This project was a significant step in my growth as a full-stack developer. Given that I was learning as I built, the extended timeline of 5 months allowed me to deeply understand each layer of the stack. I'm excited to keep improving it and apply these skills in future projects
+This project was a significant step in my growth as a full-stack developer. Given that I was learning as I built, the extended timeline of 4 months allowed me to deeply understand each layer of the stack. I'm excited to keep improving it and apply these skills in future projects
