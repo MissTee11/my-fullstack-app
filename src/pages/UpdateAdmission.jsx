@@ -12,7 +12,7 @@ function UpdateAdmissions(){
   const [messageText, setMessageText] = useState("");
   const[patients, setPatients] =useState([]);
   const[rooms, setRooms]=useState([]);
-  const {id} = useParams();
+  const {id} = useParams();//grabs the id from the URL
 
   const [values, setValues] = useState({
     patient_id: '',
@@ -41,8 +41,8 @@ function UpdateAdmissions(){
           const patientRes= await getPatients();
           setPatients(patientRes.data);
 
-          const singleAdmission= await getSingleAdmission(id);
-          setValues(singleAdmission.data)
+          const singleAdmission= await getSingleAdmission(id);//fetches the admssion from backend
+          setValues(singleAdmission.data)//populates the form with the data
           }
           catch (err) {
             console.error("Error fetching data:", err);
