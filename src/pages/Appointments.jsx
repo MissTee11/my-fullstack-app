@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import SearchBar from '../components/SearchBar';
 import './Pages.css';
 import { useDispatch } from 'react-redux'
+import { fetchTodaysAppointments } from "../redux/slices/appointmentSlice";
 
 function Appointments(){
 
@@ -39,7 +40,7 @@ function Appointments(){
         try {
               await deleteAppointment(id);
               setAppointments(appointments.filter(a => a.appointment_id !== id));
-              dispatch(fetchAppointments());
+              dispatch(fetchTodaysAppointments());
           
               setMessageText("Appointment deleted successfully!");
               setTimeout(() => setMessageText(""), 3000);
