@@ -39,8 +39,8 @@ function Appointments(){
       if (window.confirm("Are you sure you want to delete this appointment?")) {
         try {
               await deleteAppointment(id);
-              setAppointments(appointments.filter(a => a.appointment_id !== id));
-              dispatch(fetchTodaysAppointments());
+              setAppointments(appointments.filter(a => a.appointment_id !== id));//update the local state, automatic UI update
+              dispatch(fetchTodaysAppointments());//updates the global state
           
               setMessageText("Appointment deleted successfully!");
               setTimeout(() => setMessageText(""), 3000);
