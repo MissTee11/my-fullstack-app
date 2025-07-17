@@ -36,7 +36,7 @@ function Admissions(){
         if (window.confirm("Are you sure you want to delete this admission record?")) {
           try {
                 await deleteAdmission(id);
-                setAdmissions(admissions.filter(a => a.admission_id !== id));
+                setAdmissions(admissions.filter(a => a.admission_id !== id));//triggers automatic UI update
             
                 setMessageText("Admission record deleted successfully!");
                 setTimeout(() => setMessageText(""), 3000);
