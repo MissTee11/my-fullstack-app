@@ -13,7 +13,7 @@ function AddAdmissions(){
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState();
   const [messageText, setMessageText] = useState("");
-  const { roomNumber } = useParams();
+  const { roomNumber } = useParams();//it gets the room number from the URL is room is preselected
 
   const [values, setValues] = useState({
     patient_id: '',
@@ -31,8 +31,8 @@ function AddAdmissions(){
             const roomRes= await getRooms();
             setRooms(roomRes.data);
 
-            const res = await getSingleRoom(roomNumber);
-            setValues(prev => ({ ...prev, room_id: res.data.id }));
+            const res = await getSingleRoom(roomNumber);//fetches a single preselected room
+            setValues(prev => ({ ...prev, room_id: res.data.id }));//prefills form if room is preselected from Rooms
       
             }
         catch (err) {
@@ -45,7 +45,7 @@ function AddAdmissions(){
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-        await createAdmission(values);
+        await createAdmission(values);//sends admission data to backend
         setMessageText("Admission record added successfully!");
            
         setTimeout(() => {
@@ -57,6 +57,7 @@ function AddAdmissions(){
         catch(error){
         console.error("Error adding admission record!", error);
 
+        //displays error message from backend, and if not available displays the text shown below
         const message = error.response?.data?.error || "Failed to add admission record. Please try again.";
         setMessageText(message);
         
@@ -69,7 +70,7 @@ function AddAdmissions(){
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value ==="" ? null : value});//empty becomes null
+    setValues({ ...values, [name]: value ==="" ? null : value});//for discharge date which is optional, it sends null to the backend and not an empty string
   };
 
   const resetInfo = () => {
