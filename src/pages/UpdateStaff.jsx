@@ -48,7 +48,7 @@ function UpdateStaff(){
       try{
           await updateStaff(id, values);
           dispatch(fetchStaff());
-          setMessageText("Staff member updates successfuly!");
+          setMessageText("Staff member updated successfuly!");
       
           setTimeout(()=>{
           setMessageText("");
