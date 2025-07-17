@@ -7,7 +7,7 @@ require('dotenv').config();
 const router = express.Router();
 
 router.post('/login', async(req,res)=>{
-  const {username, password}= req.body;
+  const {username, password}= req.body;//login input from user
 
   try{
     //find user by username
@@ -32,3 +32,7 @@ router.post('/login', async(req,res)=>{
 }
 });
 module.exports= router;
+
+/*JWT- JSON Web Token
+it is a secire encoded token that identifies the user, is signed with a secret key so it is not tampered with and is used for stateless
+authentication*/

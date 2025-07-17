@@ -6,11 +6,11 @@ axios.defaults.baseURL = API_BASE_URL;
 
 /*USER AUTHENTIATION*/
 
-axios.interceptors.request.use(
+axios.interceptors.request.use(//interceptor
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');//get token from the rowser storage
     if (token) {
-      config.headers['x-auth-token'] = token;
+      config.headers['x-auth-token'] = token;//add token to every request header
     }
     return config;
   },
