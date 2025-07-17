@@ -27,7 +27,8 @@ function AppointmentCalender() {
             <h2 className='apptCalender'>Appointment Calendar</h2>
             <div className='DisplayAppts'>
                 <Calendar onChange={setDate} value={date} />
-                <div>
+
+                <div className='details-container'>
                     <h3>Appointments on {formatDateInput(date)}:</h3>
                     <ul>
                         {appointments.length === 0 ? (
@@ -40,7 +41,7 @@ function AppointmentCalender() {
                                         hour: "2-digit",
                                         minute: "2-digit",
                                     })}{" "}
-                                    with {appt.doctor_first_name} {appt.doctor_last_name}
+                                    with Dr. {appt.doctor_first_name} {appt.doctor_last_name}
                                 </li>
                             ))
                         )}

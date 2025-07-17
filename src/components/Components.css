@@ -83,6 +83,70 @@
  border-color: #17223B;
 }
 
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: #17223B !important;
+    color: white !important;
+}
+
+.react-calendar__tile--now {
+    background: #17223B33 !important; 
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+    background: #17223B66 !important; 
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+    background: #17223B !important;
+    color: white !important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #4869b6 !important; 
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: #757575 !important; 
+}
+
+.DisplayAppts {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    width: 100%;
+   
+}
+.apptCalender {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin: 2rem;
+    color: #17223B;
+}
+.react-calendar__tile{
+    padding:20px !important;
+}
+.react-calendar{
+    width: 800px !important;
+    border-radius: 5px;
+}
+.details-container ul{
+  list-style: none;
+}
+.details-container{
+    width: 400px;
+    border-radius: 5px;
+    border: #17223B 1px solid;
+    margin-right: 15px;
+}
+.details-container h3{
+    margin: 15px;
+}
+
 @media screen and (max-width:767px){
     .sidebar-text{
         display: none;
@@ -99,53 +163,29 @@
         margin-left: 5px;
         font-size: 1rem;
     }
-    
-}
+    .react-calendar {
+    width: 600px !important;
+  }
 
-/* Override react-calendar default styles */
-.react-calendar__tile--active,
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-    background: #17223B !important;
-    color: white !important;
-}
+  .react-calendar__tile {
+    padding: 10px !important; 
+  }
 
-.react-calendar__tile--now {
-    background: #17223B33 !important; /* Slightly transparent version for "today" */
-}
-
-.react-calendar__tile--now:enabled:hover,
-.react-calendar__tile--now:enabled:focus {
-    background: #17223B66 !important; /* Slightly darker on hover/focus */
-}
-
-.react-calendar__navigation button:enabled:hover,
-.react-calendar__navigation button:enabled:focus {
-    background: #17223B !important;
-    color: white !important;
-}
-
-.react-calendar__month-view__days__day--weekend {
-    color: #17223B !important; /* Weekend days */
-}
-
-.react-calendar__month-view__days__day--neighboringMonth {
-    color: #757575 !important; /* Days from neighboring months */
-}
-
-
-.DisplayAppts {
-    display: flex;
+  .DisplayAppts {
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 100px;
-    width: 100%;
-   
-}
-.apptCalender {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    margin: 1.5rem;
-    color: #17223B;
+    gap: 30px;
+    padding: 0;
+  }
+
+  .details-container {
+    width: 90%;
+    margin-right: 0;
+  }
+
+  .apptCalender {
+    font-size: 1.2rem;
+    margin: 1rem;
+  }
+    
 }
