@@ -10,12 +10,12 @@ import { fetchTodaysAppointments } from '../redux/slices/appointmentSlice';
 
 function AddAppointments(){
 
-    const statuses = ["Scheduled", "Completed", "Cancelled"];
+    const statuses = ["Scheduled", "Completed", "Cancelled"];//status values for appointments
     const navigate=useNavigate();
     const [messageText, setMessageText] = useState("");
     const[ patients, setPatients] = useState([]);
     const[doctors, setDoctors] = useState([]);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();//Redux hook for updating global states
 
     const [values, setValues] = useState({
       appointment_date: '',
@@ -45,7 +45,7 @@ function AddAppointments(){
         e.preventDefault();
         try{
             await createAppointment(values);
-            dispatch(fetchTodaysAppointments());
+            dispatch(fetchTodaysAppointments());//After successful creation, today's appointment list in global state is updated without refreshing the page
             setMessageText("Appointment added successfully!");
         
             setTimeout(() => {
