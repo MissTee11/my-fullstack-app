@@ -117,6 +117,7 @@ function Patients(){
 
       <Sidebar/>
         <div className="MainContent">
+          <h1 className='PageHeader'> Patients </h1>
           <Link to="/AddPatient">
             <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Patient </button>
           </Link>

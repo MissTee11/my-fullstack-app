@@ -97,6 +97,7 @@ return (
     <div>
         <Sidebar/>
         <div className="MainContent">
+        <h1 className='PageHeader'> Patient Medical Record </h1>
         <Link to={'/Patients'}>
         <button className="BackBtn"><IoMdArrowRoundBack/>Back </button>
         </Link>
