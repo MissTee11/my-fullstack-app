@@ -100,6 +100,7 @@ function Doctors(){
           <Sidebar/>
           
             <div className="MainContent">
+              <h1 className='PageHeader'>Doctors</h1>
               <Link to="/AddDoctor">
               <button className="AddBtn" ><IoPersonAddSharp className="iconBtn"/> Register New Doctor </button>
               </Link>

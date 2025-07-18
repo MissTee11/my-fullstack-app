@@ -8,22 +8,6 @@
     overflow-y: auto;
 
 }
-.Profile{
-    color: white;
-    background-color: #3674B5;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    padding:10px;
-}
-.ProfileImg{
-    font-size: 100px ;
-}
 .sidebar-list{
     width: 100%;
     margin: 0;
@@ -39,7 +23,6 @@
 .sidebar-item{
     padding: 20px;
     font-size: 28px;
-    border: 1px solid;
     margin: 10px;
 }
 
@@ -47,6 +30,7 @@
     background-color: #17223B;
     cursor: pointer;
     transition: 0.5s ease-in-out;
+    border-radius: 12px;
 }
 .LogoutBtn{
     font-size: 28px;

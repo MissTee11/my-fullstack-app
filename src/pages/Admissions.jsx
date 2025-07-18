@@ -98,6 +98,7 @@ function Admissions(){
         <div>
         <Sidebar/>
         <div className="MainContent">
+          <h1 className='PageHeader'>Admissions</h1>
         <Link to="/AddAdmissions">
         <button className="AddBtn " ><FaBed className="iconBtn"/> Admit Patient </button>
         </Link>

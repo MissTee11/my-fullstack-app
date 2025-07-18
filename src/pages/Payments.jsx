@@ -101,7 +101,8 @@ function Payments(){
            return(
             <div>
                 <Sidebar/>
-        <div className="MainContent">
+            <div className="MainContent">
+            <h1 className='PageHeader'> Payments</h1>
             <Link to="/AddPayment">
             <button className="AddBtn"><IoMdAdd />Record New Payment </button>
             </Link>

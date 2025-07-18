@@ -102,6 +102,7 @@ function Staff(){
 
         <Sidebar/>
         <div className="MainContent">
+          <h1 className='PageHeader'>Staff Members</h1>
           <Link to="/AddStaff">
           <button className="AddBtn " ><IoPersonAddSharp className="iconBtn"/> Register New Staff </button>
           </Link>

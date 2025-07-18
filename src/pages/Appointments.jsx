@@ -108,6 +108,7 @@ function Appointments(){
         <div>
         <Sidebar/>
         <div className="MainContent">
+            <h1 className='PageHeader'>Appointments</h1>
           <Link to="/AddAppointment">
           <button className="AddBtn " ><RiCalendarScheduleFill className="iconBtn"/> Make Appointment </button>
           </Link>
