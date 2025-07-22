@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'https://hospital-management-system-two-orpin.vercel.app',
+  'https://hospital-management-system-git-main-misstee11s-projects.vercel.app',
+  'https://hospital-management-system-l1d05pjf7-misstee11s-projects.vercel.app',
 ];
 
 app.use(cors({
