@@ -10,7 +10,7 @@ const pool = require('./db');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-/*const allowedOrigins = ['https://your-frontend.vercel.app'];
+const allowedOrigins = ['https://hospital-management-system-5ploufdsw-misstee11s-projects.vercel.app'];
 
 app.use(cors({
   origin: function(origin, callback){
@@ -23,9 +23,9 @@ app.use(cors({
     return callback(null, true);
   },
   credentials: true, // allow cookies and auth headers like x-auth-token
-}));*/
+}));
 
-app.use(cors({ origin: true, credentials: true }));
+
 
 
 app.use(json());
