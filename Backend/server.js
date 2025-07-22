@@ -10,7 +10,7 @@ const pool = require('./db');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ['https://hospital-management-system-dbk08tfb5-misstee11s-projects.vercel.app'];
+const allowedOrigins = ['hospital-management-system-git-main-misstee11s-projects.vercel.app'];
 
 app.use(cors({
   origin: function(origin, callback){
