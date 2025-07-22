@@ -14,13 +14,14 @@ const allowedOrigins = [
   'https://hospital-management-system-two-orpin.vercel.app',
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true, // Allow cookies/auth headers
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-  })
-);
+app.use(cors({
+  origin: function(origin, callback){
+    if (!origin) return callback(null, true); // allow tools like Postman
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('CORS not allowed from this origin'), false);
+  },
+  credentials: true
+}));
 
 
 app.use(json());
