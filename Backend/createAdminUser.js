@@ -27,7 +27,4 @@ createAdmin().catch(err => {
 
 /*Definition of terms
 Salt- a random string of characters added to a password before hashing it to make each password unique
-Salt rounds- the number of times the hashinh algorithm runs on salted password.
-
-
-
+Salt rounds- the number of times the hashinh algorithm runs on salted password.*/
