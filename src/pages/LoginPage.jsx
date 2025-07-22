@@ -37,7 +37,7 @@ function LoginPage(){
             catch(error){
             console.error("login failed!", error);
         
-            const message = error.response?.data?.error || "Login failed. Please recheck the username and password and try again.";
+            const message = error.response?.data?.msg || "Login failed. Please recheck the username and password and try again.";
             setMessageText(message);
                 
                    
