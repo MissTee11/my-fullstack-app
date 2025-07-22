@@ -10,7 +10,7 @@ const pool = require('./db');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ['https://hospital-management-system-two-orpin.vercel.app'];
+const allowedOrigins = ['https://hospital-management-system-git-main-misstee11s-projects.vercel.app'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin (like curl, postman)
