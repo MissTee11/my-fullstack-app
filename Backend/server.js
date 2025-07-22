@@ -31,7 +31,7 @@ app.use(cors({
 app.use(json());
 
 /*LOGIN*/
-const authRouter = require('./routes/auth');
+const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
 
