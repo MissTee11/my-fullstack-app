@@ -10,10 +10,12 @@ const pool = require('./db');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ['https://hospital-management-system-two-orpin.vercel.app/'];
+const allowedOrigins = [
+  'https://hospital-management-system-two-orpin.vercel.app',
+];
+
 app.use(cors({
   origin: function(origin, callback){
-    // allow requests with no origin (like curl, postman)
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
