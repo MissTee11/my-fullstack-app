@@ -10,7 +10,7 @@ const pool = require('./db');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = [
+/*const allowedOrigins = [
   'https://hospital-management-system-two-orpin.vercel.app',
   'https://hospital-management-system-git-main-misstee11s-projects.vercel.app',
   'https://hospital-management-system-l1d05pjf7-misstee11s-projects.vercel.app',
@@ -25,13 +25,18 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'x-auth-token']
+}));*/
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-auth-token']
 }));
 
 
 app.use(json());
 
 /*LOGIN*/
-const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
 
