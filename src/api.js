@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://my-fullstack-app-a4zr.onrender.com";
-const API_BASE_URL = `${BACKEND_URL}/api`;
+const API_BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? '' // same domain
+    : 'http://localhost:5000'; // development
 
 
 /*USER AUTHENTIATION*/

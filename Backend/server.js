@@ -6,40 +6,14 @@ const authRoutes = require('./routes/auth');
 const pool = require('./db');
 
 
-
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-/*const allowedOrigins = [
-  'https://hospital-management-system-two-orpin.vercel.app',
-  'https://hospital-management-system-git-main-misstee11s-projects.vercel.app',
-  'https://hospital-management-system-l1d05pjf7-misstee11s-projects.vercel.app',
-];
-
-app.use(cors({
-  origin: function(origin, callback){
-    if (!origin) return callback(null, true); // allow tools like Postman
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error('CORS not allowed from this origin'), false);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-auth-token']
-}));*/
-
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-auth-token']
-}));
-
-
+app.use(cors());
 app.use(json());
 
 /*LOGIN*/
 app.use('/api/auth', authRoutes);
-
-
 
 /*PATIENTS*/
 

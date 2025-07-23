@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/login', async(req,res)=>{
   const {username, password}= req.body;//login input from user
+  console.log(req.body)
   console.log('Login request received:', { username, password });
 
 
