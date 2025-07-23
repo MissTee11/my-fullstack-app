@@ -4,6 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const pool = require('./db');
+const path = require('path'); 
+
 
 
 const app=express();
