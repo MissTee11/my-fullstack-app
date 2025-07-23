@@ -1,9 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://my-fullstack-app-a4zr.onrender.com";
-
-console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL);
-/*const API_BASE_URL ="http://localhost:5000/api";*/
+const BACKEND_URL = "https://my-fullstack-app-a4zr.onrender.com";
 const API_BASE_URL = `${BACKEND_URL}/api`;
 
 
