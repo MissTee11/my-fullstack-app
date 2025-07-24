@@ -1,5 +1,14 @@
 🏥 Hospital Management System - Admin Panel (Work in Progress)
 
+🌐 Live Demo
+Hospital Management System- Admin Panel: https://hospital-system-frontend-k3np.onrender.com
+
+🔐 Demo Login Details (Admin Only)
+Username: Admin
+Password: admin123!
+
+Note: This is a demo account with limited functionality. For security, please avoid storing sensitive data.
+
 Welcome to the Hospital Management System - Admin Panel project! This is a full-stack web application designed to simplify hospital operations by providing an intuitive interface for administrative tasks such as managing patient records, appointments, admissions, staff, and more.
 
 🚀 Project Overview:
