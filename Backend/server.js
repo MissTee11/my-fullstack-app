@@ -13,10 +13,14 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Backend is live!' });
+});
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..','dist', 'index.html'));
 });
 
 app.use(json());
