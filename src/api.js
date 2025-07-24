@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 /*USER AUTHENTIATION*/
 
@@ -15,7 +15,7 @@ axios.interceptors.request.use(//interceptor
   (error) => Promise.reject(error)
 );
 
-export const login=(credentials)=> axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
+export const login=(credentials)=> axios.post(`${API_BASE_URL}/auth/login`, credentials);
 //export const getAdminData =() => api.get('/admin/admin-data');
 export default axios;
 
