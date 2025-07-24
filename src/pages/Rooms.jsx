@@ -44,14 +44,6 @@ function Rooms(){
             }, 3000)
 
         }
-        else if(room_type !== "General" && room_type !== "Private"){
-          setMessageText("Admissions only allowed to general or private rooms");
-
-            setTimeout(() => {
-                setMessageText("");
-            }, 3000)
-
-        }
         else{
             navigate(`/AddAdmissions/${row.room_number}`);
         }
