@@ -74,7 +74,7 @@ function AddAdmissions(){
   };
 
   const resetInfo = () => {
-    setValues({ patient_id: '', room_id: prev.room_id, admission_date: '',discharge_date: '',});
+    setValues({ patient_id: '', room_id: '', admission_date: '',discharge_date: '',});
   };
 
     return(
