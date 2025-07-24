@@ -12,7 +12,7 @@ const app=express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin:'*',
+  origin:'https://hospital-system-frontend-k3np.onrender.com',
 }));
 
 app.get('/api/test', (req, res) => {
@@ -20,13 +20,6 @@ app.get('/api/test', (req, res) => {
 });
 
 app.use(json());
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..','dist', 'index.html'));
-});
-
-
-
 
 /*LOGIN*/
 app.use('/api/auth', authRoutes);
