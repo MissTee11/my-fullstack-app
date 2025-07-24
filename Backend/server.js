@@ -11,19 +11,21 @@ const path = require('path');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-
-app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(cors({
+  origin:'*',
+}));
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Backend is live!' });
 });
 
+app.use(json());
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..','dist', 'index.html'));
 });
 
-app.use(json());
+
 
 
 /*LOGIN*/
@@ -1086,9 +1088,9 @@ app.get('/api/medical_records/:id', async (req, res) => {
   }
 });
 /******************************************************************** */
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
+});
 
 
 
