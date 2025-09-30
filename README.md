@@ -2,6 +2,7 @@
 
 🌐 Live Demo
 Hospital Management System- Admin Panel: https://hospital-system-frontend-k3np.onrender.com
+⚠ Note: The backend is hosted on Render’s free tier, which may cause a short delay (5–15 seconds) on the first request due to server cold starts. Please be patient if login takes a moment to respond.
 
 🔐 Demo Login Details (Admin Only)
 Username: Admin
