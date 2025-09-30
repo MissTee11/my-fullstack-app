@@ -11,9 +11,15 @@ const path = require('path');
 const app=express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin:'https://hospital-system-frontend-k3np.onrender.com',
-}));
+app.use(
+  cors({
+    origin: [
+      "https://hospital-system-frontend-k3np.onrender.com", // production frontend
+      "http://localhost:5173"  // Vite dev (default port for Vite)
+    ],
+    credentials: true, // if you’re sending cookies/auth headers
+  })
+);
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Backend is live!' });
